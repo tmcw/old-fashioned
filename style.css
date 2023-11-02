@@ -10,10 +10,30 @@ body {
   display: block;
   padding: 5px;
   color: #222;
+  transition: 400ms background-color;
+}
+
+.recipe.active {
+  background-color: #f0ede9;
 }
 
 .recipe:hover {
   color: #000;
+}
+
+ul.ingredients {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul.ingredients li {
+  padding: 5px;
+}
+
+form {
+  padding: 0;
+  margin: 0;
 }
 
 /**
@@ -21,7 +41,7 @@ body {
  */
 columns {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 240px 200px 1fr;
   height: 100vh;
 }
 
@@ -33,4 +53,19 @@ columns {
 #recipe-detail {
   padding: 20px;
   overflow-y: auto;
+}
+
+#recipe-detail h1 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+#materials-list {
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#materials-list label {
+  display: block;
+  padding: 4px 0;
 }
