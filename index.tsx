@@ -225,7 +225,6 @@ function Index() {
       <head>
         <title>Old Fashioned</title>
         <script src="https://unpkg.com/htmx.org@1.9.6"></script>
-        <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -237,7 +236,7 @@ function Index() {
           content="width=device-width,initial-scale=1,minimum-scale=1"
         />
       </head>
-      <body _="on every htmx:pushedIntoHistory(path) remove .active from .active then add .active to <a/> when its href contains path">
+      <body>
         <StyleTag />
         <columns>
           <MaterialsList />
@@ -245,6 +244,7 @@ function Index() {
           <RecipeDetail />
         </columns>
         <div hx-get="/reload" hx-trigger="every 2s"></div>
+        <script src="/script.js"></script>
       </body>
     </html>
   );
@@ -299,6 +299,12 @@ function getMaterialIds(c: Context | null) {
     ),
   );
 }
+
+app.get("/script.js", (c) => {
+  const script = Deno.readTextFileSync("./script.js");
+  c.header("Content-Type", "application/javascript; charset=UTF-8");
+  return c.text(script);
+});
 
 app.post("/material", async (c) => {
   if (c.req.header("HX-Request")) {
