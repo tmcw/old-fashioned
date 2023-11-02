@@ -2,6 +2,7 @@ body {
   font-family: "IBM Plex Mono", sans-serif;
   font-size: 13px;
   background: #faf7f4;
+  line-height: 1.4;
   margin: 0;
 }
 
@@ -9,12 +10,25 @@ body {
   text-decoration: none;
   display: block;
   padding: 5px;
+  border-radius: 5px;
   color: #222;
   transition: 400ms background-color;
 }
 
+.recipe name {
+  display: block;
+  font-weight: normal;
+  text-decoration: underline;
+  font-style: italic;
+}
+
 .recipe.active {
   background-color: #f0ede9;
+}
+
+.recipe ingredient.missing {
+  text-decoration: line-through;
+  color: #888;
 }
 
 .recipe:hover {
@@ -23,12 +37,12 @@ body {
 
 ul.ingredients {
   margin: 0;
-  padding: 0;
-  list-style-type: none;
+  padding: 10px 0 10px 20px;
+  list-style-type: "- ";
 }
 
 ul.ingredients li {
-  padding: 5px;
+  padding: 4px 0;
 }
 
 form {
@@ -36,13 +50,39 @@ form {
   margin: 0;
 }
 
+summary {
+  list-style-type: "+";
+  padding: 2px;
+}
+
+details[open] summary {
+  list-style-type: "-";
+}
+
 /**
  * Overall page structure
  */
-columns {
-  display: grid;
-  grid-template-columns: 240px 200px 1fr;
-  height: 100vh;
+@media (min-width: 720px) {
+  columns {
+    display: grid;
+    grid-template-columns: 240px 240px 1fr;
+    height: 100vh;
+  }
+
+  summary {
+    list-style-type: none;
+    pointer-events: none;
+  }
+
+  details[open] summary {
+    list-style-type: none;
+  }
+}
+
+material-group-name {
+  font-weight: bold;
+  display: block;
+  padding: 10px 2px 2px 2px;
 }
 
 #recipes-list {
@@ -56,8 +96,12 @@ columns {
 }
 
 #recipe-detail h1 {
-  font-size: 20px;
-  font-weight: normal;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#recipe-detail p {
+  max-width: 720px;
 }
 
 #materials-list {
