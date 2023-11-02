@@ -16,5 +16,13 @@
       }
     }
   },
-  "remote": {}
+  "redirects": {
+    "https://deno.land/x/punycode/punycode.js": "https://deno.land/x/punycode@v2.1.1/punycode.js",
+    "https://deno.land/x/slug/mod.ts": "https://deno.land/x/slug@v1.1.0/mod.ts"
+  },
+  "remote": {
+    "https://deno.land/x/punycode@v2.1.1/punycode.js": "3de0ad931f4637cdcc2bd600d831ef3cd20dd0876e1c54d5ab438f81c123489d",
+    "https://deno.land/x/slug@v1.1.0/lib/locale.ts": "824401e31650704aec7595750e1898495c7f81f848c3b5150adb1a6a609a1741",
+    "https://deno.land/x/slug@v1.1.0/mod.ts": "b0d86966a651871d610f81062c865e40fca1c7932584c7bf687e3d432825cfd6"
+  }
 }

@@ -1,115 +1,178 @@
 /** @jsxImportSource npm:hono/jsx */
-import { Context, Hono } from "npm:hono@3.8.1";
-import { HtmlEscapedString } from "npm:hono@3.8.1/src/utils/html";
-import { JSXNode } from "npm:hono@3.8.1/jsx";
+import { Hono, HonoRequest } from "npm:hono@3.8.1";
+import { createContext, Fragment, useContext } from "npm:hono@3.8.1/jsx";
+import recipes from "./recipes.json" with { type: "json" };
+import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 
-let list: string[] = ["Cookies", "Bread"];
+const app = new Hono();
 
-type Component<
-  A extends { c: Context; index?: number | string } = {
-    c: Context;
-    index?: number | string;
-  },
-> = (args: A) => Promise<HtmlEscapedString | null>;
+const styleWatch = Deno.watchFs("./style.css");
+let styleVersionOld = 0;
+let styleVersionNew = 0;
+(async () => {
+  for await (let evt of styleWatch) styleVersionNew++;
+})();
 
-function NameInput({ c }: { c: Context }) {
+function RecipesList() {
   return (
-    <div>
-      Add item?
-      <form
-        hx-post={path(list_display)}
-        hx-swap="outerHTML"
-        hx-target={selector(list_display)}
-      >
-        <input name="name" autocomplete="off" />
-      </form>
-    </div>
+    <plank id="recipes-list">
+      {recipes.recipes.map((recipe) => {
+        return (
+          <a
+            class="recipe"
+            href={`/recipe/${slug(recipe.name)}`}
+            hx-boost="true"
+          >
+            {recipe.name}
+          </a>
+        );
+      })}
+    </plank>
   );
 }
 
-async function list_item({ c, l, i }: { c: Context; l: string; i: number }) {
-  // TODO: this data-component shouldn't really be there.
-  if (c.req.method === "DELETE") {
-    const body = await c.req.parseBody();
-    list = list.filter((l) => l !== body.name);
-    c.res.headers.set("HX-Retarget", `#list_item_${i}`);
-    return null;
+function StyleTag() {
+  const style = Deno.readTextFileSync("./style.css");
+  return (
+    <style
+      hx-get="/style"
+      hx-trigger="every 2s"
+      dangerouslySetInnerHTML={{ __html: style }}
+    />
+  );
+}
+
+app.get("/style", (c) => {
+  if (!c.req.header("HX-Request")) {
+    c.status(400);
+    return c.text("Only HTMX-accessible");
   }
-  return (
-    <div>
-      {l}
-      <button name="name" value={list[i]} hx-delete={path(list_item, i)}>
-        Remove
-      </button>
-    </div>
-  );
-}
-
-async function list_display({ c }: { c: Context }) {
-  if (c.req.method === "POST") {
-    const body = await c.req.parseBody();
-    list.push(String(body.name));
+  if (styleVersionNew !== styleVersionOld) {
+    styleVersionOld = styleVersionNew;
+    c.header("HX-Reswap", "outerHTML");
+    return c.html(<StyleTag />);
   }
-  // TODO: this data-component shouldn't really be there.
+  c.header("HX-Reswap", "none");
+  c.status(204);
+  return c.body(null);
+});
+
+function RecipeDetail() {
+  const requestContext = useContext(RequestContext);
+  const s = requestContext?.param("slug");
+
+  const recipe = recipes.recipes.find((r) => {
+    return slug(r.name) == s;
+  });
+
+  if (!recipe) {
+    return (
+      <plank id="recipe-detail" hx-swap-oob="true">
+      </plank>
+    );
+  }
+
   return (
-    <div data-component="list_display">
-      {await Promise.all(
-        list.map((l, i) => {
-          return list_item({ c, l, i });
-        }),
-      )}
-    </div>
+    <plank id="recipe-detail" hx-swap-oob="true">
+      <h1>{recipe.name}</h1>
+    </plank>
   );
 }
 
-async function index({ c }: { c: Context }) {
+function Index() {
   return (
     <html>
-      <body>
+      <head>
+        <title>Old Fashioned</title>
         <script src="https://unpkg.com/htmx.org@1.9.6"></script>
-        {await list_display({ c })}
-        <NameInput c={c} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,500&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
+        <StyleTag />
+        <columns>
+          <RecipesList />
+          <RecipeDetail />
+        </columns>
+        <div hx-get="/reload" hx-trigger="every 2s"></div>
       </body>
     </html>
   );
 }
 
-const components: Component[] = [index, list_display, list_item];
+const RequestContext = createContext<HonoRequest | null>(null);
 
-function path(component: Component, index = undefined) {
-  if (index === undefined) {
-    return `/components/${component.name}`;
-  } else {
-    return `/components/${component.name}/${index}`;
-  }
-}
-
-function selector(component: Component) {
-  return `[data-component="${component.name}"]`;
-}
-
-const app = new Hono();
-
-components.forEach((component) => {
-  app.all(path(component), async (c) => {
-    const j = await component({ c });
-    return c.html(j || "");
-  });
-  app.all(`${path(component)}/:index`, async (c) => {
-    const i = c.req.param("index");
-    const j = await component({ c, i });
-    if (j?.props) {
-      j.props.id = `${component.name}_${i}`;
-    }
-    return c.html(j || "");
-  });
-  if (component.name === "index") {
-    // TODO: do this in a less dumb way
-    app.get(`/`, async (c) => {
-      const j = await component({ c });
-      return c.html(j || "");
-    });
-  }
+let reloaded = false;
+app.get("/", (c) => {
+  reloaded = true;
+  return c.html(
+    <RequestContext.Provider value={c.req}>
+      <Index />
+    </RequestContext.Provider>,
+  );
 });
+
+app.get("/recipe/:slug", (c) => {
+  if (c.req.header("HX-Request")) {
+    c.header("HX-Reswap", "none");
+    return c.html(
+      <RequestContext.Provider value={c.req}>
+        <RecipeDetail />
+      </RequestContext.Provider>,
+    );
+  }
+  reloaded = true;
+  return c.html(
+    <RequestContext.Provider value={c.req}>
+      <Index />
+    </RequestContext.Provider>,
+  );
+});
+
+/**
+ * "LiveReload" lol!
+ */
+app.get("/reload", (c) => {
+  if (!reloaded) {
+    reloaded = true;
+    c.header("HX-Refresh", "true");
+  }
+  c.status(204);
+  return c.body(null);
+});
+
+// app.post("/increment", (c) => {
+//   count++;
+//   if (c.req.header("HX-Request")) {
+//     c.header("HX-Push-URL", "false");
+//     return c.html(
+//       <Fragment>
+//         <Counter />
+//         <TooHigh />
+//       </Fragment>,
+//     );
+//   } else {
+//     return c.redirect("/");
+//   }
+// });
+//
+// app.post("/reset", (c) => {
+//   count = 0;
+//   if (c.req.header("HX-Request")) {
+//     c.header("HX-Push-URL", "false");
+//     return c.html(
+//       <Fragment>
+//         <Counter />
+//         <TooHigh />
+//       </Fragment>,
+//     );
+//   } else {
+//     return c.redirect("/");
+//   }
+// });
 
 Deno.serve(app.fetch);

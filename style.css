@@ -1,0 +1,36 @@
+body {
+  font-family: "IBM Plex Mono", sans-serif;
+  font-size: 13px;
+  background: #faf7f4;
+  margin: 0;
+}
+
+.recipe {
+  text-decoration: none;
+  display: block;
+  padding: 5px;
+  color: #222;
+}
+
+.recipe:hover {
+  color: #000;
+}
+
+/**
+ * Overall page structure
+ */
+columns {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  height: 100vh;
+}
+
+#recipes-list {
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#recipe-detail {
+  padding: 20px;
+  overflow-y: auto;
+}
