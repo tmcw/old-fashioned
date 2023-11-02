@@ -1,54 +1,21 @@
 /** @jsxImportSource npm:hono/jsx */
 import { Context, Hono } from "npm:hono@3.8.1";
-import {
-  getCookie as _getCookie,
-  setCookie as _setCookie,
-} from "npm:hono@3.8.1/cookie";
 import { createContext, Fragment, useContext } from "npm:hono@3.8.1/jsx";
-import recipes from "./recipes.json" with { type: "json" };
-import materials from "./materials.json" with { type: "json" };
 import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
+import { setCookie } from "./cookies.ts";
+import {
+  getMaterialIds,
+  getMaterials,
+  materials,
+  recipes,
+  sort,
+} from "./data.ts";
+import { styleSytem } from "./style.tsx";
 
-/**
- * We're leaning hard on cookies here, which makes some of this
- * a little difficult! If we sent a POST with some mutation,
- * we're sending back a cookie that updates the cookiestate,
- * then we also want to immediately render UI with that cookiestate.
- * But the current request doesn't have the cookie.
- *
- * So, we have this, which tracks inflight cookies too.
- */
-const InflightCookies = new WeakMap<Context, Map<string, string>>();
-
-function getInflight(c: Context) {
-  return InflightCookies.get(c) || new Map();
-}
-
-/** Set a cookie and keep track of it inflight */
-function setCookie(c: Context, key: string, value: string) {
-  const inflight = getInflight(c);
-  inflight.set(key, value);
-  InflightCookies.set(c, inflight);
-  _setCookie(c, key, value);
-}
-
-/** Get a cookie from the request or optionally from inflight */
-function getCookie(c: Context, key: string): string | undefined {
-  const inflight = getInflight(c);
-  if (inflight.has(key)) {
-    return inflight.get(key);
-  }
-  return _getCookie(c, key);
-}
-
+// TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
 
-const styleWatch = Deno.watchFs("./style.css");
-let styleVersionOld = 0;
-let styleVersionNew = 0;
-(async () => {
-  for await (const _evt of styleWatch) styleVersionNew++;
-})();
+const { styleRoute, StyleTag } = styleSytem();
 
 function MaterialsList() {
   const c = useContext(RequestContext);
@@ -95,29 +62,6 @@ function MaterialsList() {
   );
 }
 
-function getMaterials(c: Context | null) {
-  const ids = getMaterialIds(c);
-  return materials.materials.filter((mat) => ids.has(mat.id));
-}
-
-type Recipe = typeof recipes.recipes[number];
-type Material = typeof materials.materials[number];
-
-function sort(recipes: Recipe[], materials: Material[]) {
-  const have = new Set(materials.map((m) => m.name));
-
-  return recipes.map((recipe) => {
-    return {
-      recipe,
-      weight: recipe.ingredients.filter((ingredient) => {
-        return have.has(ingredient.name);
-      }).length,
-    };
-  }).sort((a, b) => {
-    return b.weight - a.weight;
-  }).map((r) => r.recipe);
-}
-
 function RecipesList() {
   const c = useContext(RequestContext);
   const s = c?.req.param("slug");
@@ -160,31 +104,7 @@ function RecipesList() {
   );
 }
 
-function StyleTag() {
-  const style = Deno.readTextFileSync("./style.css");
-  return (
-    <style
-      hx-get="/style"
-      hx-trigger="every 2s"
-      dangerouslySetInnerHTML={{ __html: style }}
-    />
-  );
-}
-
-app.get("/style", (c) => {
-  if (!c.req.header("HX-Request")) {
-    c.status(400);
-    return c.text("Only HTMX-accessible");
-  }
-  if (styleVersionNew !== styleVersionOld) {
-    styleVersionOld = styleVersionNew;
-    c.header("HX-Reswap", "outerHTML");
-    return c.html(<StyleTag />);
-  }
-  c.header("HX-Reswap", "none");
-  c.status(204);
-  return c.body(null);
-});
+app.get("/style", styleRoute);
 
 function RecipeDetail() {
   const requestContext = useContext(RequestContext);
@@ -224,7 +144,8 @@ function Index() {
     <html>
       <head>
         <title>Old Fashioned</title>
-        <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+        <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js">
+        </script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -290,15 +211,6 @@ app.get("/reload", (c) => {
   c.status(204);
   return c.body(null);
 });
-
-function getMaterialIds(c: Context | null) {
-  if (!c) return new Set();
-  return new Set(
-    (getCookie(c, "mat") || "").split(",").map((n) => parseInt(n, 10)).filter(
-      (n) => !isNaN(n),
-    ),
-  );
-}
 
 app.get("/script.js", (c) => {
   const script = Deno.readTextFileSync("./script.js");
