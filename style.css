@@ -9,14 +9,17 @@ body {
 .recipe {
   text-decoration: none;
   display: block;
-  padding: 5px;
+  padding: 15px;
   border-radius: 5px;
   color: #222;
   transition: 400ms background-color;
 }
 
 .recipe name {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 5px;
   font-weight: normal;
   text-decoration: underline;
   font-style: italic;
@@ -53,6 +56,8 @@ form {
 summary {
   list-style-type: "+";
   padding: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 details[open] summary {
@@ -65,7 +70,7 @@ details[open] summary {
 @media (min-width: 720px) {
   columns {
     display: grid;
-    grid-template-columns: 240px 240px 1fr;
+    grid-template-columns: 280px 280px 1fr;
     height: 100vh;
   }
 
@@ -112,4 +117,10 @@ material-group-name {
 #materials-list label {
   display: block;
   padding: 4px 0;
+}
+
+glass {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }

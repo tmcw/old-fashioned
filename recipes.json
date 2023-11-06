@@ -10,7 +10,7 @@
         { "unit": "Slice", "amount": 1, "name": "Orange" }
       ],
       "description": "Stir in mixing glass with ice & strain. Garnish with Orange slice.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "French 75",
@@ -21,7 +21,7 @@
         { "unit": "CL", "amount": 6, "name": "Champagne" }
       ],
       "description": "Pour all the ingredients, except Champagne, into a shaker. Shake well and strain into a Champagne flute. Top up with Champagne. Stir gently.",
-      "glass": " Champagne flute",
+      "glass": "Champagne flute",
       "video": "29:55"
     },
     {
@@ -33,7 +33,7 @@
         { "unit": "Wedge", "amount": 1, "name": "Lime" }
       ],
       "description": "Build all ingredients in a highball glass filled with ice. Garnish with lime wedge.",
-      "glass": "Highball"
+      "glass": "Highball glass"
     },
     {
       "name": "Moscow mule",
@@ -44,13 +44,13 @@
         { "unit": "Slice", "amount": 1, "name": "Lime" }
       ],
       "description": "Combine vodka and ginger beer in a highball glass filled with ice. Add lime juice. Stir gently. Garnish with a lime slice.",
-      "glass": "CopperMug",
+      "glass": "Copper mug",
       "video": "22:42"
     },
     {
       "name": "Mimosa",
       "description": "Ensure both ingredients are well chilled, then mix into the glass. Garnish with Orange twist (optional).",
-      "glass": " Champagne flute",
+      "glass": "Champagne flute",
       "ingredients": [
         { "unit": "CL", "amount": 7.5, "name": "Champagne" },
         { "unit": "CL", "amount": 7.5, "name": "Orange juice" }
@@ -64,7 +64,7 @@
         { "unit": "CL", "amount": 5, "name": "Peach purée" }
       ],
       "description": "Pour peach purée into chilled glass, add sparkling wine. Stir gently.",
-      "glass": " Champagne flute"
+      "glass": "Champagne flute"
     },
     {
       "name": "Black russian",
@@ -73,7 +73,7 @@
         { "unit": "CL", "amount": 2, "name": "Coffee liqueur" }
       ],
       "description": "Pour the ingredients into an old fashioned glass filled with ice cubes. Stir gently.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Caipirinha",
@@ -83,7 +83,7 @@
         { "unit": "Tsp", "amount": 4, "name": "Cane sugar" }
       ],
       "description": "Place small lime wedges from one lime and sugar into old fashioned glass and muddle (mash the two ingredients together using a muddler or a wooden spoon). Fill the glass with ice and add the Cachaça. Use vodka instead of cachaça for a caipiroska; rum instead of cachaça for a caipirissima;",
-      "glass": "Old fashioned",
+      "glass": "Old fashioned glass",
       "video": "35:50"
     },
     {
@@ -97,7 +97,7 @@
         { "unit": "Splash", "amount": 1, "name": "Soda water" }
       ],
       "description": "Muddle mint springs with sugar and lime juice. Add splash of soda water and fill glass with cracked ice. Pour rum and top with soda water. Garnish with sprig of mint leaves and Lemon slice. Serve with straw.",
-      "glass": "Collins",
+      "glass": "Collins glass",
       "video": "28:10"
     },
     {
@@ -108,7 +108,7 @@
         { "unit": "Wedge", "amount": 1, "name": "Lime" }
       ],
       "description": "Fill glass with ice, add rum and top with ginger beer. Garnish with lime wedge.",
-      "glass": "Highball",
+      "glass": "Highball glass",
       "video": "26:53"
     },
     {
@@ -122,7 +122,7 @@
         { "unit": "Whole", "amount": 2, "name": "Blackberry" }
       ],
       "description": "Fill glass with crushed ice. Build gin, Lemon juice and simple syrup over. Stir, and then pour blackberry liqueur over in a circular fashion to create marbling effect. Garnish with two blackberries and Lemon slice.",
-      "glass": "Old fashioned",
+      "glass": "Old fashioned glass",
       "video": "19:10"
     },
     {
@@ -135,11 +135,11 @@
       "optionalIngredients": [
         {
           "ingredient": "Lemon",
-          "customUnit": "peel",
-          "description": "Pour all ingredients into shaker with ice cubes. Shake well and strain into a chilled cocktail glass. Squeeze oil from Lemon peel onto the drink.",
-          "glass": "Cocktail"
+          "customUnit": "peel"
         }
-      ]
+      ],
+      "description": "Pour all ingredients into shaker with ice cubes. Shake well and strain into a chilled cocktail glass. Squeeze oil from Lemon peel onto the drink.",
+      "glass": "Cocktail glass"
     },
     {
       "name": "Kamikaze",
@@ -150,7 +150,7 @@
         { "unit": "Slice", "amount": 1, "name": "Lime" }
       ],
       "description": "Shake all ingredients together with ice. Strain into glass. Garnish with lime slice.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Lemon drop martini",
@@ -162,7 +162,7 @@
         { "unit": "Slice", "amount": 1, "name": "Lime" }
       ],
       "description": "Shake and strain into a chilled cocktail glass rimmed with sugar, garnish with a slice of Lemon.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Vesper",
@@ -173,7 +173,7 @@
         { "customUnit": "zest", "name": "Lemon" }
       ],
       "description": "Shake and strain into a chilled cocktail glass. Add the garnish.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "23:30"
     },
     {
@@ -187,12 +187,12 @@
       "optionalIngredients": [
         {
           "name": "Lemon",
-          "customUnit": "zest",
-          "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled cocktail glass. Garnish with a Orange zest, optionally a Lemon zest.",
-          "glass": "Old fashioned",
-          "video": "8:15"
+          "customUnit": "zest"
         }
-      ]
+      ],
+      "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled cocktail glass. Garnish with a Orange zest, optionally a Lemon zest.",
+      "glass": "Old fashioned glass",
+      "video": "8:15"
     },
     {
       "name": "Alexander",
@@ -203,7 +203,7 @@
         { "name": "Nutmeg", "customUnit": "None" }
       ],
       "description": "Shake all ingredients with ice and strain contents into a cocktail glass. Sprinkle ground nutmeg on top and serve.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Americano",
@@ -215,7 +215,7 @@
         { "name": "Lemon", "customUnit": "twist" }
       ],
       "description": "Pour the Campari and vermouth over ice into a highball glass, add a splash of soda water and garnish with half Orange slice and a Lemon twist.",
-      "glass": "Highball",
+      "glass": "Highball glass",
       "video": "33:41"
     },
     {
@@ -226,7 +226,7 @@
         { "unit": "CL", "amount": 3, "name": "Calvados" }
       ],
       "description": "Shake all ingredients with ice and strain contents into a cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Aviation",
@@ -238,7 +238,7 @@
         { "unit": "Whole", "amount": 1, "name": "Cherry" }
       ],
       "description": "Add all ingredients into cocktail shaker filled with ice. Shake well and strain into cocktail glass. Garnish with a cherry.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Bacardi cocktail",
@@ -248,7 +248,7 @@
         { "unit": "CL", "amount": 1, "name": "Grenadine" }
       ],
       "description": "Shake together with ice. Strain into glass and serve.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Between the sheets",
@@ -259,7 +259,7 @@
         { "unit": "CL", "amount": 2, "name": "Lemon juice" }
       ],
       "description": "Pour all ingredients into shaker with ice cubes, shake, strain into chilled cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Casino",
@@ -272,7 +272,7 @@
         { "unit": "Whole", "amount": 1, "name": "Cherry" }
       ],
       "description": "Pour all ingredients into shaker with ice cubes, shake well. Strain into chilled cocktail glass and garnish with a Lemon twist and a marachino cherry.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Clover club",
@@ -284,7 +284,7 @@
         { "unit": "Whole", "amount": 2, "name": "Raspberry" }
       ],
       "description": "Pour all ingredients into cocktail shaker filled with ice. Shake well. Strain into cocktail glass. Garnish with fresh raspberries.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Daiquiri",
@@ -294,7 +294,7 @@
         { "unit": "CL", "amount": 1.5, "name": "Simple syrup" }
       ],
       "description": "Pour all ingredients into shaker with ice cubes. Shake well. Double Strain in chilled cocktail glass.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "26:04"
     },
     {
@@ -305,7 +305,7 @@
         { "name": "Mint", "customUnit": "leaves" }
       ],
       "description": "Pour all ingredients into a mixing glass with ice. Stir. Strain into a cocktail glass. Garnish with fresh mint leaves in the drink.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Dry martini",
@@ -316,7 +316,7 @@
         { "unit": "Whole", "amount": 1, "name": "Olive" }
       ],
       "description": "Straight: Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled martini cocktail glass. Squeeze oil from Lemon peel onto the drink, or garnish with olive.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "13:39"
     },
     {
@@ -329,7 +329,7 @@
         { "unit": "Slice", "amount": 1, "name": "Lemon" }
       ],
       "description": "Shake all ingredients with ice cubes, except soda water. Pour into tumbler. Top with soda water. Garnish with Lemon slice.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "John collins",
@@ -343,7 +343,7 @@
         { "unit": "Whole", "amount": 1, "name": "Cherry" }
       ],
       "description": "Pour all ingredients directly into highball glass filled with ice. Stir gently. Garnish with Lemon slice and maraschino cherry. Add a dash of Angostura bitters.",
-      "glass": "Collins"
+      "glass": "Collins glass"
     },
     {
       "name": "Manhattan",
@@ -354,7 +354,7 @@
         { "unit": "Whole", "amount": 1, "name": "Cherry" }
       ],
       "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled cocktail glass. Garnish with cocktail cherry.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "2:54"
     },
     {
@@ -366,7 +366,7 @@
         { "unit": "CL", "amount": 1, "name": "Maraschino" }
       ],
       "description": "Shake and strain into a chilled large cocktail glass",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Monkey gland",
@@ -377,7 +377,7 @@
         { "unit": "Drop", "amount": 2, "name": "Grenadine" }
       ],
       "description": "Shake well over ice cubes in a shaker, strain into a chilled cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Negroni",
@@ -388,7 +388,7 @@
         { "unit": "Slice", "amount": 0.5, "name": "Orange" }
       ],
       "description": "Pour all ingredients directly into old-fashioned glass filled with ice. Stir gently. Garnish with half Orange slice.",
-      "glass": "Old fashioned",
+      "glass": "Old fashioned glass",
       "video": "15:52"
     },
     {
@@ -402,7 +402,7 @@
         { "unit": "Whole", "amount": 1, "name": "Cherry" }
       ],
       "description": "Place sugar cube in old-fashioned glass and saturate with bitters, add a dash of plain water. Muddle until dissolve. Fill the glass with ice cubes and add whiskey. Garnish with Orange slice and a cocktail cherry.",
-      "glass": "Old fashioned",
+      "glass": "Old fashioned glass",
       "video": "1:45"
     },
     {
@@ -413,7 +413,7 @@
         { "unit": "CL", "amount": 1.5, "name": "Orange juice" }
       ],
       "description": "Shake together over ice. Strain into cocktail glass and serve chilled.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Planter’s punch",
@@ -429,7 +429,7 @@
         { "unit": "Slice", "amount": 1, "name": "Pineapple" }
       ],
       "description": "Pour all ingredients, except the bitters, into shaker filled with ice. Shake well. Pour into large glass, filled with ice. Add dash Angostura bitters. Garnish with cocktail cherry and pineapple.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Porto flip",
@@ -440,7 +440,7 @@
         { "name": "Nutmeg", "customUnit": "None" }
       ],
       "description": "Pour all ingredients into cocktail shaker filled with ice. Shake well. Strain into cocktail glass. Sprinkle with fresh ground nutmeg.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Ramos fizz",
@@ -456,7 +456,7 @@
         { "name": "Soda water", "customUnit": "None" }
       ],
       "description": "Pour all ingredients (except soda) in a mixing glass, dry shake (no ice) for two minutes, add ice and hard shake for another minute. Strain into a highball glass without ice, top with soda.",
-      "glass": "Highball",
+      "glass": "Highball glass",
       "video": "17:38"
     },
     {
@@ -467,7 +467,7 @@
         { "name": "Lemon", "customUnit": "twist" }
       ],
       "description": "Pour all ingredients directly into old-fashioned glass filled with ice. Stir gently. Garnish with a Lemon twist.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Sazerac",
@@ -479,7 +479,7 @@
         { "name": "Lemon", "customUnit": "peel" }
       ],
       "description": "Rinse a chilled old-fashioned glass with the absinthe, add crushed ice and set it aside. Stir the remaining ingredients over ice and set it aside. Discard the ice and any excess absinthe from the prepared glass, and strain the drink into the glass. Add the Lemon peel for garnish. Note: The original recipe changed after the American Civil War, rye whiskey substituted cognac as it became hard to obtain.",
-      "glass": "Old fashioned",
+      "glass": "Old fashioned glass",
       "video": "5:45"
     },
     {
@@ -490,7 +490,7 @@
         { "unit": "Slice", "amount": 1, "name": "Orange" }
       ],
       "description": "Pour all ingredients into a highball glass filled with ice. Stir gently. Garnish with an Orange slice.",
-      "glass": "Highball"
+      "glass": "Highball glass"
     },
     {
       "name": "Sidecar",
@@ -500,7 +500,7 @@
         { "unit": "CL", "amount": 2, "name": "Lemon juice" }
       ],
       "description": "Pour all ingredients into cocktail shaker filled with ice. Shake well and strain into cocktail glass.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "29:31"
     },
     {
@@ -510,7 +510,7 @@
         { "unit": "CL", "amount": 2, "name": "White crème de menthe" }
       ],
       "description": "Pour in a mixing glass with ice, stir and strain into a cocktail glass. May also be served on rocks in a rocks glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Tuxedo",
@@ -524,7 +524,7 @@
         { "name": "Lemon", "customUnit": "twist" }
       ],
       "description": "Stir all ingredients with ice and strain into cocktail glass. Garnish with a cocktail cherry and a Lemon zest twist.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Whiskey sour",
@@ -539,7 +539,7 @@
         { "ingredient": "Egg white", "unit": "Dash", "amount": 1 }
       ],
       "description": "Egg white is optional. Pour all ingredients into cocktail shaker filled with ice. Shake well (a little harder if using egg white). Strain in cocktail glass. Garnish with half Orange slice and maraschino cherry.",
-      "glass": "Old fashioned",
+      "glass": "Old fashioned glass",
       "video": "4:03"
     },
     {
@@ -550,7 +550,7 @@
         { "unit": "CL", "amount": 2, "name": "Lemon juice" }
       ],
       "description": "Add all ingredients into cocktail shaker filled with ice. Shake well and strain into large cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "French connection",
@@ -559,7 +559,7 @@
         { "unit": "CL", "amount": 3.5, "name": "Amaretto" }
       ],
       "description": "Pour all ingredients directly into old fashioned glass filled with ice cubes. Stir gently.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Mint julep",
@@ -570,7 +570,7 @@
         { "unit": "Tsp", "amount": 1, "name": "Powdered sugar" }
       ],
       "description": "In steel cup gently muddle 4 mint sprigs with sugar and water. Fill the glass with cracked ice, add the Bourbon and stir well until the cup frosts. Garnish with a mint sprig.",
-      "glass": "SteelCup",
+      "glass": "Steel cup",
       "video": "12:05"
     },
     {
@@ -581,7 +581,7 @@
         { "unit": "CL", "amount": 3, "name": "Cream" }
       ],
       "description": "Pour vodka and coffee liqueur into an old fashioned glass filled with ice cubes. Float fresh cream on the top and stir in slowly..",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Bloody Mary",
@@ -597,7 +597,7 @@
         { "unit": "Wedge", "amount": 1, "name": "Lemon" }
       ],
       "description": "Stir gently all the ingredients in a mixing glass with ice. Add tabasco, celery salt, pepper to taste. Pour into rocks glass. Garnish with celery and Lemon wedge. If requested served with ice, pour into highball glass.",
-      "glass": "Highball"
+      "glass": "Highball glass"
     },
     {
       "name": "Champagne cocktail",
@@ -613,7 +613,7 @@
         { "name": "grandMarnier", "customUnit": "FewDrops" }
       ],
       "description": "Place the sugar cube with 2 dashes of bitters in a large Champagne glass, add the cognac. Optionally add a few drops of Grand Marnier. Pour gently chilled Champagne. Garnish with Orange zest and cherry.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Kir",
@@ -622,7 +622,7 @@
         { "unit": "CL", "amount": 1, "name": "Crème de cassis" }
       ],
       "description": "Pour Crème de Cassis into glass, top up with white wine.",
-      "glass": "Wine"
+      "glass": "Wine glass"
     },
     {
       "name": "Kir royal",
@@ -631,7 +631,7 @@
         { "unit": "CL", "amount": 1, "name": "Crème de cassis" }
       ],
       "description": "Pour Crème de Cassis into glass, top up with Champagne.",
-      "glass": "Wine"
+      "glass": "Wine glass"
     },
     {
       "name": "Long island iced tea",
@@ -647,7 +647,7 @@
         { "unit": "Slice", "amount": 1, "name": "Lemon" }
       ],
       "description": "Add all ingredients into highball glass filled with ice. Top with cola. Stir gently. Garnish with Lemon slice.",
-      "glass": "Highball"
+      "glass": "Highball glass"
     },
     {
       "name": "Mai-tai",
@@ -663,7 +663,7 @@
         { "name": "Lime", "customUnit": "peel" }
       ],
       "description": "Add all ingredients into a shaker with ice. Shake and pour into a double rocks glass or an highball glass. Garnish with pineapple spear, mint leaves, and lime peel.",
-      "glass": "Highball",
+      "glass": "Highball glass",
       "video": "27:20"
     },
     {
@@ -676,12 +676,12 @@
       "optionalIngredients": [
         {
           "name": "salt",
-          "customUnit": "None",
-          "description": "Add all ingredients into a shaker with ice. Shake and strain into a chilled cocktail glass. Garnish with a half salt rim (optional).",
-          "glass": "Margarita",
-          "video": "24:13"
+          "customUnit": "None"
         }
-      ]
+      ],
+      "description": "Add all ingredients into a shaker with ice. Shake and strain into a chilled cocktail glass. Garnish with a half salt rim (optional).",
+      "glass": "Margarita glass",
+      "video": "24:13"
     },
     {
       "name": "Tommy’s margarita",
@@ -691,7 +691,7 @@
         { "unit": "Tsp", "amount": 2, "name": "Agave nectar" }
       ],
       "description": "Shake and strain into a chilled cocktail glass.",
-      "glass": "Margarita"
+      "glass": "Margarita glass"
     },
     {
       "name": "B52",
@@ -701,7 +701,7 @@
         { "unit": "CL", "amount": 2, "name": "Irish cream" }
       ],
       "description": "Layer ingredients one at a time starting with coffee liqueur, followed by irish cream and top with triple sec. Flame the triple sec, serve while the flame is still on, accompanied with a straw on side plate.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Barracuda",
@@ -713,7 +713,7 @@
         { "name": "Prosecco", "customUnit": "None" }
       ],
       "description": "Shake together with ice. Strain into glass and serve.",
-      "glass": "Margarita"
+      "glass": "Margarita glass"
     },
     {
       "name": "Corpse reviver #2",
@@ -726,7 +726,7 @@
         { "name": "Orange", "customUnit": "zest" }
       ],
       "description": "Pour all ingredients into shaker with ice. Shake well and strain in chilled cocktail glass. Garnish with Orange zest.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "16:10"
     },
     {
@@ -739,7 +739,7 @@
         { "name": "Lemon", "customUnit": "twist" }
       ],
       "description": "Add all ingredients into cocktail shaker filled with ice. Shake well and strain into large cocktail glass. Garnish with Lemon twist.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Dirty martini",
@@ -750,12 +750,12 @@
         { "unit": "Whole", "amount": 1, "name": "Olive" }
       ],
       "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain in chilled martini glass. Garnish with green olive.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Espresso martini",
       "description": "Shake and strain into a chilled cocktail glass.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "ingredients": [
         { "unit": "CL", "amount": 5, "name": "Vodka" },
         { "unit": "CL", "amount": 1, "name": "Coffee liqueur" },
@@ -766,7 +766,7 @@
     {
       "name": "Golden dream",
       "description": "Pour all ingredients into shaker filled with ice. Shake briskly for few seconds. Strain into chilled cocktail glass.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "ingredients": [
         { "unit": "CL", "amount": 2, "name": "Triple sec" },
         { "unit": "CL", "amount": 2, "name": "Galliano" },
@@ -777,7 +777,7 @@
     {
       "name": "Grasshopper",
       "description": "Pour all ingredients into shaker filled with ice. Shake briskly for few seconds. Strain into chilled cocktail glass. Garnish with mint leaf (optional).",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "ingredients": [
         { "unit": "CL", "amount": 2, "name": "White crème de cacao" },
         { "unit": "CL", "amount": 2, "name": "Green crème de menthe" },
@@ -788,7 +788,7 @@
     {
       "name": "Hemingway special",
       "description": "Pour all ingredients into a shaker with ice. Shake well and strain into a large cocktail glass.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "ingredients": [
         { "unit": "CL", "amount": 6, "name": "White rum" },
         { "unit": "CL", "amount": 4, "name": "Grapefruit juice" },
@@ -799,7 +799,7 @@
     {
       "name": "Horse’s neck",
       "description": "Pour Cognac and ginger ale directly into highball glass with ice cubes. Stir gently. If preferred, add dashes of Angostura Bitter. Garnish with rind of one Lemon spiral.",
-      "glass": "Collins",
+      "glass": "Collins glass",
       "ingredients": [
         { "unit": "CL", "amount": 4, "name": "Cognac" },
         { "unit": "CL", "amount": 12, "name": "Ginger ale" },
@@ -810,7 +810,7 @@
     {
       "name": "Irish coffee",
       "description": "Warm black coffee is poured into a pre-heated Irish coffee glass. Whiskey and at least one teaspoon of sugar is added and stirred until dissolved. Fresh thick chilled cream is carefully poured over the back of a spoon held just above the surface of the coffee. The layer of cream will float on the coffee without mixing. Plain sugar can be replaced with sugar syrup.",
-      "glass": "IrishCoffeeMug",
+      "glass": "Irish coffee mug",
       "ingredients": [
         { "unit": "CL", "amount": 5, "name": "Irish whiskey" },
         { "unit": "CL", "amount": 12, "name": "Coffee" },
@@ -821,7 +821,7 @@
     {
       "name": "Tom collins",
       "description": "Pour all ingredients directly into highball glass filled with ice. Stir gently. Garnish with Lemon slice and maraschino cherry. Add a dash of Angostura bitters.",
-      "glass": "Collins",
+      "glass": "Collins glass",
       "video": "17:13",
       "ingredients": [
         { "unit": "CL", "amount": 4.5, "name": "Old Tom Gin" },
@@ -855,7 +855,7 @@
         { "unit": "Dash", "amount": 1, "name": "Angostura bitters" }
       ],
       "description": "Shake and strain into a chilled champagne flute. Dash some Angostura bitters on top.",
-      "glass": " Champagne flute",
+      "glass": "Champagne flute",
       "video": "35:00"
     },
     {
@@ -870,7 +870,7 @@
         { "unit": "Whole", "amount": 1, "name": "Blackberry" }
       ],
       "description": "Shake the ingredients and pour into highball glass. Top with Sparkling wine. Garnish with a Lemon slice and a blackberry.",
-      "glass": "Highball"
+      "glass": "Highball glass"
     },
     {
       "name": "Sea breeze",
@@ -882,7 +882,7 @@
         { "unit": "Whole", "amount": 1, "name": "Cherry" }
       ],
       "description": "Build all ingredients in a highball glass filled with ice. Garnish with an Orange zest and cherry.",
-      "glass": "Highball"
+      "glass": "Highball glass"
     },
     {
       "name": "Sex on the beach",
@@ -895,7 +895,7 @@
         { "unit": "Slice", "amount": 0.5, "name": "Orange" }
       ],
       "description": "Build all ingredients in a highball glass filled with ice. Garnish with an Orange zest and cherry.",
-      "glass": "Highball"
+      "glass": "Highball glass"
     },
     {
       "name": "Singapore sling",
@@ -923,7 +923,7 @@
         { "unit": "Slice", "amount": 0.5, "name": "Orange" }
       ],
       "description": "Pour tequila and Orange juice directly into highball glass filled with ice cubes. Add the grenadine syrup to create chromatic effect (sunrise), do not stir. Garnish with half Orange slice or an Orange zest.",
-      "glass": "Collins"
+      "glass": "Collins glass"
     },
     {
       "name": "Yellow bird",
@@ -934,7 +934,7 @@
         { "unit": "CL", "amount": 1.5, "name": "Lime juice" }
       ],
       "description": "Shake and strain into a chilled cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Zombie",
@@ -952,7 +952,7 @@
         { "name": "Mint", "customUnit": "leaves" }
       ],
       "description": "Add all ingredients into an electric blender with 170 grams of cracked ice. With pulse bottom blend for a few seconds. Serve in a tall tumbler glass. Garnish with mint leaves.",
-      "glass": "ZombieGlass"
+      "glass": "Zombie glass"
     },
     {
       "name": "Brandy crusta",
@@ -967,7 +967,7 @@
         { "unit": "Tsp", "amount": 1, "name": "Powdered sugar" }
       ],
       "description": "Mix together all ingredients with ice cubes in a mixing glass and strain into prepared slim cocktail glass. Rub a slice of Orange (or Lemon) around the rim of the glass and dip it in pulverized white sugar, so that the sugar will adhere to the edge of the glass. Carefully curling place the Orange/Lemon peel around the inside of the glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Hanky panky",
@@ -978,7 +978,7 @@
         { "name": "Orange", "customUnit": "zest" }
       ],
       "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled cocktail glass. Garnish with Orange zest.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Last word",
@@ -989,7 +989,7 @@
         { "unit": "CL", "amount": 2.25, "name": "Lime juice" }
       ],
       "description": "Add all ingredients into a cocktail shaker. Shake with ice and strain into a chilled cocktail glass.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "21:18"
     },
     {
@@ -1002,7 +1002,7 @@
         { "name": "Lemon", "customUnit": "zest" }
       ],
       "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled cocktail glass. Garnish with Lemon zest.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "14:20"
     },
     {
@@ -1017,7 +1017,7 @@
         { "unit": "Whole", "amount": 1, "name": "Cherry" }
       ],
       "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled cocktail glass. Garnish with Orange zest and maraschino cherry.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "31:04"
     },
     {
@@ -1031,12 +1031,12 @@
       "optionalIngredients": [
         {
           "name": "Orange",
-          "customUnit": "zest",
-          "description": "Stir honey with Lemon and Orange juices until it dissolves, add gin and shake with ice. Strain into a chilled cocktail glass. Optionally garnish with a Lemon or Orange zest.",
-          "glass": "Cocktail",
-          "video": "20:46"
+          "customUnit": "zest"
         }
-      ]
+      ],
+      "description": "Stir honey with Lemon and Orange juices until it dissolves, add gin and shake with ice. Strain into a chilled cocktail glass. Optionally garnish with a Lemon or Orange zest.",
+      "glass": "Cocktail glass",
+      "video": "20:46"
     },
     {
       "name": "Cachanchara",
@@ -1048,7 +1048,7 @@
         { "unit": "Wedge", "amount": 1, "name": "Lime" }
       ],
       "description": "Mix honey with water and lime juice and spread the mixture on the bottom and sides of the glass. Add cracked ice, and then the rum. End by energetically stirring from bottom to top. Garnish with Lime wedge.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Fernandito",
@@ -1057,7 +1057,7 @@
         { "name": "Cola", "customUnit": "None" }
       ],
       "description": "Pour the Fernet Branca into a double old fashioned glass with ice, fill the glass up with Cola. Gently stir.",
-      "glass": "Highball"
+      "glass": "Highball glass"
     },
     {
       "name": "Old cuban",
@@ -1070,7 +1070,7 @@
         { "unit": "Sprig", "amount": 3, "name": "Mint" }
       ],
       "description": "Pour all ingredients into cocktail shaker except the wine, shake well with ice, strain into chilled elegant cocktail glass. Top up with the sparkling wine. Garnish with mint springs.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Paloma",
@@ -1082,7 +1082,7 @@
         { "unit": "Slice", "amount": 1, "name": "Lime" }
       ],
       "description": "Pour the tequila into a highball glass, squeeze the lime juice. Add ice and salt, fill up pink grapefruit soda. Stir gently. Garnish with a slice of lime.",
-      "glass": "Highball",
+      "glass": "Highball glass",
       "video": "24:47"
     },
     {
@@ -1094,7 +1094,7 @@
         { "unit": "CL", "amount": 3, "name": "Lemon juice" }
       ],
       "description": "Pour all ingredients into cocktail shaker, shake well with ice, strain into chilled cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Penicillin",
@@ -1107,7 +1107,7 @@
         { "unit": "Whole", "amount": 1, "name": "Candied ginger" }
       ],
       "description": "Muddle fresh ginger in a shaker and add the remaining ingredients, except for the Islay single malt whiskey. Fill the shaker with ice and shake. Double-strain into a chilled old fashioned glass with ice. Float the single malt whisky on top. Garnish with a candied ginger.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Southside",
@@ -1121,11 +1121,11 @@
         {
           "ingredient": "Egg white",
           "unit": "CL",
-          "amount": 3,
-          "description": "Egg white optional. Pour all ingredients into a cocktail shaker, shake well with ice, double-strain into chilled cocktail glass. If egg white is used shake vigorously. Garnish with mint springs.",
-          "glass": "Cocktail"
+          "amount": 3
         }
-      ]
+      ],
+      "description": "Egg white optional. Pour all ingredients into a cocktail shaker, shake well with ice, double-strain into chilled cocktail glass. If egg white is used shake vigorously. Garnish with mint springs.",
+      "glass": "Cocktail glass"
     },
     {
       "name": "Spicy fifty",
@@ -1138,7 +1138,7 @@
         { "name": "Red chili pepper", "customUnit": "None" }
       ],
       "description": "Pour all ingredients (including 2 thin slices of pepper) into a cocktail shaker, shake well with ice, double-strain into chilled cocktail glass. Garnish with a red chili pepper.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Suffering bastard",
@@ -1154,11 +1154,11 @@
         {
           "ingredient": "Orange",
           "unit": "Slice",
-          "amount": 1,
-          "description": "Pour all ingredients into cocktail shaker except the ginger beer, shake well with ice, Pour unstrained into a Collins glass or in the original S. Bastard mug and top up with ginger beer. Garnish with mint sprig and optionally an Orange slice as well.",
-          "glass": "Collins"
+          "amount": 1
         }
-      ]
+      ],
+      "description": "Pour all ingredients into cocktail shaker except the ginger beer, shake well with ice, Pour unstrained into a Collins glass or in the original S. Bastard mug and top up with ginger beer. Garnish with mint sprig and optionally an Orange slice as well.",
+      "glass": "Collins glass"
     },
     {
       "name": "Tipperary",
@@ -1170,7 +1170,7 @@
         { "unit": "Slice", "amount": 1, "name": "Orange" }
       ],
       "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled martini cocktail glass. Garnish with a slice of Orange.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Trinidad sour",
@@ -1181,7 +1181,7 @@
         { "unit": "CL", "amount": 1.5, "name": "Rye whiskey" }
       ],
       "description": "Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Ve.n.to",
@@ -1198,7 +1198,7 @@
         { "ingredient": "Egg white", "unit": "CL", "amount": 3 }
       ],
       "description": "Egg white optional. Pour all ingredients into the shaker. Shake vigorously with ice. Strain into a chilled small tumbler glass filled with ice. Garnish with Lemon zest and white grapes.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Illegal",
@@ -1214,11 +1214,11 @@
         {
           "ingredient": "Egg white",
           "unit": "CL",
-          "amount": 3,
-          "description": "Egg white optional. Pour all ingredients into the shaker. Shake vigorously with ice. Strain into a chilled cocktail glass, or “on the rocks” in a traditional clay or terracotta mug.",
-          "glass": "Cocktail"
+          "amount": 3
         }
-      ]
+      ],
+      "description": "Egg white optional. Pour all ingredients into the shaker. Shake vigorously with ice. Strain into a chilled cocktail glass, or “on the rocks” in a traditional clay or terracotta mug.",
+      "glass": "Cocktail glass"
     },
     {
       "name": "Naked and famous",
@@ -1229,7 +1229,7 @@
         { "unit": "CL", "amount": 2.25, "name": "Lime juice" }
       ],
       "description": "Pour all ingredients into cocktail shaker, shake well with ice, strain into chilled cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "New York sour",
@@ -1243,7 +1243,7 @@
         { "unit": "Whole", "amount": 1, "name": "Cherry" }
       ],
       "description": "Bourbon can be used instead of rye. Pour all ingredients into the shaker. Shake vigorously with ice. Strain into a chilled rocks glass filled with ice. Float the wine on top. Garnish with Lemon or Orange zest with cherry.",
-      "glass": "Old fashioned"
+      "glass": "Old fashioned glass"
     },
     {
       "name": "Spritz",
@@ -1254,7 +1254,7 @@
         { "unit": "Slice", "amount": 1, "name": "Orange" }
       ],
       "description": "Build all ingredients into a wine glass filled with ice. Stir gently. Garnish with a slice of Orange.",
-      "glass": "Wine",
+      "glass": "Wine glass",
       "video": "33:11"
     },
     {
@@ -1265,7 +1265,7 @@
         { "unit": "CL", "amount": 6, "name": "Gin" }
       ],
       "description": "Pour all ingredients into a cocktail strainer, shake well with ice, strain into chilled cocktail glass.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "15:00"
     },
     {
@@ -1277,12 +1277,12 @@
       "optionalIngredients": [
         {
           "name": "Lemon",
-          "customUnit": "twist",
-          "description": "Mix gin and vermouth in a chilled pint glass, stir with ice. Strain into a champagne coupe.",
-          "glass": "Champagne coupe",
-          "video": "13:39"
+          "customUnit": "twist"
         }
-      ]
+      ],
+      "description": "Mix gin and vermouth in a chilled pint glass, stir with ice. Strain into a champagne coupe.",
+      "glass": "Champagne coupe",
+      "video": "13:39"
     },
     {
       "name": "Vodka martini",
@@ -1295,12 +1295,12 @@
         {
           "ingredient": "olive",
           "unit": "Whole",
-          "amount": 1,
-          "description": "Mix vodka and dry vermouth in a pint glass. The amount of vermouth used varies and can be as little as a drop. Stir with ice. Optionally add olive brine to make a dirty martini.",
-          "glass": "Cocktail",
-          "video": "21:53"
+          "amount": 1
         }
-      ]
+      ],
+      "description": "Mix vodka and dry vermouth in a pint glass. The amount of vermouth used varies and can be as little as a drop. Stir with ice. Optionally add olive brine to make a dirty martini.",
+      "glass": "Cocktail glass",
+      "video": "21:53"
     },
     {
       "name": "20th century",
@@ -1312,7 +1312,7 @@
         { "name": "Lemon", "customUnit": "twist" }
       ],
       "description": "Combine ingredients in a cocktail shaker, shake with ice, strain into a cocktail glass.",
-      "glass": "Cocktail",
+      "glass": "Cocktail glass",
       "video": "19:51"
     },
     {
@@ -1323,12 +1323,12 @@
         { "unit": "Dash", "amount": 2, "name": "Angostura bitters" }
       ],
       "description": "Stir all ingredients with ice and strain into a cocktail glass.",
-      "glass": "Cocktail"
+      "glass": "Cocktail glass"
     },
     {
       "name": "Whiskey fix",
       "description": "Shake in a cocktail shaker with a small piece of ice. Drain into the glass and top with crushed ice and garnish with a Lemon wedge and a luxardo cherry.",
-      "glass": "Old fashioned",
+      "glass": "Old fashioned glass",
       "video": "7:11",
       "ingredients": [
         { "unit": "CL", "amount": 2, "name": "Lemon juice" },
@@ -1340,4 +1340,3 @@
     }
   ]
 }
-
