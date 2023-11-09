@@ -1,9 +1,28 @@
+:root {
+  --main-bg-color: #faf7f4;
+  --active-bg-color: #f0ede9;
+  --main-text-color: #333;
+  --hover-text-color: #111;
+  --secondary-text-color: #888;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: #2e2e2e;
+    --active-bg-color: #444;
+    --main-text-color: #eee;
+    --secondary-text-color: #888;
+    --hover-text-color: #fff;
+  }
+}
+
 body {
   font-family: "IBM Plex Mono", sans-serif;
   font-size: 13px;
-  background: #faf7f4;
+  background: var(--main-bg-color);
   line-height: 1.4;
   margin: 0;
+  color: var(--main-text-color);
 }
 
 .recipe {
@@ -11,7 +30,7 @@ body {
   display: block;
   padding: 15px;
   border-radius: 5px;
-  color: #222;
+  color: var(--main-text-color);
   transition: 400ms background-color;
 }
 
@@ -26,16 +45,16 @@ body {
 }
 
 .recipe.active {
-  background-color: #f0ede9;
+  background-color: var(--active-bg-color);
 }
 
 .recipe ingredient.missing {
   text-decoration: line-through;
-  color: #888;
+  color: var(--secondary-text-color);
 }
 
 .recipe:hover {
-  color: #000;
+  color: var(--hover-text-color);
 }
 
 ul.ingredients {
@@ -123,4 +142,16 @@ glass {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+#units {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#units select {
+  font-family: inherit;
+  background: var(--main-bg-color);
+  color: var(--main-text-color);
 }

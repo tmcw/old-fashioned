@@ -5,7 +5,7 @@ import materials from "./materials.json" with { type: "json" };
 
 export { materials, recipes };
 
-type Recipe = typeof recipes.recipes[number];
+export type Recipe = typeof recipes.recipes[number];
 type Material = typeof materials.materials[number];
 
 export function getMaterials(c: Context | null) {
