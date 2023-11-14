@@ -3,14 +3,8 @@ import { Context, Hono } from "npm:hono@3.8.1";
 import { createContext, Fragment, useContext } from "npm:hono@3.8.1/jsx";
 import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 import { getCookie, setCookie } from "./cookies.ts";
-import {
-  getMaterialIds,
-  getMaterials,
-  materials,
-  Recipe,
-  recipes,
-  sort,
-} from "./data.ts";
+import { materials, Recipe, recipes } from "./recipes.ts";
+import { getMaterialIds, getMaterials, sort } from "./data.ts";
 import { styleSytem } from "./style.tsx";
 import { glasses } from "./glasses.ts";
 
@@ -23,7 +17,7 @@ function MaterialsList() {
   const c = useContext(RequestContext);
   const mats = getMaterialIds(c);
 
-  const groups = [...new Set(materials.materials.map((m) => m.type))];
+  const groups = [...new Set(materials.map((m) => m.type))];
 
   return (
     <plank id="materials-list">
@@ -34,7 +28,7 @@ function MaterialsList() {
           return (
             <material-group>
               <material-group-name>{group}</material-group-name>
-              {materials.materials.filter((mat) => mat.type == group).map(
+              {materials.filter((mat) => mat.type == group).map(
                 (mat) => {
                   // Possibly wait until loaded to toggle fully?
                   return (
@@ -74,7 +68,7 @@ function RecipesList() {
     <plank id="recipes-list" hx-swap-oob="true">
       <details open>
         <summary>Recipes</summary>
-        {sort(recipes.recipes, mats).map((recipe) => {
+        {sort(recipes, mats).map((recipe) => {
           const thisSlug = slug(recipe.name);
           // Possibly wait until loaded to toggle fully?
           return (
@@ -154,7 +148,7 @@ function RecipeDetail() {
   const requestContext = useContext(RequestContext);
   const s = requestContext?.req.param("slug");
 
-  const recipe = recipes.recipes.find((r) => {
+  const recipe = recipes.find((r) => {
     return slug(r.name) == s;
   });
   const unit = getCookie(requestContext!, "units") || "";

@@ -1,16 +1,10 @@
 import { Context } from "npm:hono@3.8.1";
 import { getCookie } from "./cookies.ts";
-import recipes from "./recipes.json" with { type: "json" };
-import materials from "./materials.json" with { type: "json" };
-
-export { materials, recipes };
-
-export type Recipe = typeof recipes.recipes[number];
-type Material = typeof materials.materials[number];
+import { Material, materials, Recipe } from "./recipes.ts";
 
 export function getMaterials(c: Context | null) {
   const ids = getMaterialIds(c);
-  return materials.materials.filter((mat) => ids.has(mat.id));
+  return materials.filter((mat) => ids.has(mat.id));
 }
 
 export function getMaterialIds(c: Context | null) {
