@@ -17,7 +17,7 @@ interface Ingredient {
     | "Leaves"
     | "Splash";
   amount: number;
-  name: string;
+  name: MaterialName;
 }
 
 export interface Recipe {
@@ -46,6 +46,8 @@ export interface Material {
   parent?: string;
   id: number;
 }
+
+type MaterialName = (typeof materials)[number]["name"];
 
 export const materials = [
   { "name": "Whiskey", "type": "Spirit", "id": 0 },
@@ -254,7 +256,9 @@ export const materials = [
   { "name": "Red wine", "type": "Base", "parent": "wine", "id": 128 },
   { "name": "Red chili pepper", "type": "Fruit", "id": 129 },
   { "name": "Chamomile syrup", "type": "Syrup", "id": 130 },
-] satisfies Material[];
+] as const;
+
+materials satisfies readonly Material[];
 
 export const recipes: Recipe[] = [
   {
@@ -921,7 +925,7 @@ export const recipes: Recipe[] = [
       { "unit": "Whole", "amount": 1, "name": "Cherry" },
     ],
     "optionalIngredients": [
-      { "name": "grandMarnier", "unit": "Drop", "amount": 3 },
+      { "name": "Grand Marnier", "unit": "Drop", "amount": 3 },
     ],
     "description":
       "Place the sugar cube with 2 dashes of bitters in a large Champagne glass, add the cognac. Optionally add a few drops of Grand Marnier. Pour gently chilled Champagne. Garnish with Orange zest and cherry.",
@@ -989,7 +993,7 @@ export const recipes: Recipe[] = [
     ],
     "optionalIngredients": [
       {
-        "name": "salt",
+        "name": "Salt",
         "unit": "None",
         "amount": 1,
       },
@@ -1105,7 +1109,7 @@ export const recipes: Recipe[] = [
       { "unit": "CL", "amount": 2, "name": "Green crème de menthe" },
       { "unit": "CL", "amount": 2, "name": "Cream" },
     ],
-    "optionalIngredients": [{ "name": "mint", "unit": "Leaves", amount: 1 }],
+    "optionalIngredients": [{ "name": "Mint", "unit": "Leaves", amount: 1 }],
   },
   {
     "name": "Hemingway special",
@@ -1653,7 +1657,7 @@ export const recipes: Recipe[] = [
     "optionalIngredients": [
       { "name": "Lemon", "unit": "Twist", "amount": 1 },
       {
-        "name": "olive",
+        "name": "Olive",
         "unit": "Whole",
         "amount": 1,
       },
