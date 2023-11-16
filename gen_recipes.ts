@@ -1,6 +1,6 @@
 import { camelCase } from "https://deno.land/x/case/mod.ts";
+import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 import * as mats from "./materials.ts";
-import * as glas from "./glas.ts";
 import * as u from "./unit.ts";
 
 export const rawRecipes = [
@@ -1453,42 +1453,42 @@ export const rawRecipes = [
 
 console.log('import { Recipe, Ingredient } from "./types.ts"');
 console.log(
-  `import { ${Object.keys(mats).join(", ")} } from "./materials.ts"`,
+  `import { materials } from "./materials.ts"`,
 );
 console.log(
-  `import { ${Object.keys(glas).join(", ")} } from "./glas.ts"`,
+  `import { glasses } from "./glasses.ts"`,
 );
 console.log(
-  `import { ${Object.keys(u).join(", ")} } from "./unit.ts"`,
+  `import { U } from "./unit.ts"`,
 );
 
-let names = [];
+console.log(`export const recipes = new Map<string, Recipe>([`);
+
 for (let raw of rawRecipes) {
-  let name = camelCase(raw.name);
-
   if (name.match(/^[0-9]/)) {
     name = "_" + name;
   }
 
-  names.push(name);
-
   console.log(
-    `export const ${name} = new Recipe(${JSON.stringify(raw.name)},
+    `[${JSON.stringify(slug(raw.name))}, new Recipe(
+    ${JSON.stringify(raw.name)},
     ${JSON.stringify(raw.description)},
-    ${camelCase(raw.glass)},
+    glasses.${camelCase(raw.glass)},
     [
     ${
       raw.ingredients.map((ingredient) => {
-        return `${camelCase(ingredient.name)}.ingredient(
-        new ${ingredient.unit}(${ingredient.amount}))`;
+        return `materials.${camelCase(ingredient.name)}.ingredient(
+        new U.${ingredient.unit}(${ingredient.amount}))`;
       }).concat(
         raw.optionalIngredients?.map((ingredient) => {
-          return `${camelCase(ingredient.name)}.optionalIngredient(
-        new ${ingredient.unit}(${ingredient.amount}))`;
+          return `materials.${camelCase(ingredient.name)}.optionalIngredient(
+        new U.${ingredient.unit}(${ingredient.amount}))`;
         }) || [],
       )
     }
     ],
-  );`,
+  )],`,
   );
 }
+
+console.log(`]);`);

@@ -218,6 +218,7 @@ console.log('import { Material } from "./types.ts"');
 console.log(`import { ${Object.keys(t).join(",")} } from "./material_type.ts"`);
 
 let names = [];
+let i = 0;
 for (let raw of rawMaterials) {
   const name = camelCase(raw.name);
   names.push(name);
@@ -225,8 +226,10 @@ for (let raw of rawMaterials) {
   const parent = raw.parent ? `, ${camelCase(raw.parent)}` : "";
 
   console.log(
-    `export const ${name} = new Material(${JSON.stringify(raw.name)}, ${
-      camelCase(raw.type)
-    }${parent});`,
+    `const ${name} = new Material(${JSON.stringify(raw.name)}, ${
+      JSON.stringify(`m-${(i++).toString(16)}`)
+    }, materialType.${camelCase(raw.type)}${parent});`,
   );
 }
+
+console.log(`export const materials = {${names.join(", ")}}`);

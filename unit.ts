@@ -1,23 +1,69 @@
-export class BaseUnit {
-  amount: number;
-  constructor(amount: number) {
-    this.amount = amount;
-  }
+import { BaseUnit } from "./types.ts";
+
+class CL extends BaseUnit {
+  name = "CL";
+}
+class Tsp extends BaseUnit {
+  name = "Tsp";
+}
+class Dash extends BaseUnit {
+  name = "Dash";
+}
+class Slice extends BaseUnit {
+  name = "Slice";
+}
+class Whole extends BaseUnit {
+  name = "Whole";
+}
+class Sprig extends BaseUnit {
+  name = "Sprig";
+}
+class Wedge extends BaseUnit {
+  name = "Wedge";
+}
+class Twist extends BaseUnit {
+  name = "Twist";
+}
+class Cube extends BaseUnit {
+  name = "Cube";
+}
+class Drop extends BaseUnit {
+  name = "Drop";
+}
+class Peel extends BaseUnit {
+  name = "Peel";
+}
+class Zest extends BaseUnit {
+  name = "Zest";
+}
+class None extends BaseUnit {
+  name = "None";
+}
+class Spear extends BaseUnit {
+  name = "Spear";
+}
+class Leaves extends BaseUnit {
+  name = "Leaves";
+}
+class Splash extends BaseUnit {
+  name = "Splash";
 }
 
-export class CL extends BaseUnit {}
-export class Tsp extends BaseUnit {}
-export class Dash extends BaseUnit {}
-export class Slice extends BaseUnit {}
-export class Whole extends BaseUnit {}
-export class Sprig extends BaseUnit {}
-export class Wedge extends BaseUnit {}
-export class Twist extends BaseUnit {}
-export class Cube extends BaseUnit {}
-export class Drop extends BaseUnit {}
-export class Peel extends BaseUnit {}
-export class Zest extends BaseUnit {}
-export class None extends BaseUnit {}
-export class Spear extends BaseUnit {}
-export class Leaves extends BaseUnit {}
-export class Splash extends BaseUnit {}
+export const U = {
+  CL,
+  Tsp,
+  Dash,
+  Slice,
+  Whole,
+  Sprig,
+  Wedge,
+  Twist,
+  Cube,
+  Drop,
+  Peel,
+  Zest,
+  None,
+  Spear,
+  Leaves,
+  Splash,
+};

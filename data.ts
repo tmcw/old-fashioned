@@ -1,10 +1,11 @@
 import { Context } from "npm:hono@3.8.1";
 import { getCookie } from "./cookies.ts";
-import { Material, materials, Recipe } from "./recipes.ts";
+import { Material, Recipe } from "./types.ts";
+import { materials } from "./materials.ts";
 
 export function getMaterials(c: Context | null) {
   const ids = getMaterialIds(c);
-  return materials.filter((mat) => ids.has(mat.id));
+  return Object.values(materials).filter((mat) => ids.has(mat.id));
 }
 
 export function getMaterialIds(c: Context | null) {
@@ -19,11 +20,11 @@ export function getMaterialIds(c: Context | null) {
 export function sort(recipes: Recipe[], materials: Material[]) {
   const have = new Set(materials.map((m) => m.name));
 
-  return recipes.map((recipe) => {
+  return Array.from(recipes.values()).map((recipe) => {
     return {
       recipe,
       weight: recipe.ingredients.filter((ingredient) => {
-        return have.has(ingredient.name);
+        return have.has(ingredient.material.name);
       }).length,
     };
   }).sort((a, b) => {

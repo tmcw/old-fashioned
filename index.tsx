@@ -1,12 +1,16 @@
 /** @jsxImportSource npm:hono/jsx */
 import { Context, Hono } from "npm:hono@3.8.1";
 import { createContext, Fragment, useContext } from "npm:hono@3.8.1/jsx";
+import { camelCase } from "https://deno.land/x/case@2.2.0/mod.ts";
 import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 import { getCookie, setCookie } from "./cookies.ts";
-import { materials, Recipe, recipes } from "./recipes.ts";
+import { recipes } from "./recipes.ts";
 import { getMaterialIds, getMaterials, sort } from "./data.ts";
 import { styleSytem } from "./style.tsx";
 import { glasses } from "./glasses.ts";
+import { materialType } from "./material_type.ts";
+import { Ingredient } from "./types.ts";
+import { formatFloat } from "./format_float.ts";
 
 // TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
@@ -17,18 +21,16 @@ function MaterialsList() {
   const c = useContext(RequestContext);
   const mats = getMaterialIds(c);
 
-  const groups = [...new Set(materials.map((m) => m.type))];
-
   return (
     <plank id="materials-list">
       <details open>
         <summary>Materials</summary>
 
-        {groups.map((group) => {
+        {Object.values(materialType).map((group) => {
           return (
             <material-group>
-              <material-group-name>{group}</material-group-name>
-              {materials.filter((mat) => mat.type == group).map(
+              <material-group-name>{group.name}</material-group-name>
+              {group.links.map(
                 (mat) => {
                   // Possibly wait until loaded to toggle fully?
                   return (
@@ -81,7 +83,7 @@ function RecipesList() {
                 <img
                   width="16"
                   height="16"
-                  src={`/icon/${slug(recipe.glass || "")}.svg`}
+                  src={`/icon/${camelCase(recipe.glass.name || "")}.svg`}
                 />
                 {recipe.name}
               </name>
@@ -89,9 +91,9 @@ function RecipesList() {
                 return (
                   <Fragment>
                     <ingredient
-                      class={names.has(ing.name) ? "" : "missing"}
+                      class={names.has(ing.material.name) ? "" : "missing"}
                     >
-                      {ing.name}
+                      {ing.material.name}
                     </ingredient>
                     {i === list.length - 1 ? "" : ", "}
                   </Fragment>
@@ -146,11 +148,10 @@ app.post("/units", async (c) => {
 
 function RecipeDetail() {
   const requestContext = useContext(RequestContext);
-  const s = requestContext?.req.param("slug");
+  const s = requestContext?.req.param("slug") || "";
 
-  const recipe = recipes.find((r) => {
-    return slug(r.name) == s;
-  });
+  const recipe = recipes.get(s);
+
   const unit = getCookie(requestContext!, "units") || "";
 
   if (!recipe) {
@@ -160,94 +161,74 @@ function RecipeDetail() {
     );
   }
 
+  // https://schema.org/Recipe
   return (
     <plank
       id="recipe-detail"
       hx-swap-oob="true"
       hx-get={`/recipe/${s}`}
       hx-trigger="refresh-recipe from:body"
+      itemscope
+      itemtype="https://schema.org/Recipe"
     >
-      <h1>{recipe.name}</h1>
+      <h1 itemprop="name">{recipe.name}</h1>
       <glass>
         <img
           width="16"
           height="16"
-          src={`/icon/${slug(recipe.glass!)}.svg`}
+          src={`/icon/${camelCase(recipe.glass.name!)}.svg`}
         />
-        Served in a {recipe.glass}
+        Served in a {recipe.glass.name}
       </glass>
       <ul class="ingredients">
         {recipe.ingredients.map((ing) => {
           return (
             <li>
-              <Ingredient ingredient={ing} unit={unit} />
+              <IngredientDisplay ingredient={ing} unit={unit} />
             </li>
           );
         })}
       </ul>
-      <p>{recipe.description}</p>
+      <p itemprop="recipeInstructions">{recipe.description}</p>
+      <meta itemprop="recipeCategory" content="cocktail" />
+      <meta itemprop="recipeYield" content="1 drink" />
     </plank>
   );
 }
 
-type TIngredient = Recipe["ingredients"][number];
-
-const NICE_FRACTIONS = {
-  0: "",
-  10: "⅒",
-  11: "⅑",
-  12: "⅛",
-  14: "⅐",
-  16: "⅙",
-  20: "⅕",
-  25: "¼",
-  33: "⅓",
-  37: "⅜",
-  40: "⅖",
-  50: "½",
-  60: "⅗",
-  62: "⅝",
-  66: "⅔",
-  75: "¾",
-  80: "⅘",
-  83: "⅚",
-  87: "⅞",
-};
-
-// TODO: refactor
-function formatFloat(a: number) {
-  const intPart = Math.floor(a);
-  const remainder = Math.floor((a - intPart) * 100);
-
-  if (remainder in NICE_FRACTIONS) {
-    return `${intPart === 0 ? "" : intPart}${NICE_FRACTIONS[remainder]}`;
-  }
-
-  return a.toFixed(2);
-}
-
-function Ingredient({ ingredient, unit }: {
-  ingredient: TIngredient;
+function IngredientDisplay({ ingredient, unit }: {
+  ingredient: Ingredient;
   unit: keyof typeof units;
 }) {
-  if (ingredient.unit === "CL") {
-    const a = ingredient.amount;
+  const name = ingredient.material.name;
+
+  if (ingredient.unit.name === "CL") {
+    const a = ingredient.unit.amount;
     switch (unit) {
       case "CL":
-        return <>{formatFloat(a)} Cl {ingredient.name}</>;
+        return (
+          <span itemprop="recipeIngredient">{formatFloat(a)} Cl {name}</span>
+        );
 
       case "Ml":
-        return <>{formatFloat(a * 10)} Ml {ingredient.name}</>;
+        return (
+          <span itemprop="recipeIngredient">
+            {formatFloat(a * 10)} Ml {name}
+          </span>
+        );
 
       case "Oz":
-        return <>{formatFloat(a * 1 / 3)} Oz {ingredient.name}</>;
+        return (
+          <span itemprop="recipeIngredient">
+            {formatFloat(a * 1 / 3)} Oz {name}
+          </span>
+        );
     }
-    return <></>;
   }
   return (
-    <>
-      {ingredient.name}
-    </>
+    <span itemprop="recipeIngredient">
+      {name}
+    </span>
   );
 }
 
@@ -327,7 +308,7 @@ app.get("/reload", (c) => {
 
 app.get("/icon/:slug", (c) => {
   const p = c.req.param("slug").replace(".svg", "");
-  const icon = glasses.find((g) => slug(g.name) === p);
+  const icon = glasses[p];
 
   if (icon) {
     c.header("Content-Type", "image/svg+xml");
@@ -339,7 +320,7 @@ app.get("/icon/:slug", (c) => {
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path stroke="#333" fill="none" d={icon.icon} />
+        <path stroke="#333" fill="none" d={icon.path} />
       </svg>,
     );
   }
