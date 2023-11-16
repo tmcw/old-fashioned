@@ -1,3 +1,5 @@
+import { camelCase } from "https://deno.land/x/case/mod.ts";
+
 export const glasses = [
   {
     name: "Collins glass",
@@ -61,3 +63,13 @@ export const glasses = [
     icon: "M13 4H6v11c.512.239 1.792.5 3.5.5s3.158-.261 3.5-.5V4zm-7 6h7",
   },
 ];
+
+console.log(`import { Glass } from "./types.ts"`);
+
+for (const glass of glasses) {
+  console.log(
+    `export const ${camelCase(glass.name)} = new Glass(${
+      JSON.stringify(glass.name)
+    }, ${JSON.stringify(glass.icon)});`,
+  );
+}

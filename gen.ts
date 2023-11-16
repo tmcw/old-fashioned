@@ -1,5 +1,9 @@
 import { camelCase } from "https://deno.land/x/case/mod.ts";
 
+/**
+ * This file generates "new" code (classes! Stuff!)
+ * from old code. It does not run at runtime.
+ */
 export const rawMaterials = [
   { "name": "Whiskey", "type": "Spirit", "id": 0 },
   {
@@ -87,6 +91,7 @@ export const rawMaterials = [
   { "name": "Orange juice", "type": "Juice", "id": 38 },
   { "name": "Pineapple juice", "type": "Juice", "id": 39 },
   { "name": "Lime", "type": "Fruit", "id": 40 },
+  { "name": "Rum", "type": "Spirit", "id": 52 },
   { "name": "Cachaça", "type": "Spirit", "parent": "rum", "id": 41 },
   { "name": "Absinthe", "type": "Liqueur", "id": 42 },
   { "name": "Campari", "type": "Liqueur", "id": 43 },
@@ -96,14 +101,14 @@ export const rawMaterials = [
   { "name": "Orange", "type": "Fruit", "id": 47 },
   { "name": "Egg yolk", "type": "Other", "id": 48 },
   { "name": "Egg white", "type": "Other", "id": 49 },
+  { "name": "Sparkling wine", "type": "Base", "id": 82 },
   {
     "name": "Champagne",
     "type": "Base",
-    "parent": "sparklingWine",
+    "parent": "Sparkling wine",
     "id": 50,
   },
   { "name": "Tequila", "type": "Spirit", "id": 51 },
-  { "name": "Rum", "type": "Spirit", "id": 52 },
   { "name": "White rum", "type": "Spirit", "parent": "rum", "id": 53 },
   { "name": "Gold rum", "type": "Spirit", "parent": "rum", "id": 54 },
   { "name": "Demerara rum", "type": "Spirit", "parent": "rum", "id": 55 },
@@ -121,7 +126,7 @@ export const rawMaterials = [
   { "name": "Vodka", "type": "Spirit", "id": 67 },
   { "name": "Ginger beer", "type": "Soda", "id": 68 },
   { "name": "Ginger ale", "type": "Soda", "id": 69 },
-  { "name": "Prosecco", "type": "Base", "parent": "sparklingWine", "id": 70 },
+  { "name": "Prosecco", "type": "Base", "parent": "Sparkling wine", "id": 70 },
   { "name": "Mint", "type": "Seasoning", "id": 71 },
   { "name": "Peach purée", "type": "Other", "id": 72 },
   { "name": "Coffee liqueur", "type": "Liqueur", "id": 73 },
@@ -133,7 +138,6 @@ export const rawMaterials = [
   { "name": "Olive", "type": "Fruit", "id": 79 },
   { "name": "Wine", "type": "Base", "id": 80 },
   { "name": "Dry white wine", "type": "Base", "parent": "wine", "id": 81 },
-  { "name": "Sparkling wine", "type": "Base", "id": 82 },
   { "name": "Peach schnapps", "type": "Liqueur", "id": 83 },
   { "name": "Cherry liqueur", "type": "Liqueur", "id": 84 },
   { "name": "DOM Bénédictine", "type": "Liqueur", "id": 85 },
@@ -210,6 +214,7 @@ export const rawMaterials = [
 ];
 
 console.log('import { Material } from "./types.ts"');
+console.log('import { MaterialType } from "./material_type.ts"');
 
 let names = [];
 for (let raw of rawMaterials) {
@@ -219,10 +224,8 @@ for (let raw of rawMaterials) {
   const parent = raw.parent ? `, ${camelCase(raw.parent)}` : "";
 
   console.log(
-    `const ${name} = new Material(${JSON.stringify(raw.name)}, ${
-      JSON.stringify(raw.type)
-    }${parent});`,
+    `export const ${name} = new Material(${
+      JSON.stringify(raw.name)
+    }, MaterialType.${raw.type}${parent});`,
   );
 }
-
-console.log(`export const materials = [${names.join(",")}]`);
