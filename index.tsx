@@ -9,8 +9,8 @@ import { getMaterialIds, getMaterials, sort } from "./data.ts";
 import { styleSytem } from "./style.tsx";
 import { glasses } from "./glasses.ts";
 import { materialType } from "./material_type.ts";
-import { Ingredient } from "./types.ts";
-import { formatFloat } from "./format_float.ts";
+import { Fmt, Ingredient, Recipe } from "./types.ts";
+import { materials } from "./materials.ts";
 
 // TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
@@ -21,12 +21,20 @@ function MaterialsList() {
   const c = useContext(RequestContext);
   const mats = getMaterialIds(c);
 
-  console.log(mats);
-
   return (
-    <plank id="materials-list">
+    <plank id="materials-list" hx-swap-oob="true">
       <details open>
         <summary>Materials</summary>
+
+        <div>
+          Select{" "}
+          <button hx-post="/material" hx-swap="none" name="all" value="true">
+            All
+          </button>{" "}
+          <button hx-post="/material" hx-swap="none" name="all" value="false">
+            None
+          </button>
+        </div>
 
         {Object.values(materialType).map((group) => {
           return (
@@ -148,19 +156,66 @@ app.post("/units", async (c) => {
   );
 });
 
-function RecipeDetail() {
-  const requestContext = useContext(RequestContext);
-  const s = requestContext?.req.param("slug") || "";
+function getTitle(recipe: Recipe | undefined): string {
+  if (!recipe) {
+    return "Old Fashioned";
+  }
+  return `${recipe.name} | Recipe on Old Fashioned`;
+}
 
+function parseUnit(unit: string | undefined): Fmt {
+  if (unit === "CL" || unit === "Ml" || unit === "Oz") {
+    return unit;
+  }
+  return "Ml";
+}
+
+function WelcomeMessage() {
+  return (
+    <plank id="recipe-detail" hx-swap-oob="true">
+      <strong>
+        Hi.
+      </strong>
+      <p>
+        This is a website that I made about cocktails. I'm not a huge cocktail
+        nerd (drinking is bad, probably), but think that they're cool. And the
+        world's pretty bad right now and making this has been calming.
+      </p>
+      <p>
+        It gave me a chance to both tinker with technology I usually don't use
+        (Elm), and explore some of the cool properties of cocktails: notably
+        that they're pretty similar and have standardized ingredients, so they
+        can be described in relationship to each other.
+      </p>
+      <p>
+        So some of it might seem funky. By default, the list is sorted by
+        'feasibility': as you add ingredients that you have, it'll put recipes
+        that you can make (or barely make) closer to the top. Also, click on
+        'Grid' for a wacky adjacency grid of cocktails and their ingredients.
+      </p>
+      <p>
+        Also, for vim fans, there’s j & k support.
+      </p>
+    </plank>
+  );
+}
+
+function RecipeDetail() {
+  const c = useContext(RequestContext);
+  const s = c?.req.param("slug") || "";
   const recipe = recipes.get(s);
 
-  const unit = getCookie(requestContext!, "units") || "";
+  const unit = parseUnit(getCookie(c!, "units"));
 
   if (!recipe) {
-    return (
-      <plank id="recipe-detail" hx-swap-oob="true">
-      </plank>
-    );
+    if (s) {
+      return (
+        <plank id="recipe-detail" hx-swap-oob="true">
+          That recipe couldn’t be found.
+        </plank>
+      );
+    }
+    return <WelcomeMessage />;
   }
 
   // https://schema.org/Recipe
@@ -173,6 +228,7 @@ function RecipeDetail() {
       itemscope
       itemtype="https://schema.org/Recipe"
     >
+      <title>{getTitle(recipe)}</title>
       <h1 itemprop="name">{recipe.name}</h1>
       <glass>
         <img
@@ -202,20 +258,45 @@ function IngredientDisplay({ ingredient, unit }: {
   ingredient: Ingredient;
   unit: keyof typeof units;
 }) {
-  const name = ingredient.material.name;
+  const c = useContext(RequestContext);
+  const mats = getMaterials(c);
+  const mat = ingredient.material;
+  const name = mat.name;
+
+  const has = mats.includes(mat);
 
   return (
     <span itemprop="recipeIngredient">
-      {ingredient.unit.format(unit)} {name}
+      <span
+        class={has ? "" : "missing"}
+      >
+        {ingredient.unit.format(unit)} {name}
+      </span>
+
+      {has ? null : (
+        <form class="missing-trigger" hx-post="/material">
+          <input type="hidden" name="name" value={mat.id} />
+          <button
+            checked={true}
+            name="included"
+            value="true"
+          >
+            Add to cabinet
+          </button>
+        </form>
+      )}
     </span>
   );
 }
 
 function Index() {
+  const requestContext = useContext(RequestContext);
+  const s = requestContext?.req.param("slug") || "";
+  const recipe = recipes.get(s);
   return (
     <html>
       <head>
-        <title>Old Fashioned</title>
+        <title>{getTitle(recipe)}</title>
         <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js">
         </script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -232,9 +313,9 @@ function Index() {
       <body>
         <StyleTag />
         <columns>
-          <MaterialsList />
-          <RecipesList />
           <RecipeDetail />
+          <RecipesList />
+          <MaterialsList />
           <Units />
         </columns>
         <div hx-get="/reload" hx-trigger="every 2s"></div>
@@ -317,20 +398,29 @@ app.post("/material", async (c) => {
   if (c.req.header("HX-Request")) {
     const body = await c.req.parseBody();
 
-    const mats = getMaterialIds(c);
-
-    if (body.included) {
-      mats.add(body.name);
+    if (body.all === "true") {
+      setCookie(c, "mat", Object.values(materials).map((m) => m.id).join("_"));
+    } else if (body.all === "false") {
+      setCookie(c, "mat", "");
     } else {
-      mats.delete(body.name);
+      const mats = getMaterialIds(c);
+
+      if (body.included) {
+        mats.add(body.name);
+      } else {
+        mats.delete(body.name);
+      }
+
+      setCookie(c, "mat", [...mats].filter((s) => s).join("_"));
     }
 
-    setCookie(c, "mat", [...mats].filter((s) => s).join("_"));
     c.header("HX-Push-URL", "false");
+    c.header("HX-Trigger", "refresh-recipe");
 
     return c.html(
       <RequestContext.Provider value={c}>
         <Fragment>
+          <MaterialsList />
           <RecipesList />
         </Fragment>,
       </RequestContext.Provider>,

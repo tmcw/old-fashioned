@@ -21,7 +21,6 @@ body {
   font-size: 13px;
   background: var(--main-bg-color);
   line-height: 1.4;
-  margin: 0;
   color: var(--main-text-color);
 }
 
@@ -48,9 +47,33 @@ body {
   background-color: var(--active-bg-color);
 }
 
-.recipe ingredient.missing {
+.missing {
   text-decoration: line-through;
   color: var(--secondary-text-color);
+}
+
+[itemprop="recipeIngredient"] .missing-trigger {
+  display: none;
+}
+
+[itemprop="recipeIngredient"]:hover .missing-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding-left: 10px;
+}
+
+button {
+  padding: 1px 10px;
+  font-size: 10px;
+  border: none;
+  background: var(--active-bg-color);
+  font-family: inherit;
+  border-radius: 2px;
+}
+
+button:hover {
+  box-shadow: 0 0 0 1px var(--hover-text-color);
 }
 
 .recipe:hover {
@@ -91,6 +114,22 @@ details[open] summary {
     display: grid;
     grid-template-columns: 280px 280px 1fr;
     height: 100vh;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  #material-list {
+    order: 0;
+  }
+
+  #recipes-list {
+    order: 1;
+  }
+
+  #recipe-detail {
+    order: 2;
   }
 
   summary {

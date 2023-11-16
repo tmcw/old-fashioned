@@ -19,7 +19,7 @@ export function getMaterialIds(c: Context | null) {
   }
 }
 
-export function sort(recipes: Recipe[], materials: Material[]) {
+export function sort(recipes: Map<string, Recipe>, materials: Material[]) {
   const have = new Set(materials.map((m) => m.name));
 
   return Array.from(recipes.values()).map((recipe) => {
