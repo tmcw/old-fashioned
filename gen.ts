@@ -1,4 +1,5 @@
 import { camelCase } from "https://deno.land/x/case/mod.ts";
+import * as t from "./material_type.ts";
 
 /**
  * This file generates "new" code (classes! Stuff!)
@@ -39,35 +40,35 @@ export const rawMaterials = [
   { "name": "Apricot brandy", "type": "Liqueur", "id": 16 },
   { "name": "Port", "type": "Fortified", "id": 17 },
   { "name": "Calvados", "type": "Spirit", "id": 18 },
-  { "name": "Bitters", "type": "Bitters", "id": 19 },
+  { "name": "Any bitters", "type": "Bitters", "id": 19 },
   {
     "name": "Peach bitters",
-    "type": "Bitters",
-    "parent": "bitters",
+    "type": "bitters",
+    "parent": "Any bitters",
     "id": 20,
   },
   {
     "name": "Orange bitters",
-    "type": "Bitters",
-    "parent": "bitters",
+    "type": "bitters",
+    "parent": "Any bitters",
     "id": 21,
   },
   {
     "name": "Angostura bitters",
-    "type": "Bitters",
-    "parent": "bitters",
+    "type": "bitters",
+    "parent": "Any bitters",
     "id": 22,
   },
   {
     "name": "Peychaud’s bitters",
     "type": "Bitters",
-    "parent": "bitters",
+    "parent": "Any bitters",
     "id": 23,
   },
   {
     "name": "Aromatic bitters",
     "type": "Bitters",
-    "parent": "bitters",
+    "parent": "Any bitters",
     "id": 24,
   },
   { "name": "Lemon", "type": "Fruit", "id": 25 },
@@ -214,7 +215,7 @@ export const rawMaterials = [
 ];
 
 console.log('import { Material } from "./types.ts"');
-console.log('import { MaterialType } from "./material_type.ts"');
+console.log(`import { ${Object.keys(t).join(",")} } from "./material_type.ts"`);
 
 let names = [];
 for (let raw of rawMaterials) {
@@ -224,8 +225,8 @@ for (let raw of rawMaterials) {
   const parent = raw.parent ? `, ${camelCase(raw.parent)}` : "";
 
   console.log(
-    `export const ${name} = new Material(${
-      JSON.stringify(raw.name)
-    }, MaterialType.${raw.type}${parent});`,
+    `export const ${name} = new Material(${JSON.stringify(raw.name)}, ${
+      camelCase(raw.type)
+    }${parent});`,
   );
 }

@@ -1,24 +1,5 @@
 import { MaterialType } from "./material_type.ts";
-
-export enum Unit {
-  CL,
-  Tsp,
-  Dash,
-  Slice,
-  Whole,
-  Sprig,
-  Wedge,
-  Twist,
-  Cube,
-  Drop,
-  Peel,
-  Zest,
-  // TODO: why do I have "None"?
-  None,
-  Spear,
-  Leaves,
-  Splash,
-}
+import { BaseUnit } from "./unit.ts";
 
 export class Material {
   name: string;
@@ -31,28 +12,36 @@ export class Material {
       this.parent = parent;
     }
   }
+
+  ingredient(unit: BaseUnit) {
+    return new Ingredient(this, unit);
+  }
+
+  optionalIngredient(unit: BaseUnit) {
+    return new Ingredient(this, unit, true);
+  }
 }
 
 export class Ingredient {
   material: Material;
-  amount: number;
-  unit: Unit;
-  constructor(material: Material, amount: number, unit: Unit) {
+  unit: BaseUnit;
+  optional: boolean;
+  constructor(material: Material, unit: BaseUnit, optional: boolean = false) {
     this.material = material;
-    this.amount = amount;
     this.unit = unit;
+    this.optional = optional;
   }
 }
 
 export class Recipe {
   name: string;
   description: string;
-  glass: string;
+  glass: Glass;
   ingredients: Ingredient[];
   constructor(
     name: string,
     description: string,
-    glass: string,
+    glass: Glass,
     ingredients: Ingredient[],
   ) {
     this.name = name;

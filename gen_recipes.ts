@@ -1,6 +1,7 @@
 import { camelCase } from "https://deno.land/x/case/mod.ts";
 import * as mats from "./materials.ts";
 import * as glas from "./glas.ts";
+import * as u from "./unit.ts";
 
 export const rawRecipes = [
   {
@@ -1450,12 +1451,15 @@ export const rawRecipes = [
   },
 ];
 
-console.log('import { Recipe, Ingredient, Unit } from "./types.ts"');
+console.log('import { Recipe, Ingredient } from "./types.ts"');
 console.log(
   `import { ${Object.keys(mats).join(", ")} } from "./materials.ts"`,
 );
 console.log(
   `import { ${Object.keys(glas).join(", ")} } from "./glas.ts"`,
+);
+console.log(
+  `import { ${Object.keys(u).join(", ")} } from "./unit.ts"`,
 );
 
 let names = [];
@@ -1475,10 +1479,14 @@ for (let raw of rawRecipes) {
     [
     ${
       raw.ingredients.map((ingredient) => {
-        return `new Ingredient(${camelCase(ingredient.name)},
-        ${ingredient.amount},
-        Unit.${ingredient.unit})`;
-      })
+        return `${camelCase(ingredient.name)}.ingredient(
+        new ${ingredient.unit}(${ingredient.amount}))`;
+      }).concat(
+        raw.optionalIngredients?.map((ingredient) => {
+          return `${camelCase(ingredient.name)}.optionalIngredient(
+        new ${ingredient.unit}(${ingredient.amount}))`;
+        }) || [],
+      )
     }
     ],
   );`,
