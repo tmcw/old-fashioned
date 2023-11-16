@@ -2,7 +2,6 @@
 import { Context, Hono } from "hono";
 import { createContext, Fragment, useContext } from "hono/jsx";
 import { camelCase } from "./camelcase.ts";
-import { slug } from "./slug/index.ts";
 import { getCookie, setCookie } from "./cookies.ts";
 import { recipes } from "./recipes.ts";
 import { getMaterialIds, getMaterials, sort } from "./data.ts";
@@ -78,20 +77,19 @@ function RecipesList() {
     <plank id="recipes-list" hx-swap-oob="true">
       <details open>
         <summary>Recipes</summary>
-        {sort(recipes, mats).map((recipe) => {
-          const thisSlug = slug(recipe.name);
+        {sort(recipes, mats).map(([slug, recipe]) => {
           // Possibly wait until loaded to toggle fully?
           return (
             <a
-              class={`recipe ${s === thisSlug ? "active" : ""}`}
-              href={`/recipe/${thisSlug}`}
+              class={`recipe ${s === slug ? "active" : ""}`}
+              href={`/recipe/${slug}`}
               hx-boost="true"
             >
               <name>
                 <img
                   width="16"
                   height="16"
-                  src={`/icon/${camelCase(recipe.glass.name || "")}.svg`}
+                  src={getGlassSvg(recipe.glass)}
                 />
                 {recipe.name}
               </name>
@@ -198,6 +196,13 @@ function WelcomeMessage() {
   );
 }
 
+function getGlassSvg(glass: Glass) {
+  const glassSlug =
+    Object.entries(glasses).find(([slug, g]) => g === glass)?.[0] || "";
+
+  return `/icon/${glassSlug}.svg`;
+}
+
 function RecipeDetail() {
   const c = useContext(RequestContext);
   const s = c?.req.param("slug") || "";
@@ -232,7 +237,7 @@ function RecipeDetail() {
         <img
           width="16"
           height="16"
-          src={`/icon/${camelCase(recipe.glass.name!)}.svg`}
+          src={getGlassSvg(recipe.glass)}
         />
         Served in a {recipe.glass.name}
       </glass>
@@ -391,7 +396,27 @@ app.get("/icon/:slug", (c) => {
 });
 
 app.get("/script.js", (c) => {
-  const script = Deno.readTextFileSync("./script.js");
+  const script = `
+addEventListener("htmx:pushedIntoHistory", (e) => {
+  for (const a of document.querySelectorAll("a")) {
+    a.classList.toggle("active", a.getAttribute("href") === e.detail.path);
+  }
+});
+
+addEventListener("keyup", (event) => {
+  const target = event.target;
+  if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") return;
+  if (event.key === "j" || event.key === "k") {
+    const next = document.querySelector(
+      event.key === "j"
+        ? ".recipe.active + .recipe"
+        : ".recipe:has(+ .recipe.active)",
+    );
+    next?.click();
+    next?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+});
+  `;
   c.header("Content-Type", "application/javascript; charset=UTF-8");
   return c.text(script);
 });

@@ -19,17 +19,20 @@ export function getMaterialIds(c: Context | null) {
   }
 }
 
-export function sort(recipes: Map<string, Recipe>, materials: Material[]) {
+export function sort(
+  recipes: Map<string, Recipe>,
+  materials: Material[],
+): [string, Recipe][] {
   const have = new Set(materials.map((m) => m.name));
 
-  return Array.from(recipes.values()).map((recipe) => {
-    return {
+  return Array.from(recipes.entries()).map(([slug, recipe]) => {
+    return [slug, {
       recipe,
       weight: recipe.ingredients.filter((ingredient) => {
         return have.has(ingredient.material.name);
       }).length,
-    };
+    }] as const;
   }).sort((a, b) => {
-    return b.weight - a.weight;
-  }).map((r) => r.recipe);
+    return b[1].weight - a[1].weight;
+  }).map((a) => [a[0], a[1].recipe]);
 }
