@@ -6,7 +6,7 @@ import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
 import { getCookie, setCookie } from "./cookies.ts";
 import { recipes } from "./recipes.ts";
 import { getMaterialIds, getMaterials, sort } from "./data.ts";
-import { styleSytem } from "./style.tsx";
+import { styleSystem } from "./style.tsx";
 import { glasses } from "./glasses.ts";
 import { materialType } from "./material_type.ts";
 import { Fmt, Ingredient, Recipe } from "./types.ts";
@@ -15,7 +15,7 @@ import { materials } from "./materials.ts";
 // TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
 
-const { styleRoute, StyleTag } = styleSytem();
+const { styleRoute, StyleTag } = styleSystem();
 
 function MaterialsList() {
   const c = useContext(RequestContext);
@@ -318,7 +318,11 @@ function Index() {
           <MaterialsList />
           <Units />
         </columns>
+        {
+          /*
         <div hx-get="/reload" hx-trigger="every 2s"></div>
+        */
+        }
         <script src="/script.js"></script>
       </body>
     </html>

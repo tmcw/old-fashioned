@@ -3,7 +3,7 @@ import { Context } from "npm:hono@3.8.1";
 
 const production = Deno.env.get("NODE_ENV") === "production";
 
-export function styleSytem() {
+export function styleSystem() {
   function StyleTag() {
     const style = Deno.readTextFileSync("./style.css");
     return (
