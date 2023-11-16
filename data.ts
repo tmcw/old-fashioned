@@ -1,4 +1,4 @@
-import { Context } from "npm:hono@3.8.1";
+import { Context } from "hono";
 import { getCookie } from "./cookies.ts";
 import { Material, Recipe } from "./types.ts";
 import { materials } from "./materials.ts";

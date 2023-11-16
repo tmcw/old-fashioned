@@ -1,8 +1,5 @@
-import {
-  getCookie as _getCookie,
-  setCookie as _setCookie,
-} from "npm:hono@3.8.1/cookie";
-import { Context } from "npm:hono@3.8.1";
+import { getCookie as _getCookie, setCookie as _setCookie } from "hono/cookie";
+import { Context } from "hono";
 
 /**
  * We're leaning hard on cookies here, which makes some of this

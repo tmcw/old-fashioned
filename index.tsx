@@ -1,12 +1,12 @@
-/** @jsxImportSource npm:hono/jsx */
-import { Context, Hono } from "npm:hono@3.8.1";
-import { createContext, Fragment, useContext } from "npm:hono@3.8.1/jsx";
-import { camelCase } from "https://deno.land/x/case@2.2.0/mod.ts";
-import { slug } from "https://deno.land/x/slug@v1.1.0/mod.ts";
+/** @jsxImportSource hono/jsx */
+import { Context, Hono } from "hono";
+import { createContext, Fragment, useContext } from "hono/jsx";
+import { camelCase } from "./camelcase.ts";
+import { slug } from "./slug/index.ts";
 import { getCookie, setCookie } from "./cookies.ts";
 import { recipes } from "./recipes.ts";
 import { getMaterialIds, getMaterials, sort } from "./data.ts";
-import { styleSystem } from "./style.tsx";
+import { StyleTag } from "./style_prod.tsx";
 import { glasses } from "./glasses.ts";
 import { materialType } from "./material_type.ts";
 import { Fmt, Ingredient, Recipe } from "./types.ts";
@@ -14,8 +14,6 @@ import { materials } from "./materials.ts";
 
 // TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
-
-const { styleRoute, StyleTag } = styleSystem();
 
 function MaterialsList() {
   const c = useContext(RequestContext);
@@ -117,7 +115,7 @@ function RecipesList() {
   );
 }
 
-app.get("/style", styleRoute);
+// app.get("/style", styleRoute);
 
 const units = {
   "Ml": null,
@@ -434,4 +432,4 @@ app.post("/material", async (c) => {
   }
 });
 
-Deno.serve(app.fetch);
+export default app;

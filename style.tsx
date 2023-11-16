@@ -1,5 +1,5 @@
-/** @jsxImportSource npm:hono/jsx */
-import { Context } from "npm:hono@3.8.1";
+/** @jsxImportSource hono/jsx */
+import { Context } from "hono";
 
 const production = Deno.env.get("NODE_ENV") === "production";
 
