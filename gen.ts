@@ -1,65 +1,10 @@
-interface Ingredient {
-  unit: Unit;
-  amount: number;
-  name: MaterialName;
-}
+import { camelCase } from "https://deno.land/x/case/mod.ts";
+import * as t from "./material_type.ts";
 
-enum Unit {
-  CL,
-  Tsp,
-  Dash,
-  Slice,
-  Whole,
-  Sprig,
-  Wedge,
-  Twist,
-  Cube,
-  Drop,
-  Peel,
-  Zest,
-  // TODO: why do I have "None"?
-  None,
-  Spear,
-  Leaves,
-  Splash,
-}
-
-export interface RawRecipe {
-  name: string;
-  description: string;
-  ingredients: Ingredient[];
-  optionalIngredients?: Ingredient[];
-  glass: string;
-  video?: string;
-}
-
-enum MaterialType {
-  "Spirit",
-  "Liqueur",
-  "Bitters",
-  "Fruit",
-  "Fortified",
-  "Juice",
-  "Soda",
-  "Syrup",
-  "Other",
-  "Base",
-  "Seasoning",
-}
-
-export interface RawMaterial {
-  name: string;
-  type: MaterialType;
-  parent?: string;
-  id: number;
-}
-
-export interface Material extends RawMaterial {
-  inlinks: RawRecipe;
-}
-
-type MaterialName = (typeof rawMaterials)[number]["name"];
-
+/**
+ * This file generates "new" code (classes! Stuff!)
+ * from old code. It does not run at runtime.
+ */
 export const rawMaterials = [
   { "name": "Whiskey", "type": "Spirit", "id": 0 },
   {
@@ -95,35 +40,35 @@ export const rawMaterials = [
   { "name": "Apricot brandy", "type": "Liqueur", "id": 16 },
   { "name": "Port", "type": "Fortified", "id": 17 },
   { "name": "Calvados", "type": "Spirit", "id": 18 },
-  { "name": "Bitters", "type": "Bitters", "id": 19 },
+  { "name": "Any bitters", "type": "Bitters", "id": 19 },
   {
     "name": "Peach bitters",
-    "type": "Bitters",
-    "parent": "bitters",
+    "type": "bitters",
+    "parent": "Any bitters",
     "id": 20,
   },
   {
     "name": "Orange bitters",
-    "type": "Bitters",
-    "parent": "bitters",
+    "type": "bitters",
+    "parent": "Any bitters",
     "id": 21,
   },
   {
     "name": "Angostura bitters",
-    "type": "Bitters",
-    "parent": "bitters",
+    "type": "bitters",
+    "parent": "Any bitters",
     "id": 22,
   },
   {
     "name": "Peychaud’s bitters",
     "type": "Bitters",
-    "parent": "bitters",
+    "parent": "Any bitters",
     "id": 23,
   },
   {
     "name": "Aromatic bitters",
     "type": "Bitters",
-    "parent": "bitters",
+    "parent": "Any bitters",
     "id": 24,
   },
   { "name": "Lemon", "type": "Fruit", "id": 25 },
@@ -147,6 +92,7 @@ export const rawMaterials = [
   { "name": "Orange juice", "type": "Juice", "id": 38 },
   { "name": "Pineapple juice", "type": "Juice", "id": 39 },
   { "name": "Lime", "type": "Fruit", "id": 40 },
+  { "name": "Rum", "type": "Spirit", "id": 52 },
   { "name": "Cachaça", "type": "Spirit", "parent": "rum", "id": 41 },
   { "name": "Absinthe", "type": "Liqueur", "id": 42 },
   { "name": "Campari", "type": "Liqueur", "id": 43 },
@@ -156,14 +102,14 @@ export const rawMaterials = [
   { "name": "Orange", "type": "Fruit", "id": 47 },
   { "name": "Egg yolk", "type": "Other", "id": 48 },
   { "name": "Egg white", "type": "Other", "id": 49 },
+  { "name": "Sparkling wine", "type": "Base", "id": 82 },
   {
     "name": "Champagne",
     "type": "Base",
-    "parent": "sparklingWine",
+    "parent": "Sparkling wine",
     "id": 50,
   },
   { "name": "Tequila", "type": "Spirit", "id": 51 },
-  { "name": "Rum", "type": "Spirit", "id": 52 },
   { "name": "White rum", "type": "Spirit", "parent": "rum", "id": 53 },
   { "name": "Gold rum", "type": "Spirit", "parent": "rum", "id": 54 },
   { "name": "Demerara rum", "type": "Spirit", "parent": "rum", "id": 55 },
@@ -181,7 +127,7 @@ export const rawMaterials = [
   { "name": "Vodka", "type": "Spirit", "id": 67 },
   { "name": "Ginger beer", "type": "Soda", "id": 68 },
   { "name": "Ginger ale", "type": "Soda", "id": 69 },
-  { "name": "Prosecco", "type": "Base", "parent": "sparklingWine", "id": 70 },
+  { "name": "Prosecco", "type": "Base", "parent": "Sparkling wine", "id": 70 },
   { "name": "Mint", "type": "Seasoning", "id": 71 },
   { "name": "Peach purée", "type": "Other", "id": 72 },
   { "name": "Coffee liqueur", "type": "Liqueur", "id": 73 },
@@ -193,7 +139,6 @@ export const rawMaterials = [
   { "name": "Olive", "type": "Fruit", "id": 79 },
   { "name": "Wine", "type": "Base", "id": 80 },
   { "name": "Dry white wine", "type": "Base", "parent": "wine", "id": 81 },
-  { "name": "Sparkling wine", "type": "Base", "id": 82 },
   { "name": "Peach schnapps", "type": "Liqueur", "id": 83 },
   { "name": "Cherry liqueur", "type": "Liqueur", "id": 84 },
   { "name": "DOM Bénédictine", "type": "Liqueur", "id": 85 },
@@ -267,31 +212,21 @@ export const rawMaterials = [
   { "name": "Red wine", "type": "Base", "parent": "wine", "id": 128 },
   { "name": "Red chili pepper", "type": "Fruit", "id": 129 },
   { "name": "Chamomile syrup", "type": "Syrup", "id": 130 },
-] as const;
+];
 
-rawMaterials satisfies readonly RawMaterial[];
+console.log('import { Material } from "./types.ts"');
+console.log(`import { ${Object.keys(t).join(",")} } from "./material_type.ts"`);
 
-export const materials = rawMaterials.map((material) => {
-  return {
-    ...material,
-    inlinks: new Set([]),
-  };
-});
+let names = [];
+for (let raw of rawMaterials) {
+  const name = camelCase(raw.name);
+  names.push(name);
 
-export const recipes = rawRecipes.map((recipe) => {
-  const rec = {
-    ...recipe,
-  };
-  const ingredients = recipe.ingredients.map((ingredient) => {
-    const link = materials.find((mat) => {
-      return mat.name === ingredient.name;
-    })!;
-    link.inlinks.add(rec);
-    return {
-      ...ingredient,
-      link,
-    };
-  });
-  rec.ingredients = ingredients;
-  return rec;
-});
+  const parent = raw.parent ? `, ${camelCase(raw.parent)}` : "";
+
+  console.log(
+    `export const ${name} = new Material(${JSON.stringify(raw.name)}, ${
+      camelCase(raw.type)
+    }${parent});`,
+  );
+}
