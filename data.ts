@@ -10,11 +10,13 @@ export function getMaterials(c: Context | null) {
 
 export function getMaterialIds(c: Context | null) {
   if (!c) return new Set();
-  return new Set(
-    (getCookie(c, "mat") || "").split(",").map((n) => parseInt(n, 10)).filter(
-      (n) => !isNaN(n),
-    ),
-  );
+  try {
+    return new Set(
+      (getCookie(c, "mat") || "").split("_").filter((s) => s),
+    );
+  } catch (_e) {
+    return new Set();
+  }
 }
 
 export function sort(recipes: Recipe[], materials: Material[]) {

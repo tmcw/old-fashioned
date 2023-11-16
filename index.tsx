@@ -21,6 +21,8 @@ function MaterialsList() {
   const c = useContext(RequestContext);
   const mats = getMaterialIds(c);
 
+  console.log(mats);
+
   return (
     <plank id="materials-list">
       <details open>
@@ -341,12 +343,12 @@ app.post("/material", async (c) => {
     const mats = getMaterialIds(c);
 
     if (body.included) {
-      mats.add(+body.name);
+      mats.add(body.name);
     } else {
-      mats.delete(+body.name);
+      mats.delete(body.name);
     }
 
-    setCookie(c, "mat", [...mats].join(","));
+    setCookie(c, "mat", [...mats].filter((s) => s).join("_"));
     c.header("HX-Push-URL", "false");
 
     return c.html(
