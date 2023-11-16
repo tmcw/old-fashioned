@@ -204,32 +204,9 @@ function IngredientDisplay({ ingredient, unit }: {
 }) {
   const name = ingredient.material.name;
 
-  if (ingredient.unit.name === "CL") {
-    const a = ingredient.unit.amount;
-    switch (unit) {
-      case "CL":
-        return (
-          <span itemprop="recipeIngredient">{formatFloat(a)} Cl {name}</span>
-        );
-
-      case "Ml":
-        return (
-          <span itemprop="recipeIngredient">
-            {formatFloat(a * 10)} Ml {name}
-          </span>
-        );
-
-      case "Oz":
-        return (
-          <span itemprop="recipeIngredient">
-            {formatFloat(a * 1 / 3)} Oz {name}
-          </span>
-        );
-    }
-  }
   return (
     <span itemprop="recipeIngredient">
-      {name}
+      {ingredient.unit.format(unit)} {name}
     </span>
   );
 }

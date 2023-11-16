@@ -1,9 +1,16 @@
+export type Fmt = "CL" | "Oz" | "Ml";
+
 export class BaseUnit {
   amount: number;
   name: string;
+  plural?: string;
   constructor(amount: number) {
     this.amount = amount;
     this.name = "BaseUnit";
+  }
+
+  format(_unit: Fmt) {
+    throw new Error("unimplemented");
   }
 }
 
