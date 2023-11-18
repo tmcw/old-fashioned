@@ -16,6 +16,9 @@ const style = `:root {
     --secondary-text-color: #888;
     --hover-text-color: #fff;
   }
+  img {
+    filter: invert();
+  }
 }
 
 body {
