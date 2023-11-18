@@ -457,6 +457,15 @@ app.post("/material", async (c) => {
   }
 });
 
+app.get("/robots.txt", (c) => {
+  return c.text(`Sitemap: https://oldfashioned.tech/sitemap.xml
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Disallow: /`);
+});
+
 app.get("/sitemap.xml", (c) => {
   return c.html(
     <urlset
