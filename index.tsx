@@ -74,7 +74,7 @@ function RecipesList() {
   const names = new Set(mats.map((m) => m.name));
 
   return (
-    <plank id="recipes-list" hx-swap-oob="true">
+    <plank id="recipes-list" hx-swap-oob="true" role="navigation">
       <details open>
         <summary>Recipes</summary>
         {sort(recipes, mats).map(([slug, recipe]) => {
@@ -89,6 +89,7 @@ function RecipesList() {
                 <img
                   width="16"
                   height="16"
+                  alt={recipe.glass.name}
                   src={getGlassSvg(recipe.glass)}
                 />
                 {recipe.name}
@@ -237,6 +238,7 @@ function RecipeDetail() {
         <img
           width="16"
           height="16"
+          alt={recipe.glass.name}
           src={getGlassSvg(recipe.glass)}
         />
         Served in a {recipe.glass.name}
@@ -297,7 +299,7 @@ function Index() {
   const s = requestContext?.req.param("slug") || "";
   const recipe = recipes.get(s);
   return (
-    <html>
+    <html lang="en">
       <head>
         <title>{getTitle(recipe)}</title>
         <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js">
@@ -335,13 +337,17 @@ function Index() {
 const RequestContext = createContext<Context | null>(null);
 
 let reloaded = false;
-app.get("/", (c) => {
+app.get("/", async (c) => {
   reloaded = true;
-  return c.html(
+  const resp = await c.html(
     <RequestContext.Provider value={c}>
       <Index />
     </RequestContext.Provider>,
   );
+
+  const txt = await resp.text();
+
+  return new Response(`<!DOCTYPE html>${txt}`, resp);
 });
 
 app.get("/recipe/:slug", (c) => {
