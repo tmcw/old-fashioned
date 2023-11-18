@@ -8,7 +8,7 @@ import { getMaterialIds, getMaterials, sort } from "./data.ts";
 import { StyleTag } from "./style_prod.tsx";
 import { glasses } from "./glasses.ts";
 import { materialType } from "./material_type.ts";
-import { Fmt, Ingredient, Recipe } from "./types.ts";
+import { Fmt, Glass, Ingredient, Recipe } from "./types.ts";
 import { materials } from "./materials.ts";
 
 // TODO: Deno doesn't have a pattern for this?
@@ -204,7 +204,7 @@ function getGlassSvg(glass: Glass) {
   return `/icon/${glassSlug}.svg`;
 }
 
-function RecipeDetail() {
+function RecipeDetail({ swap = false }: { swap?: boolean }) {
   const c = useContext(RequestContext);
   const s = c?.req.param("slug") || "";
   const recipe = recipes.get(s);
@@ -222,6 +222,8 @@ function RecipeDetail() {
     return <WelcomeMessage />;
   }
 
+  console.log({ swap });
+
   // https://schema.org/Recipe
   return (
     <plank
@@ -232,7 +234,7 @@ function RecipeDetail() {
       itemscope
       itemtype="https://schema.org/Recipe"
     >
-      <title>{getTitle(recipe)}</title>
+      {swap && <title>{getTitle(recipe)}</title>}
       <h1 itemprop="name">{recipe.name}</h1>
       <glass>
         <img
@@ -355,7 +357,7 @@ app.get("/recipe/:slug", (c) => {
     c.header("HX-Reswap", "none");
     return c.html(
       <RequestContext.Provider value={c}>
-        <RecipeDetail />
+        <RecipeDetail swap={true} />
       </RequestContext.Provider>,
     );
   }
