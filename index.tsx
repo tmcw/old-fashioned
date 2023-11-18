@@ -457,4 +457,24 @@ app.post("/material", async (c) => {
   }
 });
 
+app.get("/sitemap.xml", (c) => {
+  return c.html(
+    <urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+    >
+      {[...recipes.keys()].map((slug) => {
+        return (
+          <url>
+            <loc>https://oldfashioned.tech/recipe/{slug}</loc>
+            <lastmod>2023-11-14T15:55:00+00:00</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>1.0</priority>
+          </url>
+        );
+      })}
+    </urlset>,
+  );
+});
+
 export default app;
