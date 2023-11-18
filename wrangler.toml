@@ -1,4 +1,5 @@
 name = "old-fashioned"
 compatibility_date = "2023-01-01"
-
-
+routes = [
+	{ pattern = "oldfashioned.tech", custom_domain = true }
+]
