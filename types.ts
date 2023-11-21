@@ -14,19 +14,28 @@ export class BaseUnit {
   }
 }
 
+interface MaterialOptions {
+  abv?: number;
+  caffeine?: boolean;
+}
+
 export class Material {
   name: string;
   id: string;
   type: MaterialType;
-  parent?: Material;
-  constructor(name: string, id: string, type: MaterialType, parent?: Material) {
+  options: MaterialOptions | undefined;
+
+  constructor(
+    name: string,
+    id: string,
+    type: MaterialType,
+    options?: MaterialOptions,
+  ) {
     this.name = name;
     this.type = type;
     this.id = id;
+    this.options = options;
     this.type.link(this);
-    if (parent) {
-      this.parent = parent;
-    }
   }
 
   ingredient(unit: BaseUnit) {
@@ -93,10 +102,12 @@ export class Glass {
 
 export class MaterialType {
   name: string;
+  parent: MaterialType | undefined;
   links: Material[];
 
-  constructor(name: string) {
+  constructor(name: string, parent?: MaterialType | undefined) {
     this.name = name;
+    this.parent = parent;
     this.links = [];
   }
 
