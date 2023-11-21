@@ -17,6 +17,7 @@ export class BaseUnit {
 interface MaterialOptions {
   abv?: number;
   caffeine?: boolean;
+  dairy?: boolean;
 }
 
 export class Material {
@@ -40,6 +41,13 @@ export class Material {
 
   ingredient(unit: BaseUnit) {
     return new Ingredient(this, unit);
+  }
+
+  formattedAbv() {
+    if (this.options?.abv !== undefined) {
+      return `${this.options.abv}%`;
+    }
+    return "(N/A)";
   }
 
   optionalIngredient(unit: BaseUnit) {
@@ -80,6 +88,24 @@ export class Recipe {
     this.glass = glass;
     this.ingredients = ingredients;
     this.glass.link(this);
+  }
+
+  materialsAlcohol(): Material[] {
+    return this.ingredients.filter((ingredient) => {
+      return ingredient.material.options?.abv;
+    }).map((ingredient) => ingredient.material);
+  }
+
+  materialsCaffeine(): Material[] {
+    return this.ingredients.filter((ingredient) => {
+      return ingredient.material.options?.caffeine;
+    }).map((ingredient) => ingredient.material);
+  }
+
+  materialsDairy(): Material[] {
+    return this.ingredients.filter((ingredient) => {
+      return ingredient.material.options?.dairy;
+    }).map((ingredient) => ingredient.material);
   }
 }
 

@@ -168,6 +168,12 @@ material-group-name {
   font-weight: bold;
 }
 
+#recipe-detail h2 {
+  margin-top: 40px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 #recipe-detail p {
   max-width: 720px;
 }

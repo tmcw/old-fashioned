@@ -222,7 +222,8 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
     return <WelcomeMessage />;
   }
 
-  console.log({ swap });
+  const caffeineMaterials = recipe.materialsCaffeine();
+  const dairyMaterials = recipe.materialsDairy();
 
   // https://schema.org/Recipe
   return (
@@ -255,6 +256,44 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
         })}
       </ul>
       <p itemprop="recipeInstructions">{recipe.description}</p>
+
+      <h2>ABV</h2>
+      <p>
+        Alcohol by volume totals and numbers are based on typical numbers - your
+        brands may vary.
+      </p>
+      <ul class="abv-list">
+        {recipe.materialsAlcohol().map((mat) => {
+          return (
+            <li>
+              {mat.name}: {mat.formattedAbv()}
+            </li>
+          );
+        })}
+      </ul>
+
+      {caffeineMaterials.length
+        ? (
+          <>
+            <p>
+              Note: this recipe contains caffeine in its ingredients
+              ({caffeineMaterials.map((i) => i.name)})
+            </p>
+          </>
+        )
+        : null}
+
+      {dairyMaterials.length
+        ? (
+          <>
+            <p>
+              Note: this recipe contains dairy in its ingredients
+              ({dairyMaterials.map((i) => i.name)})
+            </p>
+          </>
+        )
+        : null}
+
       <meta itemprop="recipeCategory" content="cocktail" />
       <meta itemprop="recipeYield" content="1 drink" />
     </plank>
@@ -307,7 +346,7 @@ function Index() {
         <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js">
         </script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,500&display=swap"
           rel="stylesheet"

@@ -36,8 +36,10 @@ const irishWhiskey = new Material(
 );
 
 const drambuie = new Material("Drambuie", "m-6", materialType.liqueur);
-const water = new Material("Water", "m-7", materialType.other);
-const sodaWater = new Material("Soda water", "m-8", materialType.soda);
+const water = new Material("Water", "m-7", materialType.other, { abv: 0 });
+const sodaWater = new Material("Soda water", "m-8", materialType.soda, {
+  abv: 0,
+});
 const gin = new Material("Gin", "m-9", materialType.gin, { abv: 40 });
 const oldTomGin = new Material("Old Tom Gin", "m-a", materialType.gin, {
   abv: 40,
@@ -54,15 +56,20 @@ const whiteCrèmeDeMenthe = new Material(
   materialType.liqueur,
 );
 const crèmeDeMure = new Material("Crème de mure", "m-d", materialType.liqueur);
-const maraschino = new Material("Maraschino", "m-e", materialType.liqueur);
+const maraschino = new Material("Maraschino", "m-e", materialType.liqueur, {
+  abv: 32,
+});
 const brandy = new Material("Brandy", "m-f", materialType.spirit);
 const apricotBrandy = new Material(
   "Apricot brandy",
   "m-10",
   materialType.liqueur,
+  { abv: 24 },
 );
-const port = new Material("Port", "m-11", materialType.fortified);
-const calvados = new Material("Calvados", "m-12", materialType.spirit);
+const port = new Material("Port", "m-11", materialType.fortified, { abv: 20 });
+const calvados = new Material("Calvados", "m-12", materialType.spirit, {
+  abv: 40,
+});
 const anyBitters = new Material("Any bitters", "m-13", materialType.bitters);
 const peachBitters = new Material(
   "Peach bitters",
@@ -104,14 +111,18 @@ const sweetRedVermouth = new Material(
   "Sweet red vermouth",
   "m-1e",
   materialType.fortified,
+  { abv: 16 },
 );
 const dryVermouth = new Material(
   "Dry vermouth",
   "m-1f",
   materialType.fortified,
+  { abv: 18 },
 );
-const cognac = new Material("Cognac", "m-20", materialType.brandy);
-const tripleSec = new Material("Triple sec", "m-21", materialType.tripleSec);
+const cognac = new Material("Cognac", "m-20", materialType.brandy, { abv: 40 });
+const tripleSec = new Material("Triple sec", "m-21", materialType.tripleSec, {
+  abv: 24,
+});
 const grandMarnier = new Material(
   "Grand Marnier",
   "m-22",
@@ -138,9 +149,13 @@ const pineappleJuice = new Material(
 );
 const lime = new Material("Lime", "m-28", materialType.fruit, { abv: 0 });
 const rum = new Material("Rum", "m-29", materialType.spirit, { abv: 40 });
-const cachaça = new Material("Cachaça", "m-2a", materialType.rum);
-const absinthe = new Material("Absinthe", "m-2b", materialType.liqueur);
-const campari = new Material("Campari", "m-2c", materialType.liqueur);
+const cachaça = new Material("Cachaça", "m-2a", materialType.rum, { abv: 40 });
+const absinthe = new Material("Absinthe", "m-2b", materialType.liqueur, {
+  abv: 45,
+});
+const campari = new Material("Campari", "m-2c", materialType.liqueur, {
+  abv: 24,
+});
 const fernetBranca = new Material(
   "Fernet Branca",
   "m-2d",
@@ -168,30 +183,50 @@ const champagne = new Material(
   "Champagne",
   "m-34",
   materialType.wine,
+  { abv: 12 },
 );
-const tequila = new Material("Tequila", "m-35", materialType.spirit);
-const whiteRum = new Material("White rum", "m-36", materialType.rum);
-const goldRum = new Material("Gold rum", "m-37", materialType.rum);
+const tequila = new Material("Tequila", "m-35", materialType.spirit, {
+  abv: 40,
+});
+const whiteRum = new Material("White rum", "m-36", materialType.rum, {
+  abv: 40,
+});
+const goldRum = new Material("Gold rum", "m-37", materialType.rum, {
+  abv: 40,
+});
 const demeraraRum = new Material(
   "Demerara rum",
   "m-38",
   materialType.rum,
+  {
+    abv: 40,
+  },
 );
-const darkRum = new Material("Dark rum", "m-39", materialType.rum);
-const limeJuice = new Material("Lime juice", "m-3a", materialType.juice);
-const cream = new Material("Cream", "m-3b", materialType.other);
+const darkRum = new Material("Dark rum", "m-39", materialType.rum, {
+  abv: 40,
+});
+const limeJuice = new Material("Lime juice", "m-3a", materialType.juice, {
+  abv: 0,
+});
+const cream = new Material("Cream", "m-3b", materialType.other, {
+  abv: 0,
+  dairy: true,
+});
 const brownCrèmeDeCacao = new Material(
   "Brown crème de cacao",
   "m-3c",
   materialType.liqueur,
+  { caffeine: true },
 );
 const whiteCrèmeDeCacao = new Material(
   "White crème de cacao",
   "m-3d",
   materialType.liqueur,
+  { caffeine: true },
 );
 const lightCream = new Material("Light cream", "m-3e", materialType.other, {
   abv: 0,
+  dairy: true,
 });
 const orangeFlowerWater = new Material(
   "Orange flower water",
@@ -205,14 +240,17 @@ const vanillaExtract = new Material(
   materialType.bitters,
   { abv: 0 },
 );
-const cola = new Material("Cola", "m-41", materialType.soda, { abv: 0 });
+const cola = new Material("Cola", "m-41", materialType.soda, {
+  abv: 0,
+  caffeine: true,
+});
 const nutmeg = new Material("Nutmeg", "m-42", materialType.seasoning, {
   abv: 0,
 });
 const lemonJuice = new Material("Lemon juice", "m-43", materialType.juice, {
   abv: 0,
 });
-const vodka = new Material("Vodka", "m-44", materialType.spirit);
+const vodka = new Material("Vodka", "m-44", materialType.spirit, { abv: 40 });
 const gingerBeer = new Material("Ginger beer", "m-45", materialType.soda, {
   abv: 0,
 });
@@ -223,13 +261,17 @@ const prosecco = new Material(
   "Prosecco",
   "m-47",
   materialType.wine,
+  { abv: 12 },
 );
 const mint = new Material("Mint", "m-48", materialType.seasoning, { abv: 0 });
-const peachPurée = new Material("Peach purée", "m-49", materialType.other);
+const peachPurée = new Material("Peach purée", "m-49", materialType.other, {
+  abv: 0,
+});
 const coffeeLiqueur = new Material(
   "Coffee liqueur",
   "m-4a",
   materialType.liqueur,
+  { caffeine: true },
 );
 const lilletBlanc = new Material(
   "Lillet blanc",
@@ -246,6 +288,7 @@ const crèmeDeCassis = new Material(
   "Crème de cassis",
   "m-4e",
   materialType.liqueur,
+  { abv: 15 },
 );
 const amaretto = new Material("Amaretto", "m-4f", materialType.liqueur);
 const olive = new Material("Olive", "m-50", materialType.fruit, {
@@ -256,6 +299,7 @@ const dryWhiteWine = new Material(
   "Dry white wine",
   "m-52",
   materialType.wine,
+  { abv: 12 },
 );
 const peachSchnapps = new Material(
   "Peach schnapps",
@@ -330,8 +374,12 @@ const powderedSugar = new Material(
     abv: 0,
   },
 );
-const aperol = new Material("Aperol", "m-61", materialType.liqueur);
-const galliano = new Material("Galliano", "m-62", materialType.liqueur);
+const aperol = new Material("Aperol", "m-61", materialType.liqueur, {
+  abv: 11,
+});
+const galliano = new Material("Galliano", "m-62", materialType.liqueur, {
+  abv: 42,
+});
 const pisco = new Material("Pisco", "m-63", materialType.brandy);
 const orgeatSyrup = new Material("Orgeat syrup", "m-64", materialType.syrup, {
   abv: 0,
@@ -362,7 +410,10 @@ const worcestershireSauce = new Material(
     abv: 0,
   },
 );
-const irishCream = new Material("Irish cream", "m-6b", materialType.liqueur);
+const irishCream = new Material("Irish cream", "m-6b", materialType.liqueur, {
+  dairy: true,
+  abv: 15,
+});
 const falernum = new Material("Falernum", "m-6c", materialType.liqueur);
 const tabasco = new Material("Tabasco", "m-6d", materialType.other, {
   abv: 0,
