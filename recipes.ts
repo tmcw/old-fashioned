@@ -21,7 +21,7 @@ export const recipes = new Map<string, Recipe>([
         wiki: "https://en.wikipedia.org/wiki/Toronto_%28cocktail%29",
         description:
           "A variation on the Old Fashioned, the Toronto is one of the most popular cocktails that uses Fernet Branca.",
-      }
+      },
     ),
   ],
   [
@@ -40,7 +40,7 @@ export const recipes = new Map<string, Recipe>([
         description:
           "The drink dates to World War I, and an early form was created in 1915 at the New York Bar in Paris—later Harry's New York Bar—by barman Harry MacElhone. The combination was said to have such a kick that it felt like being shelled with the powerful French 75mm field gun. The French 75 was popularized in America at the Stork Club in New York. The drink's recipe was first recorded in The Savoy Cocktail Book in 1930.",
         wiki: "https://en.wikipedia.org/wiki/French_75_(cocktail)",
-      }
+      },
     ),
   ],
   [
@@ -60,7 +60,7 @@ export const recipes = new Map<string, Recipe>([
           'Also known as a Rum & Coke, A Cuba Libre is a cocktail made of cola, lime, and dark or light rum. "Libre" is Spanish for "free".',
         wiki: "https://en.wikipedia.org/wiki/Rum_and_Coke",
         tags: ["highball"],
-      }
+      },
     ),
   ],
   [
@@ -80,7 +80,7 @@ export const recipes = new Map<string, Recipe>([
           "A Moscow mule is a type of buck, made with vodka. Sometimes called a vodka buck.",
         wiki: "https://en.wikipedia.org/wiki/Moscow_mule",
         tags: ["mule"],
-      }
+      },
     ),
   ],
   [
@@ -99,7 +99,7 @@ export const recipes = new Map<string, Recipe>([
           "The mimosa is traditionally served in a tall champagne flute at brunch, at weddings, or as part of business or first class service on some passenger railways and airlines.",
         wiki: "https://en.wikipedia.org/wiki/Mimosa_(cocktail)",
         tags: ["brunch"],
-      }
+      },
     ),
   ],
   [
@@ -115,7 +115,7 @@ export const recipes = new Map<string, Recipe>([
       {
         wiki: "https://en.wikipedia.org/wiki/Bellini_(cocktail)",
         tags: ["brunch"],
-      }
+      },
     ),
   ],
   [
@@ -130,7 +130,7 @@ export const recipes = new Map<string, Recipe>([
       ],
       {
         tags: ["stirred"],
-      }
+      },
     ),
   ],
   [
@@ -146,7 +146,7 @@ export const recipes = new Map<string, Recipe>([
       ],
       {
         tags: ["muddled"],
-      }
+      },
     ),
   ],
   [
@@ -165,7 +165,7 @@ export const recipes = new Map<string, Recipe>([
       ],
       {
         tags: ["muddled"],
-      }
+      },
     ),
   ],
   [
@@ -178,7 +178,7 @@ export const recipes = new Map<string, Recipe>([
         materials.darkRum.ingredient(new U.CL(6)),
         materials.gingerBeer.ingredient(new U.CL(10)),
         materials.lime.ingredient(new U.Wedge(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -194,7 +194,7 @@ export const recipes = new Map<string, Recipe>([
         materials.crèmeDeMure.ingredient(new U.CL(1.5)),
         materials.lemon.ingredient(new U.Slice(1)),
         materials.blackberry.ingredient(new U.Whole(2)),
-      ]
+      ],
     ),
   ],
   [
@@ -208,7 +208,7 @@ export const recipes = new Map<string, Recipe>([
         materials.raspberryLiqueur.ingredient(new U.CL(1.5)),
         materials.pineappleJuice.ingredient(new U.CL(1)),
         materials.lemon.optionalIngredient(new U.Peel(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -222,7 +222,7 @@ export const recipes = new Map<string, Recipe>([
         materials.tripleSec.ingredient(new U.CL(3)),
         materials.limeJuice.ingredient(new U.CL(3)),
         materials.lime.ingredient(new U.Slice(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -237,7 +237,7 @@ export const recipes = new Map<string, Recipe>([
         materials.lemonJuice.ingredient(new U.CL(1.5)),
         materials.sugar.ingredient(new U.None(1)),
         materials.lime.ingredient(new U.Slice(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -251,7 +251,7 @@ export const recipes = new Map<string, Recipe>([
         materials.vodka.ingredient(new U.CL(1.5)),
         materials.lilletBlanc.ingredient(new U.CL(0.75)),
         materials.lemon.ingredient(new U.Zest(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -266,7 +266,7 @@ export const recipes = new Map<string, Recipe>([
         materials.campari.ingredient(new U.CL(3)),
         materials.orange.ingredient(new U.Peel(1)),
         materials.lemon.optionalIngredient(new U.Zest(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -280,7 +280,7 @@ export const recipes = new Map<string, Recipe>([
         materials.brownCrèmeDeCacao.ingredient(new U.CL(3)),
         materials.lightCream.ingredient(new U.CL(3)),
         materials.nutmeg.ingredient(new U.None(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -295,7 +295,7 @@ export const recipes = new Map<string, Recipe>([
         materials.sodaWater.ingredient(new U.Splash(1)),
         materials.orange.ingredient(new U.Slice(0.5)),
         materials.lemon.ingredient(new U.Twist(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -308,7 +308,7 @@ export const recipes = new Map<string, Recipe>([
         materials.gin.ingredient(new U.CL(3)),
         materials.apricotBrandy.ingredient(new U.CL(3)),
         materials.calvados.ingredient(new U.CL(3)),
-      ]
+      ],
     ),
   ],
   [
@@ -323,7 +323,7 @@ export const recipes = new Map<string, Recipe>([
         materials.maraschino.ingredient(new U.CL(1.5)),
         materials.crèmeDeViolette.ingredient(new U.Tsp(1)),
         materials.cherry.ingredient(new U.Whole(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -336,7 +336,7 @@ export const recipes = new Map<string, Recipe>([
         materials.whiteRum.ingredient(new U.CL(4.5)),
         materials.limeJuice.ingredient(new U.CL(2)),
         materials.grenadine.ingredient(new U.CL(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -350,7 +350,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cognac.ingredient(new U.CL(3)),
         materials.tripleSec.ingredient(new U.CL(3)),
         materials.lemonJuice.ingredient(new U.CL(2)),
-      ]
+      ],
     ),
   ],
   [
@@ -366,7 +366,7 @@ export const recipes = new Map<string, Recipe>([
         materials.lemonJuice.ingredient(new U.CL(1)),
         materials.lemon.ingredient(new U.Twist(1)),
         materials.cherry.ingredient(new U.Whole(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -381,7 +381,7 @@ export const recipes = new Map<string, Recipe>([
         materials.raspberrySyrup.ingredient(new U.CL(1.5)),
         materials.eggWhite.ingredient(new U.Drop(3)),
         materials.raspberry.ingredient(new U.Whole(2)),
-      ]
+      ],
     ),
   ],
   [
@@ -394,7 +394,7 @@ export const recipes = new Map<string, Recipe>([
         materials.whiteRum.ingredient(new U.CL(4.5)),
         materials.limeJuice.ingredient(new U.CL(2.5)),
         materials.simpleSyrup.ingredient(new U.CL(1.5)),
-      ]
+      ],
     ),
   ],
   [
@@ -407,7 +407,7 @@ export const recipes = new Map<string, Recipe>([
         materials.gin.ingredient(new U.CL(6)),
         materials.peachBitters.ingredient(new U.Drop(2)),
         materials.mint.ingredient(new U.Leaves(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -421,7 +421,7 @@ export const recipes = new Map<string, Recipe>([
         materials.dryVermouth.ingredient(new U.CL(1)),
         materials.lemon.ingredient(new U.Peel(1)),
         materials.olive.ingredient(new U.Whole(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -436,7 +436,7 @@ export const recipes = new Map<string, Recipe>([
         materials.simpleSyrup.ingredient(new U.CL(1)),
         materials.sodaWater.ingredient(new U.CL(8)),
         materials.lemon.ingredient(new U.Slice(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -453,7 +453,7 @@ export const recipes = new Map<string, Recipe>([
         materials.angosturaBitters.ingredient(new U.Dash(1)),
         materials.lemon.ingredient(new U.Slice(1)),
         materials.cherry.ingredient(new U.Whole(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -467,7 +467,7 @@ export const recipes = new Map<string, Recipe>([
         materials.sweetRedVermouth.ingredient(new U.CL(2)),
         materials.angosturaBitters.ingredient(new U.Dash(1)),
         materials.cherry.ingredient(new U.Whole(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -481,7 +481,7 @@ export const recipes = new Map<string, Recipe>([
         materials.pineappleJuice.ingredient(new U.CL(6)),
         materials.grenadine.ingredient(new U.CL(1)),
         materials.maraschino.ingredient(new U.CL(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -495,7 +495,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orangeJuice.ingredient(new U.CL(3)),
         materials.absinthe.ingredient(new U.Drop(2)),
         materials.grenadine.ingredient(new U.Drop(2)),
-      ]
+      ],
     ),
   ],
   [
@@ -509,7 +509,7 @@ export const recipes = new Map<string, Recipe>([
         materials.sweetRedVermouth.ingredient(new U.CL(3)),
         materials.campari.ingredient(new U.CL(3)),
         materials.orange.ingredient(new U.Slice(0.5)),
-      ]
+      ],
     ),
   ],
   [
@@ -525,7 +525,7 @@ export const recipes = new Map<string, Recipe>([
         materials.water.ingredient(new U.Dash(3)),
         materials.orange.ingredient(new U.Slice(1)),
         materials.cherry.ingredient(new U.Whole(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -538,7 +538,7 @@ export const recipes = new Map<string, Recipe>([
         materials.gin.ingredient(new U.CL(3.5)),
         materials.apricotBrandy.ingredient(new U.CL(2)),
         materials.orangeJuice.ingredient(new U.CL(1.5)),
-      ]
+      ],
     ),
   ],
   [
@@ -557,7 +557,7 @@ export const recipes = new Map<string, Recipe>([
         materials.angosturaBitters.ingredient(new U.Dash(3)),
         materials.cherry.ingredient(new U.Whole(1)),
         materials.pineapple.ingredient(new U.Slice(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -571,7 +571,7 @@ export const recipes = new Map<string, Recipe>([
         materials.port.ingredient(new U.CL(4.5)),
         materials.eggYolk.ingredient(new U.CL(1)),
         materials.nutmeg.ingredient(new U.None(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -590,7 +590,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orangeFlowerWater.ingredient(new U.Dash(3)),
         materials.vanillaExtract.ingredient(new U.Drop(2)),
         materials.sodaWater.ingredient(new U.None(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -603,7 +603,7 @@ export const recipes = new Map<string, Recipe>([
         materials.scotchWhiskey.ingredient(new U.CL(4.5)),
         materials.drambuie.ingredient(new U.CL(2.5)),
         materials.lemon.ingredient(new U.Twist(1)),
-      ]
+      ],
     ),
   ],
   [
@@ -619,7 +619,7 @@ export const recipes = new Map<string, Recipe>([
         materials.peychaudSBitters.ingredient(new U.Dash(2)),
         materials.lemon.ingredient(new U.Peel(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -633,7 +633,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orangeJuice.ingredient(new U.CL(10)),
         materials.orange.ingredient(new U.Slice(1)),
       ],
-      { tags: ["highball"] }
+      { tags: ["highball"] },
     ),
   ],
   [
@@ -647,7 +647,7 @@ export const recipes = new Map<string, Recipe>([
         materials.tripleSec.ingredient(new U.CL(2)),
         materials.lemonJuice.ingredient(new U.CL(2)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -660,7 +660,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cognac.ingredient(new U.CL(5)),
         materials.whiteCrèmeDeMenthe.ingredient(new U.CL(2)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -678,7 +678,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cherry.ingredient(new U.Whole(1)),
         materials.lemon.ingredient(new U.Twist(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -695,7 +695,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orange.ingredient(new U.Slice(0.5)),
         materials.eggWhite.optionalIngredient(new U.Dash(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -709,7 +709,7 @@ export const recipes = new Map<string, Recipe>([
         materials.tripleSec.ingredient(new U.CL(3)),
         materials.lemonJuice.ingredient(new U.CL(2)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -722,7 +722,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cognac.ingredient(new U.CL(3.5)),
         materials.amaretto.ingredient(new U.CL(3.5)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -737,7 +737,7 @@ export const recipes = new Map<string, Recipe>([
         materials.water.ingredient(new U.Tsp(2)),
         materials.powderedSugar.ingredient(new U.Tsp(1)),
       ],
-      { tags: ["muddled"] }
+      { tags: ["muddled"] },
     ),
   ],
   [
@@ -751,7 +751,7 @@ export const recipes = new Map<string, Recipe>([
         materials.coffeeLiqueur.ingredient(new U.CL(2)),
         materials.cream.ingredient(new U.CL(3)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -771,7 +771,7 @@ export const recipes = new Map<string, Recipe>([
         materials.celery.ingredient(new U.None(1)),
         materials.lemon.ingredient(new U.Wedge(1)),
       ],
-      { tags: ["brunch"] }
+      { tags: ["brunch"] },
     ),
   ],
   [
@@ -789,7 +789,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cherry.ingredient(new U.Whole(1)),
         materials.grandMarnier.optionalIngredient(new U.Drop(3)),
       ],
-      { tags: ["topped"] }
+      { tags: ["topped"] },
     ),
   ],
   [
@@ -802,7 +802,7 @@ export const recipes = new Map<string, Recipe>([
         materials.dryWhiteWine.ingredient(new U.CL(9)),
         materials.crèmeDeCassis.ingredient(new U.CL(1)),
       ],
-      { tags: ["topped"] }
+      { tags: ["topped"] },
     ),
   ],
   [
@@ -815,7 +815,7 @@ export const recipes = new Map<string, Recipe>([
         materials.champagne.ingredient(new U.CL(9)),
         materials.crèmeDeCassis.ingredient(new U.CL(1)),
       ],
-      { tags: ["topped"] }
+      { tags: ["topped"] },
     ),
   ],
   [
@@ -835,7 +835,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cola.ingredient(new U.None(1)),
         materials.lemon.ingredient(new U.Slice(1)),
       ],
-      { tags: ["long"] }
+      { tags: ["long"] },
     ),
   ],
   [
@@ -855,7 +855,7 @@ export const recipes = new Map<string, Recipe>([
         materials.mint.ingredient(new U.Leaves(1)),
         materials.lime.ingredient(new U.Peel(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -870,7 +870,7 @@ export const recipes = new Map<string, Recipe>([
         materials.limeJuice.ingredient(new U.CL(1.5)),
         materials.salt.optionalIngredient(new U.None(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -884,7 +884,7 @@ export const recipes = new Map<string, Recipe>([
         materials.limeJuice.ingredient(new U.CL(1.5)),
         materials.agaveNectar.ingredient(new U.Tsp(2)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -898,7 +898,7 @@ export const recipes = new Map<string, Recipe>([
         materials.tripleSec.ingredient(new U.CL(2)),
         materials.irishCream.ingredient(new U.CL(2)),
       ],
-      { tags: ["layered"] }
+      { tags: ["layered"] },
     ),
   ],
   [
@@ -914,7 +914,7 @@ export const recipes = new Map<string, Recipe>([
         materials.limeJuice.ingredient(new U.Dash(1)),
         materials.prosecco.ingredient(new U.None(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -931,7 +931,7 @@ export const recipes = new Map<string, Recipe>([
         materials.absinthe.ingredient(new U.Dash(1)),
         materials.orange.ingredient(new U.Zest(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -947,7 +947,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cranberryJuice.ingredient(new U.CL(3)),
         materials.lemon.ingredient(new U.Twist(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -962,7 +962,7 @@ export const recipes = new Map<string, Recipe>([
         materials.oliveJuice.ingredient(new U.CL(1)),
         materials.olive.ingredient(new U.Whole(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -977,7 +977,7 @@ export const recipes = new Map<string, Recipe>([
         materials.simpleSyrup.ingredient(new U.None(1)),
         materials.espresso.ingredient(new U.CL(4)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -992,7 +992,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orangeJuice.ingredient(new U.CL(2)),
         materials.cream.ingredient(new U.CL(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1007,7 +1007,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cream.ingredient(new U.CL(2)),
         materials.mint.optionalIngredient(new U.Leaves(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1022,7 +1022,7 @@ export const recipes = new Map<string, Recipe>([
         materials.maraschino.ingredient(new U.CL(1.5)),
         materials.limeJuice.ingredient(new U.CL(1.5)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1037,7 +1037,7 @@ export const recipes = new Map<string, Recipe>([
         materials.angosturaBitters.ingredient(new U.Dash(3)),
         materials.lemon.ingredient(new U.Peel(1)),
       ],
-      { tags: ["layered"] }
+      { tags: ["layered"] },
     ),
   ],
   [
@@ -1052,7 +1052,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cream.ingredient(new U.CL(5)),
         materials.sugar.ingredient(new U.Tsp(1)),
       ],
-      { tags: ["layered"] }
+      { tags: ["layered"] },
     ),
   ],
   [
@@ -1070,7 +1070,7 @@ export const recipes = new Map<string, Recipe>([
         materials.lemon.ingredient(new U.Slice(1)),
         materials.cherry.ingredient(new U.Whole(1)),
       ],
-      { tags: ["layered"] }
+      { tags: ["layered"] },
     ),
   ],
   [
@@ -1086,7 +1086,7 @@ export const recipes = new Map<string, Recipe>([
         materials.pineapple.ingredient(new U.Slice(1)),
         materials.cherry.ingredient(new U.Whole(1)),
       ],
-      { tags: ["blended"] }
+      { tags: ["blended"] },
     ),
   ],
   [
@@ -1102,7 +1102,7 @@ export const recipes = new Map<string, Recipe>([
         materials.eggWhite.ingredient(new U.Whole(1)),
         materials.angosturaBitters.ingredient(new U.Dash(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1120,7 +1120,7 @@ export const recipes = new Map<string, Recipe>([
         materials.lemon.ingredient(new U.Slice(1)),
         materials.blackberry.ingredient(new U.Whole(1)),
       ],
-      { tags: ["shaken", "layered"] }
+      { tags: ["shaken", "layered"] },
     ),
   ],
   [
@@ -1136,7 +1136,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orange.ingredient(new U.Zest(1)),
         materials.cherry.ingredient(new U.Whole(1)),
       ],
-      { tags: ["layered"] }
+      { tags: ["layered"] },
     ),
   ],
   [
@@ -1153,7 +1153,7 @@ export const recipes = new Map<string, Recipe>([
         materials.grapefruitJuice.ingredient(new U.CL(3)),
         materials.orange.ingredient(new U.Slice(0.5)),
       ],
-      { tags: ["layered"] }
+      { tags: ["layered"] },
     ),
   ],
   [
@@ -1174,7 +1174,7 @@ export const recipes = new Map<string, Recipe>([
         materials.cherry.ingredient(new U.Whole(1)),
         materials.pineapple.ingredient(new U.Slice(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1189,7 +1189,7 @@ export const recipes = new Map<string, Recipe>([
         materials.grenadine.ingredient(new U.CL(1.5)),
         materials.orange.ingredient(new U.Slice(0.5)),
       ],
-      { tags: ["layered"] }
+      { tags: ["layered"] },
     ),
   ],
   [
@@ -1204,7 +1204,7 @@ export const recipes = new Map<string, Recipe>([
         materials.tripleSec.ingredient(new U.CL(1.5)),
         materials.limeJuice.ingredient(new U.CL(1.5)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1226,7 +1226,7 @@ export const recipes = new Map<string, Recipe>([
         materials.absinthe.ingredient(new U.Dash(2)),
         materials.mint.ingredient(new U.Leaves(1)),
       ],
-      { tags: ["blended"] }
+      { tags: ["blended"] },
     ),
   ],
   [
@@ -1245,7 +1245,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orange.ingredient(new U.Slice(1)),
         materials.powderedSugar.ingredient(new U.Tsp(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -1260,7 +1260,7 @@ export const recipes = new Map<string, Recipe>([
         materials.fernetBranca.ingredient(new U.CL(0.75)),
         materials.orange.ingredient(new U.Zest(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -1275,7 +1275,7 @@ export const recipes = new Map<string, Recipe>([
         materials.maraschino.ingredient(new U.CL(2.25)),
         materials.limeJuice.ingredient(new U.CL(2.25)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1291,7 +1291,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orangeBitters.ingredient(new U.Dash(2)),
         materials.lemon.ingredient(new U.Zest(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -1309,7 +1309,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orange.ingredient(new U.Zest(1)),
         materials.cherry.ingredient(new U.Whole(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -1325,7 +1325,7 @@ export const recipes = new Map<string, Recipe>([
         materials.orangeJuice.ingredient(new U.CL(2.25)),
         materials.orange.optionalIngredient(new U.Zest(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1341,7 +1341,7 @@ export const recipes = new Map<string, Recipe>([
         materials.water.ingredient(new U.CL(5)),
         materials.lime.ingredient(new U.Wedge(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -1354,7 +1354,7 @@ export const recipes = new Map<string, Recipe>([
         materials.fernetBranca.ingredient(new U.CL(5)),
         materials.cola.ingredient(new U.None(1)),
       ],
-      { tags: ["long", "stirred"] }
+      { tags: ["long", "stirred"] },
     ),
   ],
   [
@@ -1371,7 +1371,7 @@ export const recipes = new Map<string, Recipe>([
         materials.angosturaBitters.ingredient(new U.Dash(2)),
         materials.mint.ingredient(new U.Sprig(3)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1387,7 +1387,7 @@ export const recipes = new Map<string, Recipe>([
         materials.salt.ingredient(new U.None(1)),
         materials.lime.ingredient(new U.Slice(1)),
       ],
-      { tags: ["long"] }
+      { tags: ["long"] },
     ),
   ],
   [
@@ -1402,7 +1402,7 @@ export const recipes = new Map<string, Recipe>([
         materials.aperol.ingredient(new U.CL(3)),
         materials.lemonJuice.ingredient(new U.CL(3)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1419,7 +1419,7 @@ export const recipes = new Map<string, Recipe>([
         materials.ginger.ingredient(new U.Slice(3)),
         materials.candiedGinger.ingredient(new U.Whole(1)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1435,7 +1435,7 @@ export const recipes = new Map<string, Recipe>([
         materials.mint.ingredient(new U.Sprig(2)),
         materials.eggWhite.optionalIngredient(new U.CL(3)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1452,7 +1452,7 @@ export const recipes = new Map<string, Recipe>([
         materials.vanillaExtract.ingredient(new U.Drop(1)),
         materials.redChiliPepper.ingredient(new U.None(1)),
       ],
-      { tags: ["spicy"] }
+      { tags: ["spicy"] },
     ),
   ],
   [
@@ -1470,7 +1470,7 @@ export const recipes = new Map<string, Recipe>([
         materials.mint.ingredient(new U.Sprig(1)),
         materials.orange.optionalIngredient(new U.Slice(1)),
       ],
-      { tags: ["long"] }
+      { tags: ["long"] },
     ),
   ],
   [
@@ -1486,7 +1486,7 @@ export const recipes = new Map<string, Recipe>([
         materials.angosturaBitters.ingredient(new U.Dash(2)),
         materials.orange.ingredient(new U.Slice(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -1501,7 +1501,7 @@ export const recipes = new Map<string, Recipe>([
         materials.lemonJuice.ingredient(new U.CL(2.25)),
         materials.ryeWhiskey.ingredient(new U.CL(1.5)),
       ],
-      { tasg: ["sour"] }
+      { tasg: ["sour"] },
     ),
   ],
   [
@@ -1520,7 +1520,7 @@ export const recipes = new Map<string, Recipe>([
         materials.whiteGrape.ingredient(new U.Whole(3)),
         materials.eggWhite.optionalIngredient(new U.CL(3)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1538,7 +1538,7 @@ export const recipes = new Map<string, Recipe>([
         materials.maraschino.ingredient(new U.Tsp(1)),
         materials.eggWhite.optionalIngredient(new U.CL(3)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1553,7 +1553,7 @@ export const recipes = new Map<string, Recipe>([
         materials.aperol.ingredient(new U.CL(2.25)),
         materials.limeJuice.ingredient(new U.CL(2.25)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1571,7 +1571,7 @@ export const recipes = new Map<string, Recipe>([
         materials.lemon.ingredient(new U.Zest(1)),
         materials.cherry.ingredient(new U.Whole(1)),
       ],
-      { tags: ["sour"] }
+      { tags: ["sour"] },
     ),
   ],
   [
@@ -1586,7 +1586,7 @@ export const recipes = new Map<string, Recipe>([
         materials.sodaWater.ingredient(new U.Splash(1)),
         materials.orange.ingredient(new U.Slice(1)),
       ],
-      { tags: ["spritz"] }
+      { tags: ["spritz"] },
     ),
   ],
   [
@@ -1600,7 +1600,7 @@ export const recipes = new Map<string, Recipe>([
         materials.simpleSyrup.ingredient(new U.CL(2)),
         materials.gin.ingredient(new U.CL(6)),
       ],
-      { tags: ["shaken"] }
+      { tags: ["shaken"] },
     ),
   ],
   [
@@ -1614,7 +1614,7 @@ export const recipes = new Map<string, Recipe>([
         materials.dryVermouth.ingredient(new U.CL(6)),
         materials.lemon.optionalIngredient(new U.Twist(1)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -1632,7 +1632,7 @@ export const recipes = new Map<string, Recipe>([
       {
         wiki: "https://en.wikipedia.org/wiki/Martini_(cocktail)",
         tags: ["stirred"],
-      }
+      },
     ),
   ],
   [
@@ -1650,7 +1650,7 @@ export const recipes = new Map<string, Recipe>([
       ],
       {
         tags: ["shaken"],
-      }
+      },
     ),
   ],
   [
@@ -1664,7 +1664,7 @@ export const recipes = new Map<string, Recipe>([
         materials.gin.ingredient(new U.CL(4.5)),
         materials.angosturaBitters.ingredient(new U.Dash(2)),
       ],
-      { tags: ["stirred"] }
+      { tags: ["stirred"] },
     ),
   ],
   [
@@ -1682,7 +1682,7 @@ export const recipes = new Map<string, Recipe>([
       ],
       {
         tags: ["sour"],
-      }
+      },
     ),
   ],
 ]);

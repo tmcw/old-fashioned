@@ -8,73 +8,135 @@ const scotchWhiskey = new Material(
   "Scotch whiskey",
   "m-1",
   materialType.whiskey,
-  { abv: 40 },
+  {
+    abv: 40,
+
+    description:
+      `Originating from Scotland, Scotch whiskey offers a complex flavor profile often characterized by smokiness, with peaty and earthy notes. It's widely used in cocktails and savored neat for its rich and robust taste.`,
+  },
 );
 const bourbonWhiskey = new Material(
   "Bourbon whiskey",
   "m-2",
   materialType.whiskey,
-  { abv: 40 },
+  {
+    abv: 40,
+
+    description:
+      `A distinctive American spirit, Bourbon whiskey is known for its sweet, full-bodied flavor with notes of vanilla, oak, and caramel. It's a versatile ingredient in cocktails and is also enjoyed on its own.`,
+  },
 );
 const canadianWhiskey = new Material(
   "Canadian whiskey",
   "m-3",
   materialType.whiskey,
-  { abv: 40 },
+  {
+    abv: 40,
+    description:
+      `Known for its smooth and light profile, Canadian whiskey often features hints of rye, vanilla, and caramel. It's a popular choice for mixed drinks and is also enjoyed neat or on the rocks.`,
+  },
 );
 const ryeWhiskey = new Material(
   "Rye whiskey",
   "m-4",
   materialType.whiskey,
-  { abv: 40 },
+  {
+    abv: 40,
+
+    description:
+      ` Rye whiskey, primarily from North America, is known for its spicy, fruity, and slightly bitter flavor. It's a key component in classic cocktails like the Manhattan and the Old Fashioned.`,
+  },
 );
 const irishWhiskey = new Material(
   "Irish whiskey",
   "m-5",
   materialType.whiskey,
-  { abv: 40 },
+  {
+    abv: 40,
+
+    description:
+      `Renowned for its smooth and slightly sweet profile, Irish whiskey often has notes of nuttiness, vanilla, and a light fruitiness. It's popular in cocktails and is also enjoyed neat or with a splash of water.`,
+  },
 );
 
-const drambuie = new Material("Drambuie", "m-6", materialType.liqueur);
+const drambuie = new Material("Drambuie", "m-6", materialType.liqueur, {
+  description:
+    `A Scottish liqueur made from whiskey, heather honey, herbs, and spices, Drambuie has a complex, sweet, and herbaceous flavor. It's often used to add depth to cocktails or sipped on its own.`,
+});
 const water = new Material("Water", "m-7", materialType.other, { abv: 0 });
 const sodaWater = new Material("Soda water", "m-8", materialType.soda, {
   abv: 0,
 });
-const gin = new Material("Gin", "m-9", materialType.gin, { abv: 40 });
+const gin = new Material("Gin", "m-9", materialType.gin, {
+  abv: 40,
+
+  description:
+    `Gin, a spirit of multiple origins, is known for its predominant juniper flavor, accompanied by various botanicals. It's a staple in many classic cocktails, including the Martini and the Negroni.`,
+});
 const oldTomGin = new Material("Old Tom Gin", "m-a", materialType.gin, {
   abv: 40,
+  description:
+    `A sweeter style of gin from England, Old Tom Gin is known for its rich, full-bodied taste with a slight sweetness. It's a key ingredient in historic cocktail recipes.`,
 });
 const londonDryGin = new Material(
   "London dry gin",
   "m-b",
   materialType.gin,
-  { abv: 40 },
+  {
+    abv: 40,
+
+    description:
+      `The most popular style of gin, London Dry Gin is known for its crisp, dry taste with strong juniper and citrus notes. It's the foundation for many cocktails, including the classic Gin and Tonic.`,
+  },
 );
 const whiteCrèmeDeMenthe = new Material(
   "White crème de menthe",
   "m-c",
   materialType.liqueur,
+  {
+    description:
+      `A sweet, mint-flavored liqueur, White Crème de Menthe is used to add a cool, minty flavor to cocktails and desserts. It's colorless, making it a versatile ingredient in layered drinks.`,
+  },
 );
-const crèmeDeMure = new Material("Crème de mure", "m-d", materialType.liqueur);
+const crèmeDeMure = new Material("Crème de mure", "m-d", materialType.liqueur, {
+  description:
+    `A blackberry-flavored liqueur from France, Crème de Mure is known for its rich, fruity, and slightly tart flavor. It's used in cocktails to add depth and a burst of berry flavor.`,
+});
 const maraschino = new Material("Maraschino", "m-e", materialType.liqueur, {
   abv: 32,
+  description:
+    `An Italian liqueur made from Marasca cherries, Maraschino has a unique, sweet, and slightly nutty flavor. It's a classic ingredient in cocktails like the Aviation and the Last Word.`,
 });
-const brandy = new Material("Brandy", "m-f", materialType.spirit);
+const brandy = new Material("Brandy", "m-f", materialType.spirit, {
+  description:
+    `Brandy, distilled from wine or fermented fruit juice, has a rich, fruity, and warm flavor. It's enjoyed on its own and is also a key component in various cocktails and culinary recipes.`,
+});
 const apricotBrandy = new Material(
   "Apricot brandy",
   "m-10",
   materialType.liqueur,
   { abv: 24 },
 );
-const port = new Material("Port", "m-11", materialType.fortified, { abv: 20 });
+const port = new Material("Port", "m-11", materialType.fortified, {
+  abv: 20,
+
+  description:
+    `A fortified wine from Portugal, Port is known for its rich, sweet, and fruity flavor. It's often enjoyed as a dessert wine and used in cocktails for added depth and sweetness.`,
+});
 const calvados = new Material("Calvados", "m-12", materialType.spirit, {
   abv: 40,
+  description:
+    `An apple brandy from Normandy, France, Calvados is known for its apple-forward taste with hints of spices and wood. It's enjoyed neat, in cocktails, or in cooking.`,
 });
 const anyBitters = new Material("Any bitters", "m-13", materialType.bitters);
 const peachBitters = new Material(
   "Peach bitters",
   "m-14",
   materialType.bitters,
+  {
+    description:
+      ` Peach bitters bring a subtle, fruity, and slightly floral note to cocktails, enhancing the overall flavor profile with a hint of peach.`,
+  },
 );
 const orangeBitters = new Material(
   "Orange bitters",
@@ -90,6 +152,10 @@ const peychaudSBitters = new Material(
   "Peychaud’s bitters",
   "m-17",
   materialType.bitters,
+  {
+    description:
+      `Originating from New Orleans, Peychaud's bitters are known for their light, sweet, and floral profile, often used in the Sazerac cocktail.`,
+  },
 );
 const aromaticBitters = new Material(
   "Aromatic bitters",

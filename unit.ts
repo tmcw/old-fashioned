@@ -34,7 +34,7 @@ class PluralUnit extends BaseUnit {
   }
 }
 
-class None {
+class None extends BaseUnit {
   name = "None";
 
   format() {

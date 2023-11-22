@@ -18,6 +18,7 @@ interface MaterialOptions {
   abv?: number;
   caffeine?: boolean;
   dairy?: boolean;
+  description?: string;
 }
 
 export class Material {
@@ -30,7 +31,7 @@ export class Material {
     name: string,
     id: string,
     type: MaterialType,
-    options?: MaterialOptions
+    options?: MaterialOptions,
   ) {
     this.name = name;
     this.type = type;
@@ -89,7 +90,7 @@ export class Recipe {
     description: string,
     glass: Glass,
     ingredients: Ingredient[],
-    recipeOptions?: RecipeOptions
+    recipeOptions?: RecipeOptions,
   ) {
     this.name = name;
     this.description = description;
