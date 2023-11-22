@@ -37,28 +37,22 @@ function MaterialsList() {
           return (
             <material-group>
               <material-group-name>{group.name}</material-group-name>
-              {group.links.map(
-                (mat) => {
-                  // Possibly wait until loaded to toggle fully?
-                  return (
-                    <form
-                      hx-post="/material"
-                      hx-trigger="change"
-                      hx-swap="none"
-                    >
-                      <label>
-                        <input type="hidden" name="name" value={mat.id} />
-                        <input
-                          type="checkbox"
-                          checked={mats.has(mat.id)}
-                          name="included"
-                        />
-                        {mat.name}
-                      </label>
-                    </form>
-                  );
-                },
-              )}
+              {group.links.map((mat) => {
+                // Possibly wait until loaded to toggle fully?
+                return (
+                  <form hx-post="/material" hx-trigger="change" hx-swap="none">
+                    <label>
+                      <input type="hidden" name="name" value={mat.id} />
+                      <input
+                        type="checkbox"
+                        checked={mats.has(mat.id)}
+                        name="included"
+                      />
+                      {mat.name}
+                    </label>
+                  </form>
+                );
+              })}
             </material-group>
           );
         })}
@@ -117,9 +111,9 @@ function RecipesList() {
 // app.get("/style", styleRoute);
 
 const units = {
-  "Ml": null,
-  "CL": null,
-  "Oz": null,
+  Ml: null,
+  CL: null,
+  Oz: null,
 } as const;
 
 function Units() {
@@ -130,9 +124,15 @@ function Units() {
   return (
     <plank id="units" hx-swap-oob="true">
       <select name="unit" hx-post="/units" hx-boost="true">
-        <option selected={unit === "Ml"} value="Ml">Ml</option>
-        <option selected={unit === "CL"} value="CL">CL</option>
-        <option selected={unit === "Oz"} value="Oz">Oz</option>
+        <option selected={unit === "Ml"} value="Ml">
+          Ml
+        </option>
+        <option selected={unit === "CL"} value="CL">
+          CL
+        </option>
+        <option selected={unit === "Oz"} value="Oz">
+          Oz
+        </option>
       </select>
     </plank>
   );
@@ -148,8 +148,9 @@ app.post("/units", async (c) => {
     <RequestContext.Provider value={c}>
       <Fragment>
         <Units />
-      </Fragment>,
-    </RequestContext.Provider>,
+      </Fragment>
+      ,
+    </RequestContext.Provider>
   );
 });
 
@@ -170,9 +171,7 @@ function parseUnit(unit: string | undefined): Fmt {
 function WelcomeMessage() {
   return (
     <plank id="recipe-detail" hx-swap-oob="true">
-      <strong>
-        Hi.
-      </strong>
+      <strong>Hi.</strong>
       <p>
         This is a website that I made about cocktails. I'm not a huge cocktail
         nerd (drinking is bad, probably), but think that they're cool. And the
@@ -190,9 +189,7 @@ function WelcomeMessage() {
         that you can make (or barely make) closer to the top. Also, click on
         'Grid' for a wacky adjacency grid of cocktails and their ingredients.
       </p>
-      <p>
-        Also, for vim fans, there’s j & k support.
-      </p>
+      <p>Also, for vim fans, there’s j & k support.</p>
     </plank>
   );
 }
@@ -272,27 +269,42 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
         })}
       </ul>
 
-      {caffeineMaterials.length
-        ? (
-          <>
-            <p>
-              Note: this recipe contains caffeine in its ingredients
-              ({caffeineMaterials.map((i) => i.name)})
-            </p>
-          </>
-        )
-        : null}
+      {caffeineMaterials.length ? (
+        <>
+          <p>
+            Note: this recipe contains caffeine in its ingredients (
+            {caffeineMaterials.map((i) => i.name)})
+          </p>
+        </>
+      ) : null}
 
-      {dairyMaterials.length
-        ? (
-          <>
-            <p>
-              Note: this recipe contains dairy in its ingredients
-              ({dairyMaterials.map((i) => i.name)})
-            </p>
-          </>
-        )
-        : null}
+      {dairyMaterials.length ? (
+        <>
+          <p>
+            Note: this recipe contains dairy in its ingredients (
+            {dairyMaterials.map((i) => i.name)})
+          </p>
+        </>
+      ) : null}
+
+      {recipe.recipeOptions?.wiki ? (
+        <>
+          <p>
+            <a href={recipe.recipeOptions?.wiki}>View on Wikipedia</a>
+          </p>
+        </>
+      ) : null}
+
+      {recipe.recipeOptions?.tags?.length ? (
+        <>
+          <h3>Tags</h3>
+          <p>
+            {recipe.recipeOptions?.tags.map((tag) => {
+              return <span>{tag}</span>;
+            })}
+          </p>
+        </>
+      ) : null}
 
       <meta itemprop="recipeCategory" content="cocktail" />
       <meta itemprop="recipeYield" content="1 drink" />
@@ -300,7 +312,10 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
   );
 }
 
-function IngredientDisplay({ ingredient, unit }: {
+function IngredientDisplay({
+  ingredient,
+  unit,
+}: {
   ingredient: Ingredient;
   unit: keyof typeof units;
 }) {
@@ -313,20 +328,14 @@ function IngredientDisplay({ ingredient, unit }: {
 
   return (
     <span itemprop="recipeIngredient">
-      <span
-        class={has ? "" : "missing"}
-      >
+      <span class={has ? "" : "missing"}>
         {ingredient.unit.format(unit)} {name}
       </span>
 
       {has ? null : (
         <form class="missing-trigger" hx-post="/material">
           <input type="hidden" name="name" value={mat.id} />
-          <button
-            checked={true}
-            name="included"
-            value="true"
-          >
+          <button checked={true} name="included" value="true">
             Add to cabinet
           </button>
         </form>
@@ -343,8 +352,7 @@ function Index() {
     <html lang="en">
       <head>
         <title>{getTitle(recipe)}</title>
-        <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js">
-        </script>
+        <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
@@ -355,6 +363,23 @@ function Index() {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1"
         />
+
+        <meta property="og:title" content={recipe?.name ?? "Home page"} />
+        {recipe?.recipeOptions?.description ? (
+          <>
+            <meta
+              property="og:description"
+              content={recipe?.recipeOptions?.description}
+            />
+            <meta
+              name="og:description"
+              content={recipe?.recipeOptions?.description}
+            />
+          </>
+        ) : null}
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Old Fashioned" />
+        <meta property="og:locale" content="en_US" />
       </head>
       <body>
         <StyleTag />
@@ -364,11 +389,9 @@ function Index() {
           <MaterialsList />
           <Units />
         </columns>
-        {
-          /*
+        {/*
         <div hx-get="/reload" hx-trigger="every 2s"></div>
-        */
-        }
+        */}
         <script src="/script.js"></script>
       </body>
     </html>
@@ -383,7 +406,7 @@ app.get("/", async (c) => {
   const resp = await c.html(
     <RequestContext.Provider value={c}>
       <Index />
-    </RequestContext.Provider>,
+    </RequestContext.Provider>
   );
 
   const txt = await resp.text();
@@ -397,14 +420,14 @@ app.get("/recipe/:slug", (c) => {
     return c.html(
       <RequestContext.Provider value={c}>
         <RecipeDetail swap={true} />
-      </RequestContext.Provider>,
+      </RequestContext.Provider>
     );
   }
   reloaded = true;
   return c.html(
     <RequestContext.Provider value={c}>
       <Index />
-    </RequestContext.Provider>,
+    </RequestContext.Provider>
   );
 });
 
@@ -435,7 +458,7 @@ app.get("/icon/:slug", (c) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path stroke="#333" fill="none" d={icon.path} />
-      </svg>,
+      </svg>
     );
   }
   c.status(404);
@@ -473,7 +496,13 @@ app.post("/material", async (c) => {
     const body = await c.req.parseBody();
 
     if (body.all === "true") {
-      setCookie(c, "mat", Object.values(materials).map((m) => m.id).join("_"));
+      setCookie(
+        c,
+        "mat",
+        Object.values(materials)
+          .map((m) => m.id)
+          .join("_")
+      );
     } else if (body.all === "false") {
       setCookie(c, "mat", "");
     } else {
@@ -496,8 +525,9 @@ app.post("/material", async (c) => {
         <Fragment>
           <MaterialsList />
           <RecipesList />
-        </Fragment>,
-      </RequestContext.Provider>,
+        </Fragment>
+        ,
+      </RequestContext.Provider>
     );
   } else {
     return c.redirect("/");
@@ -529,7 +559,7 @@ app.get("/sitemap.xml", (c) => {
           </url>
         );
       })}
-    </urlset>,
+    </urlset>
   );
 });
 

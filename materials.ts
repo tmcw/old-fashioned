@@ -174,9 +174,11 @@ const raspberryLiqueur = new Material(
 const orange = new Material("Orange", "m-30", materialType.fruit, { abv: 0 });
 const eggYolk = new Material("Egg yolk", "m-31", materialType.other, {
   abv: 0,
+  dairy: true,
 });
 const eggWhite = new Material("Egg white", "m-32", materialType.other, {
   abv: 0,
+  dairy: true,
 });
 const sparklingWine = new Material("Sparkling wine", "m-33", materialType.base);
 const champagne = new Material(

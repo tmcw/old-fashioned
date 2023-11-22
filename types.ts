@@ -30,7 +30,7 @@ export class Material {
     name: string,
     id: string,
     type: MaterialType,
-    options?: MaterialOptions,
+    options?: MaterialOptions
   ) {
     this.name = name;
     this.type = type;
@@ -72,40 +72,55 @@ export class Ingredient {
   }
 }
 
+interface RecipeOptions {
+  wiki?: string;
+  description?: string;
+  tags?: string[];
+}
+
 export class Recipe {
   name: string;
   description: string;
   glass: Glass;
   ingredients: Ingredient[];
+  recipeOptions: RecipeOptions | undefined;
   constructor(
     name: string,
     description: string,
     glass: Glass,
     ingredients: Ingredient[],
+    recipeOptions?: RecipeOptions
   ) {
     this.name = name;
     this.description = description;
     this.glass = glass;
     this.ingredients = ingredients;
+    this.recipeOptions = recipeOptions;
     this.glass.link(this);
   }
 
   materialsAlcohol(): Material[] {
-    return this.ingredients.filter((ingredient) => {
-      return ingredient.material.options?.abv;
-    }).map((ingredient) => ingredient.material);
+    return this.ingredients
+      .filter((ingredient) => {
+        return ingredient.material.options?.abv;
+      })
+      .map((ingredient) => ingredient.material);
   }
 
   materialsCaffeine(): Material[] {
-    return this.ingredients.filter((ingredient) => {
-      return ingredient.material.options?.caffeine;
-    }).map((ingredient) => ingredient.material);
+    return this.ingredients
+      .filter((ingredient) => {
+        return ingredient.material.options?.caffeine;
+      })
+      .map((ingredient) => ingredient.material);
   }
 
   materialsDairy(): Material[] {
-    return this.ingredients.filter((ingredient) => {
-      return ingredient.material.options?.dairy;
-    }).map((ingredient) => ingredient.material);
+    return this.ingredients
+      .filter((ingredient) => {
+        return ingredient.material.options?.dairy;
+      })
+      .map((ingredient) => ingredient.material);
   }
 }
 

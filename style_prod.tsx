@@ -4,6 +4,7 @@ const style = `:root {
   --main-bg-color: #faf7f4;
   --active-bg-color: #f0ede9;
   --main-text-color: #333;
+  --main-link-color: #330;
   --hover-text-color: #111;
   --secondary-text-color: #888;
 }
@@ -13,12 +14,21 @@ const style = `:root {
     --main-bg-color: #2e2e2e;
     --active-bg-color: #444;
     --main-text-color: #eee;
+    --main-link-color: #eef;
     --secondary-text-color: #888;
     --hover-text-color: #fff;
   }
   img {
     filter: invert();
   }
+}
+
+a {
+  color: var(--main-link-color);
+}
+
+p {
+  line-height: 2;
 }
 
 body {
@@ -53,7 +63,6 @@ body {
 }
 
 .missing {
-  text-decoration: line-through;
   color: var(--secondary-text-color);
 }
 
