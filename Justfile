@@ -1,2 +1,2 @@
 dev:
-  deno run -A --watch index.tsx
+  wrangler dev index.tsx

@@ -150,7 +150,7 @@ app.post("/units", async (c) => {
         <Units />
       </Fragment>
       ,
-    </RequestContext.Provider>
+    </RequestContext.Provider>,
   );
 });
 
@@ -252,7 +252,10 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
           );
         })}
       </ul>
-      <p itemprop="recipeInstructions">{recipe.description}</p>
+      {recipe.recipeOptions?.description
+        ? <p itemprop="description">{recipe.recipeOptions?.description}</p>
+        : null}
+      <p itemprop="recipeInstructions">{recipe.instructions}</p>
 
       <h2>ABV</h2>
       <p>
@@ -269,42 +272,50 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
         })}
       </ul>
 
-      {caffeineMaterials.length ? (
-        <>
-          <p>
-            Note: this recipe contains caffeine in its ingredients (
-            {caffeineMaterials.map((i) => i.name)})
-          </p>
-        </>
-      ) : null}
+      {caffeineMaterials.length
+        ? (
+          <>
+            <p>
+              Note: this recipe contains caffeine in its ingredients (
+              {caffeineMaterials.map((i) => i.name)})
+            </p>
+          </>
+        )
+        : null}
 
-      {dairyMaterials.length ? (
-        <>
-          <p>
-            Note: this recipe contains dairy in its ingredients (
-            {dairyMaterials.map((i) => i.name)})
-          </p>
-        </>
-      ) : null}
+      {dairyMaterials.length
+        ? (
+          <>
+            <p>
+              Note: this recipe contains dairy in its ingredients (
+              {dairyMaterials.map((i) => i.name)})
+            </p>
+          </>
+        )
+        : null}
 
-      {recipe.recipeOptions?.wiki ? (
-        <>
-          <p>
-            <a href={recipe.recipeOptions?.wiki}>View on Wikipedia</a>
-          </p>
-        </>
-      ) : null}
+      {recipe.recipeOptions?.wiki
+        ? (
+          <>
+            <p>
+              <a href={recipe.recipeOptions?.wiki}>View on Wikipedia</a>
+            </p>
+          </>
+        )
+        : null}
 
-      {recipe.recipeOptions?.tags?.length ? (
-        <>
-          <h3>Tags</h3>
-          <p>
-            {recipe.recipeOptions?.tags.map((tag) => {
-              return <span>{tag}</span>;
-            })}
-          </p>
-        </>
-      ) : null}
+      {recipe.recipeOptions?.tags?.length
+        ? (
+          <>
+            <h3>Tags</h3>
+            <p>
+              {recipe.recipeOptions?.tags.map((tag) => {
+                return <span>{tag}</span>;
+              })}
+            </p>
+          </>
+        )
+        : null}
 
       <meta itemprop="recipeCategory" content="cocktail" />
       <meta itemprop="recipeYield" content="1 drink" />
@@ -352,7 +363,8 @@ function Index() {
     <html lang="en">
       <head>
         <title>{getTitle(recipe)}</title>
-        <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js"></script>
+        <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js">
+        </script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
@@ -365,18 +377,20 @@ function Index() {
         />
 
         <meta property="og:title" content={recipe?.name ?? "Home page"} />
-        {recipe?.recipeOptions?.description ? (
-          <>
-            <meta
-              property="og:description"
-              content={recipe?.recipeOptions?.description}
-            />
-            <meta
-              name="og:description"
-              content={recipe?.recipeOptions?.description}
-            />
-          </>
-        ) : null}
+        {recipe?.recipeOptions?.description
+          ? (
+            <>
+              <meta
+                property="og:description"
+                content={recipe?.recipeOptions?.description}
+              />
+              <meta
+                name="og:description"
+                content={recipe?.recipeOptions?.description}
+              />
+            </>
+          )
+          : null}
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Old Fashioned" />
         <meta property="og:locale" content="en_US" />
@@ -389,9 +403,11 @@ function Index() {
           <MaterialsList />
           <Units />
         </columns>
-        {/*
+        {
+          /*
         <div hx-get="/reload" hx-trigger="every 2s"></div>
-        */}
+        */
+        }
         <script src="/script.js"></script>
       </body>
     </html>
@@ -406,7 +422,7 @@ app.get("/", async (c) => {
   const resp = await c.html(
     <RequestContext.Provider value={c}>
       <Index />
-    </RequestContext.Provider>
+    </RequestContext.Provider>,
   );
 
   const txt = await resp.text();
@@ -420,14 +436,14 @@ app.get("/recipe/:slug", (c) => {
     return c.html(
       <RequestContext.Provider value={c}>
         <RecipeDetail swap={true} />
-      </RequestContext.Provider>
+      </RequestContext.Provider>,
     );
   }
   reloaded = true;
   return c.html(
     <RequestContext.Provider value={c}>
       <Index />
-    </RequestContext.Provider>
+    </RequestContext.Provider>,
   );
 });
 
@@ -458,7 +474,7 @@ app.get("/icon/:slug", (c) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path stroke="#333" fill="none" d={icon.path} />
-      </svg>
+      </svg>,
     );
   }
   c.status(404);
@@ -501,7 +517,7 @@ app.post("/material", async (c) => {
         "mat",
         Object.values(materials)
           .map((m) => m.id)
-          .join("_")
+          .join("_"),
       );
     } else if (body.all === "false") {
       setCookie(c, "mat", "");
@@ -527,7 +543,7 @@ app.post("/material", async (c) => {
           <RecipesList />
         </Fragment>
         ,
-      </RequestContext.Provider>
+      </RequestContext.Provider>,
     );
   } else {
     return c.redirect("/");
@@ -559,7 +575,7 @@ app.get("/sitemap.xml", (c) => {
           </url>
         );
       })}
-    </urlset>
+    </urlset>,
   );
 });
 

@@ -179,6 +179,10 @@ export const recipes = new Map<string, Recipe>([
         materials.gingerBeer.ingredient(new U.CL(10)),
         materials.lime.ingredient(new U.Wedge(1)),
       ],
+      {
+        tags: ["highball"],
+        description: `The Dark 'n' stormy is a simple, sweet cocktail.`,
+      },
     ),
   ],
   [
@@ -209,6 +213,11 @@ export const recipes = new Map<string, Recipe>([
         materials.pineappleJuice.ingredient(new U.CL(1)),
         materials.lemon.optionalIngredient(new U.Peel(1)),
       ],
+      {
+        description:
+          `The French Martini, despite the name, doesn't have any ingredients in common
+        with the drink we call a Martini, or with Martini variants like the Vodka Martini.`,
+      },
     ),
   ],
   [

@@ -81,19 +81,19 @@ interface RecipeOptions {
 
 export class Recipe {
   name: string;
-  description: string;
+  instructions: string;
   glass: Glass;
   ingredients: Ingredient[];
   recipeOptions: RecipeOptions | undefined;
   constructor(
     name: string,
-    description: string,
+    instructions: string,
     glass: Glass,
     ingredients: Ingredient[],
     recipeOptions?: RecipeOptions,
   ) {
     this.name = name;
-    this.description = description;
+    this.instructions = instructions;
     this.glass = glass;
     this.ingredients = ingredients;
     this.recipeOptions = recipeOptions;
