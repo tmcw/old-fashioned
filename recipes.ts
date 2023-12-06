@@ -519,6 +519,10 @@ export const recipes = new Map<string, Recipe>([
         materials.campari.ingredient(new U.CL(3)),
         materials.orange.ingredient(new U.Slice(0.5)),
       ],
+      {
+        description: `All alcoholic ingredients, no filler, and with a recipe
+        that's easy to remember.`,
+      },
     ),
   ],
   [
@@ -1235,7 +1239,11 @@ export const recipes = new Map<string, Recipe>([
         materials.absinthe.ingredient(new U.Dash(2)),
         materials.mint.ingredient(new U.Leaves(1)),
       ],
-      { tags: ["blended"] },
+      {
+        description:
+          `If you have all the ingredients for this, congratulations.`,
+        tags: ["blended"],
+      },
     ),
   ],
   [
