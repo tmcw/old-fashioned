@@ -357,8 +357,9 @@ function Index() {
     <html lang="en">
       <head>
         <title>{getTitle(recipe)}</title>
-        <script src="https://unpkg.com/htmx.org@1.9.6/dist/htmx.min.js">
+        <script src="/static/htmx.min.js">
         </script>
+        <script src="/static/script.js" type="module"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
@@ -473,51 +474,6 @@ app.get("/icon/:slug", (c) => {
   }
   c.status(404);
   return c.text("Not found");
-});
-
-app.get("/script.js", (c) => {
-  const script = `
-addEventListener("htmx:pushedIntoHistory", (e) => {
-  for (const a of document.querySelectorAll("a")) {
-    a.classList.toggle("active", a.getAttribute("href") === e.detail.path);
-  }
-});
-
-addEventListener("keyup", (event) => {
-  const target = event.target;
-  if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") return;
-  if (event.key === "j" || event.key === "k") {
-    const next = document.querySelector(
-      event.key === "j"
-        ? ".recipe.active + .recipe"
-        : ".recipe:has(+ .recipe.active)",
-    );
-    next?.click();
-    next?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
-});
-
-let scrolls = new Map();
-
-addEventListener("htmx:oobBeforeSwap", function (evt) {
-  const ids = [];
-  evt.detail.fragment.childNodes.forEach(function(childNode) {
-    ids.push(childNode.id);
-  });
-
-  scrolls = new Map(ids.map(id => {
-    return [id, document.getElementById(id)?.scrollTop];
-  }));
-});
-
-addEventListener("htmx:oobAfterSwap", function (evt) {
-  for (let [id, scroll] of scrolls) {
-    document.getElementById(id).scrollTop = scroll;
-  }
-});
-  `;
-  c.header("Content-Type", "application/javascript; charset=UTF-8");
-  return c.text(script);
 });
 
 app.post("/material", async (c) => {
