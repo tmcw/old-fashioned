@@ -1,7 +1,10 @@
 {
+  "type": "module",
   "scripts": {
-    "dev": "wrangler dev index.tsx",
-    "deploy": "wrangler deploy --minify index.tsx"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "wrangler pages dev dist",
+    "deploy": "$npm_execpath run build && wrangler pages deploy dist"
   },
   "dependencies": {
     "fido2-lib": "^3.4.3",
@@ -10,6 +13,9 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20231121.0",
     "miniflare": "^3.20231030.4",
-    "wrangler": "^3.19.0"
+    "@hono/vite-cloudflare-pages": "^0.1.2",
+    "@hono/vite-dev-server": "^0.3.1",
+    "vite": "^5.0.10",
+    "wrangler": "^3.22.0"
   }
 }

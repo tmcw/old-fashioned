@@ -5,10 +5,14 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
-    "lib": ["esnext"],
-    "types": ["@cloudflare/workers-types"],
+    "lib": [
+      "ESNext"
+    ],
+    "types": [
+      "@cloudflare/workers-types",
+      "vite/client"
+    ],
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "allowImportingTsExtensions": true
-  }
+    "jsxImportSource": "hono/jsx"
+  },
 }
