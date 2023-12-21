@@ -2,6 +2,7 @@
   --main-bg-color: #faf7f4;
   --active-bg-color: #f0ede9;
   --main-text-color: #333;
+  --main-link-color: #330;
   --hover-text-color: #111;
   --secondary-text-color: #888;
 }
@@ -11,9 +12,21 @@
     --main-bg-color: #2e2e2e;
     --active-bg-color: #444;
     --main-text-color: #eee;
+    --main-link-color: #eef;
     --secondary-text-color: #888;
     --hover-text-color: #fff;
   }
+  img {
+    filter: invert();
+  }
+}
+
+a {
+  color: var(--main-link-color);
+}
+
+p {
+  line-height: 2;
 }
 
 body {
@@ -48,7 +61,6 @@ body {
 }
 
 .missing {
-  text-decoration: line-through;
   color: var(--secondary-text-color);
 }
 
@@ -97,7 +109,7 @@ form {
 
 summary {
   list-style-type: "+";
-  padding: 2px;
+  padding: 2px 12px;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -120,7 +132,7 @@ details[open] summary {
     margin: 0;
   }
 
-  #materials-list {
+  #material-list {
     order: 0;
   }
 
@@ -159,6 +171,12 @@ material-group-name {
 }
 
 #recipe-detail h1 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#recipe-detail h2 {
+  margin-top: 40px;
   font-size: 14px;
   font-weight: bold;
 }

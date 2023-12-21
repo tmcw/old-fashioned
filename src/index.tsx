@@ -388,9 +388,9 @@ function Index() {
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Old Fashioned" />
         <meta property="og:locale" content="en_US" />
+        <StyleTag />
       </head>
       <body>
-        <StyleTag />
         <columns>
           <RecipeDetail />
           <RecipesList />
