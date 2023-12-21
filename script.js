@@ -17,3 +17,7 @@ addEventListener("keyup", (event) => {
     next?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 });
+
+addEventListener("htmx:beforeSwap", function (evt) {
+  console.log(evt.target);
+});

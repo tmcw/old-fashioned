@@ -178,12 +178,6 @@ function WelcomeMessage() {
         world's pretty bad right now and making this has been calming.
       </p>
       <p>
-        It gave me a chance to both tinker with technology I usually don't use
-        (Elm), and explore some of the cool properties of cocktails: notably
-        that they're pretty similar and have standardized ingredients, so they
-        can be described in relationship to each other.
-      </p>
-      <p>
         So some of it might seem funky. By default, the list is sorted by
         'feasibility': as you add ingredients that you have, it'll put recipes
         that you can make (or barely make) closer to the top. Also, click on
@@ -500,6 +494,25 @@ addEventListener("keyup", (event) => {
     );
     next?.click();
     next?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+});
+
+let scrolls = new Map();
+
+addEventListener("htmx:oobBeforeSwap", function (evt) {
+  const ids = [];
+  evt.detail.fragment.childNodes.forEach(function(childNode) {
+    ids.push(childNode.id);
+  });
+
+  scrolls = new Map(ids.map(id => {
+    return [id, document.getElementById(id)?.scrollTop];
+  }));
+});
+
+addEventListener("htmx:oobAfterSwap", function (evt) {
+  for (let [id, scroll] of scrolls) {
+    document.getElementById(id).scrollTop = scroll;
   }
 });
   `;
