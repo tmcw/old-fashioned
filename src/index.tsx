@@ -403,7 +403,6 @@ function Index() {
         <div hx-get="/reload" hx-trigger="every 2s"></div>
         */
         }
-        <script src="/script.js"></script>
       </body>
     </html>
   );
