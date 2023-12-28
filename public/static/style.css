@@ -1,6 +1,7 @@
 :root {
   --main-bg-color: #faf7f4;
-  --tint-bg-color: #fcf9f8;
+  --border-color: #cac7c4;
+  --tint-bg-color: #ffffff;
   --active-bg-color: #f0ede9;
   --main-text-color: #333;
   --main-link-color: #330;
@@ -142,11 +143,6 @@ h3 {
 
   summary {
     list-style-type: none;
-    pointer-events: none;
-  }
-
-  details[open] summary {
-    list-style-type: none;
   }
 }
 
@@ -216,4 +212,34 @@ glass {
   font-family: inherit;
   background: var(--main-bg-color);
   color: var(--main-text-color);
+}
+
+.warnings {
+  &:has(details) {
+    padding-bottom: 20px;
+  }
+  details {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: var(--tint-bg-color);
+    border-radius: 2px;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+  }
+
+  details:hover {
+    border: 1px solid var(--main-text-color);
+  }
+
+  details[open] summary {
+    font-weight: bold;
+  }
+
+  details ul {
+    list-style-type: none;
+    padding: 10px 0 0 0;
+    margin: 0;
+  }
 }

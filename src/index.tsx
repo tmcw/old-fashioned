@@ -1,49 +1,20 @@
-/** @jsxImportSource hono/jsx */
 import { Hono } from "hono";
 import { Fragment, useContext } from "hono/jsx";
 import { getCookie, setCookie } from "./cookies.ts";
 import { recipes } from "./recipes.ts";
 import { getMaterialIds, getMaterials } from "./data.ts";
 import { glasses } from "./glasses.ts";
-import { Fmt, Glass, Ingredient, Recipe } from "./types.ts";
+import { Fmt, Ingredient, Recipe } from "./types.ts";
 import { materials } from "./materials.ts";
 import { RequestContext } from "./context.ts";
 import { MaterialsList } from "./components/MaterialsList.tsx";
 import { RecipesList } from "./components/RecipesList.tsx";
 import { getGlassSvg } from "./getGlassSvg.ts";
+import { Units } from "./components/Units.tsx";
+import { units } from "./units.ts";
 
 // TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
-
-// app.get("/style", styleRoute);
-
-const units = {
-  Ml: null,
-  CL: null,
-  Oz: null,
-} as const;
-
-function Units() {
-  const requestContext = useContext(RequestContext);
-  let unit = getCookie(requestContext!, "units") || "";
-  if (!(unit in units)) unit = "Ml";
-
-  return (
-    <plank id="units" hx-swap-oob="true">
-      <select name="unit" hx-post="/units" hx-boost="true">
-        <option selected={unit === "Ml"} value="Ml">
-          Units: Ml
-        </option>
-        <option selected={unit === "CL"} value="CL">
-          Units: CL
-        </option>
-        <option selected={unit === "Oz"} value="Oz">
-          Units: Oz
-        </option>
-      </select>
-    </plank>
-  );
-}
 
 app.post("/units", async (c) => {
   const body = await c.req.parseBody();
@@ -131,6 +102,43 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
       <article>
         {swap && <title>{getTitle(recipe)}</title>}
         <h1 itemprop="name">{recipe.name}</h1>
+        <div class="warnings">
+          {caffeineMaterials.length
+            ? (
+              <>
+                <details>
+                  <summary>
+                    Contains caffeine
+                  </summary>
+                  <ul>
+                    {caffeineMaterials.map((i) => (
+                      <li>
+                        {i.name}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </>
+            )
+            : null}
+
+          {dairyMaterials.length
+            ? (
+              <details>
+                <summary>
+                  Contains dairy
+                </summary>
+                <ul>
+                  {dairyMaterials.map((i) => (
+                    <li>
+                      {i.name}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )
+            : null}
+        </div>
         <glass>
           <img
             width="16"
@@ -154,6 +162,8 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
           : null}
         <p itemprop="recipeInstructions">{recipe.instructions}</p>
 
+        {
+          /*
         <h2>ABV</h2>
         <p>
           Alcohol by volume totals and numbers are based on typical numbers -
@@ -168,47 +178,14 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
             );
           })}
         </ul>
-
-        {caffeineMaterials.length
-          ? (
-            <>
-              <p>
-                Note: this recipe contains caffeine in its ingredients (
-                {caffeineMaterials.map((i) => i.name)})
-              </p>
-            </>
-          )
-          : null}
-
-        {dairyMaterials.length
-          ? (
-            <>
-              <p>
-                Note: this recipe contains dairy in its ingredients (
-                {dairyMaterials.map((i) => i.name)})
-              </p>
-            </>
-          )
-          : null}
+      */
+        }
 
         {recipe.recipeOptions?.wiki
           ? (
             <>
               <p>
                 <a href={recipe.recipeOptions?.wiki}>View on Wikipedia</a>
-              </p>
-            </>
-          )
-          : null}
-
-        {recipe.recipeOptions?.tags?.length
-          ? (
-            <>
-              <h2>Tags</h2>
-              <p>
-                {recipe.recipeOptions?.tags.map((tag) => {
-                  return <span>{tag}</span>;
-                })}
               </p>
             </>
           )
@@ -333,18 +310,6 @@ app.get("/recipe/:slug", (c) => {
       <Index />
     </RequestContext.Provider>,
   );
-});
-
-/**
- * "LiveReload" lol!
- */
-app.get("/reload", (c) => {
-  if (!reloaded) {
-    reloaded = true;
-    c.header("HX-Refresh", "true");
-  }
-  c.status(204);
-  return c.body(null);
 });
 
 app.get("/icon/:slug", (c) => {

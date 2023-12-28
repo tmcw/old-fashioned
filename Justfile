@@ -1,2 +1,2 @@
 dev:
-  wrangler dev index.tsx
+  npm run dev
