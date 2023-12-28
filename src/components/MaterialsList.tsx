@@ -1,7 +1,4 @@
-/** @jsxImportSource hono/jsx */
-
-import { createContext, Fragment, useContext } from "hono/jsx";
-import { camelCase } from "../camelcase.ts";
+import { useContext } from "hono/jsx";
 import { materialType } from "../material_type.ts";
 import { RequestContext } from "../context.ts";
 import { getMaterialIds } from "../data.ts";

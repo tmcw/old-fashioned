@@ -13,7 +13,6 @@ import { getGlassSvg } from "./getGlassSvg.ts";
 import { Units } from "./components/Units.tsx";
 import { units } from "./units.ts";
 
-// TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
 
 app.post("/sort", async (c) => {
@@ -289,16 +288,17 @@ function Index() {
       </head>
       <body>
         <RecipeDetail />
-        <RecipesList />
+        <columns>
+          <MaterialsList />
+          <RecipesList />
+        </columns>
         <Units />
       </body>
     </html>
   );
 }
 
-let reloaded = false;
 app.get("/", async (c) => {
-  reloaded = true;
   const resp = await c.html(
     <RequestContext.Provider value={c}>
       <Index />
@@ -306,7 +306,6 @@ app.get("/", async (c) => {
   );
 
   const txt = await resp.text();
-
   return new Response(`<!DOCTYPE html>${txt}`, resp);
 });
 
@@ -319,7 +318,6 @@ app.get("/recipe/:slug", (c) => {
       </RequestContext.Provider>,
     );
   }
-  reloaded = true;
   return c.html(
     <RequestContext.Provider value={c}>
       <Index />

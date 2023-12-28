@@ -33,6 +33,8 @@ export function RecipesList() {
           </option>
         </select>
       </div>
+      <dialog>
+      </dialog>
       <list>
         {sort(recipes, mats, sortAlgorithm).map(([slug, recipe]) => {
           // Possibly wait until loaded to toggle fully?

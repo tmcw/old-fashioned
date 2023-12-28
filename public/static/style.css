@@ -132,9 +132,9 @@ h3 {
   }
 
   columns {
+    background: var(--tint-bg-color);
     display: grid;
-    grid-template-columns: 1fr 280px;
-    height: 100vh;
+    grid-template-columns: 280px 1fr;
   }
 
   body {
@@ -154,7 +154,6 @@ material-group-name {
 
 #recipes-list {
   padding: 10px;
-  overflow-y: auto;
   background: var(--tint-bg-color);
 }
 
@@ -166,7 +165,6 @@ material-group-name {
 
 #recipe-detail {
   padding: 20px;
-  overflow-y: auto;
 }
 
 #recipe-detail article {
@@ -188,7 +186,6 @@ material-group-name {
 
 #materials-list {
   padding: 10px;
-  overflow-y: auto;
 }
 
 #materials-list label {
@@ -247,6 +244,9 @@ select {
 #recipes-list-header {
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0px;
+  background: var(--tint-bg-color);
 }
 
 #recipes-list-header label {
