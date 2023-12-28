@@ -208,7 +208,7 @@ glass {
   right: 10px;
 }
 
-#units select {
+select {
   font-family: inherit;
   background: var(--main-bg-color);
   color: var(--main-text-color);
@@ -242,4 +242,13 @@ glass {
     padding: 10px 0 0 0;
     margin: 0;
   }
+}
+
+#recipes-list-header {
+  display: flex;
+  align-items: center;
+}
+
+#recipes-list-header label {
+  margin-right: 10px;
 }

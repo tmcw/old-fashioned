@@ -1,4 +1,10 @@
+import { z } from "zod";
+
 export type Fmt = "CL" | "Oz" | "Ml";
+
+export const zSort = z.enum(["ingredients", "alphabetic"]).default(
+  "alphabetic",
+);
 
 export class BaseUnit {
   amount: number;

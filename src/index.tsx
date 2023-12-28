@@ -4,7 +4,7 @@ import { getCookie, setCookie } from "./cookies.ts";
 import { recipes } from "./recipes.ts";
 import { getMaterialIds, getMaterials } from "./data.ts";
 import { glasses } from "./glasses.ts";
-import { Fmt, Ingredient, Recipe } from "./types.ts";
+import { Fmt, Ingredient, Recipe, zSort } from "./types.ts";
 import { materials } from "./materials.ts";
 import { RequestContext } from "./context.ts";
 import { MaterialsList } from "./components/MaterialsList.tsx";
@@ -15,6 +15,21 @@ import { units } from "./units.ts";
 
 // TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
+
+app.post("/sort", async (c) => {
+  const body = await c.req.parseBody();
+  setCookie(c, "sort", zSort.parse(body.sortAlgorithm));
+  c.header("HX-Push-URL", "false");
+
+  return c.html(
+    <RequestContext.Provider value={c}>
+      <Fragment>
+        <RecipesList />
+      </Fragment>
+      ,
+    </RequestContext.Provider>,
+  );
+});
 
 app.post("/units", async (c) => {
   const body = await c.req.parseBody();

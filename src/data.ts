@@ -22,7 +22,14 @@ export function getMaterialIds(c: Context | null) {
 export function sort(
   recipes: Map<string, Recipe>,
   materials: Material[],
+  sortAlgorithm: "alphabetic" | "ingredients",
 ): [string, Recipe][] {
+  if (sortAlgorithm == "alphabetic") {
+    return Array.from(recipes.entries()).sort((a, b) => {
+      return a[1].name.localeCompare(b[1].name);
+    });
+  }
+
   const have = new Set(materials.map((m) => m.name));
 
   return Array.from(recipes.entries()).map(([slug, recipe]) => {

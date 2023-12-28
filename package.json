@@ -9,7 +9,8 @@
   "dependencies": {
     "fido2-lib": "^3.4.4",
     "hono": "^3.11.11",
-    "stackbit": "^0.0.0"
+    "stackbit": "^0.0.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20231218.0",
