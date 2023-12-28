@@ -1,112 +1,19 @@
 /** @jsxImportSource hono/jsx */
-import { Context, Hono } from "hono";
-import { createContext, Fragment, useContext } from "hono/jsx";
-import { camelCase } from "./camelcase.ts";
+import { Hono } from "hono";
+import { Fragment, useContext } from "hono/jsx";
 import { getCookie, setCookie } from "./cookies.ts";
 import { recipes } from "./recipes.ts";
-import { getMaterialIds, getMaterials, sort } from "./data.ts";
-import { StyleTag } from "./style_prod.tsx";
+import { getMaterialIds, getMaterials } from "./data.ts";
 import { glasses } from "./glasses.ts";
-import { materialType } from "./material_type.ts";
 import { Fmt, Glass, Ingredient, Recipe } from "./types.ts";
 import { materials } from "./materials.ts";
+import { RequestContext } from "./context.ts";
+import { MaterialsList } from "./components/MaterialsList.tsx";
+import { RecipesList } from "./components/RecipesList.tsx";
+import { getGlassSvg } from "./getGlassSvg.ts";
 
 // TODO: Deno doesn't have a pattern for this?
 const app = new Hono();
-
-function MaterialsList() {
-  const c = useContext(RequestContext);
-  const mats = getMaterialIds(c);
-
-  return (
-    <plank id="materials-list" hx-swap-oob="true">
-      <details open>
-        <summary>Materials</summary>
-
-        <div>
-          Select{" "}
-          <button hx-post="/material" hx-swap="none" name="all" value="true">
-            All
-          </button>{" "}
-          <button hx-post="/material" hx-swap="none" name="all" value="false">
-            None
-          </button>
-        </div>
-
-        {Object.values(materialType).map((group) => {
-          return (
-            <material-group>
-              <material-group-name>{group.name}</material-group-name>
-              {group.links.map((mat) => {
-                // Possibly wait until loaded to toggle fully?
-                return (
-                  <form hx-post="/material" hx-trigger="change" hx-swap="none">
-                    <label>
-                      <input type="hidden" name="name" value={mat.id} />
-                      <input
-                        type="checkbox"
-                        checked={mats.has(mat.id)}
-                        name="included"
-                      />
-                      {mat.name}
-                    </label>
-                  </form>
-                );
-              })}
-            </material-group>
-          );
-        })}
-      </details>
-    </plank>
-  );
-}
-
-function RecipesList() {
-  const c = useContext(RequestContext);
-  const s = c?.req.param("slug");
-  const mats = getMaterials(c);
-  const names = new Set(mats.map((m) => m.name));
-
-  return (
-    <plank id="recipes-list" hx-swap-oob="true" role="navigation">
-      <details open>
-        <summary>Recipes</summary>
-        {sort(recipes, mats).map(([slug, recipe]) => {
-          // Possibly wait until loaded to toggle fully?
-          return (
-            <a
-              class={`recipe ${s === slug ? "active" : ""}`}
-              href={`/recipe/${slug}`}
-              hx-boost="true"
-            >
-              <name>
-                <img
-                  width="16"
-                  height="16"
-                  alt={recipe.glass.name}
-                  src={getGlassSvg(recipe.glass)}
-                />
-                {recipe.name}
-              </name>
-              {recipe.ingredients.map((ing, i, list) => {
-                return (
-                  <Fragment>
-                    <ingredient
-                      class={names.has(ing.material.name) ? "" : "missing"}
-                    >
-                      {ing.material.name}
-                    </ingredient>
-                    {i === list.length - 1 ? "" : ", "}
-                  </Fragment>
-                );
-              })}
-            </a>
-          );
-        })}
-      </details>
-    </plank>
-  );
-}
 
 // app.get("/style", styleRoute);
 
@@ -125,13 +32,13 @@ function Units() {
     <plank id="units" hx-swap-oob="true">
       <select name="unit" hx-post="/units" hx-boost="true">
         <option selected={unit === "Ml"} value="Ml">
-          Ml
+          Units: Ml
         </option>
         <option selected={unit === "CL"} value="CL">
-          CL
+          Units: CL
         </option>
         <option selected={unit === "Oz"} value="Oz">
-          Oz
+          Units: Oz
         </option>
       </select>
     </plank>
@@ -171,28 +78,23 @@ function parseUnit(unit: string | undefined): Fmt {
 function WelcomeMessage() {
   return (
     <plank id="recipe-detail" hx-swap-oob="true">
-      <strong>Hi.</strong>
-      <p>
-        This is a website that I made about cocktails. I'm not a huge cocktail
-        nerd (drinking is bad, probably), but think that they're cool. And the
-        world's pretty bad right now and making this has been calming.
-      </p>
-      <p>
-        So some of it might seem funky. By default, the list is sorted by
-        'feasibility': as you add ingredients that you have, it'll put recipes
-        that you can make (or barely make) closer to the top. Also, click on
-        'Grid' for a wacky adjacency grid of cocktails and their ingredients.
-      </p>
-      <p>Also, for vim fans, there’s j & k support.</p>
+      <article>
+        <strong>Hi.</strong>
+        <p>
+          This is a website that I made about cocktails. I'm not a huge cocktail
+          nerd (drinking is bad, probably), but think that they're cool. And the
+          world's pretty bad right now and making this has been calming.
+        </p>
+        <p>
+          So some of it might seem funky. By default, the list is sorted by
+          'feasibility': as you add ingredients that you have, it'll put recipes
+          that you can make (or barely make) closer to the top. Also, click on
+          'Grid' for a wacky adjacency grid of cocktails and their ingredients.
+        </p>
+        <p>Also, for vim fans, there’s j & k support.</p>
+      </article>
     </plank>
   );
-}
-
-function getGlassSvg(glass: Glass) {
-  const glassSlug =
-    Object.entries(glasses).find(([slug, g]) => g === glass)?.[0] || "";
-
-  return `/icon/${glassSlug}.svg`;
 }
 
 function RecipeDetail({ swap = false }: { swap?: boolean }) {
@@ -226,93 +128,95 @@ function RecipeDetail({ swap = false }: { swap?: boolean }) {
       itemscope
       itemtype="https://schema.org/Recipe"
     >
-      {swap && <title>{getTitle(recipe)}</title>}
-      <h1 itemprop="name">{recipe.name}</h1>
-      <glass>
-        <img
-          width="16"
-          height="16"
-          alt={recipe.glass.name}
-          src={getGlassSvg(recipe.glass)}
-        />
-        Served in a {recipe.glass.name}
-      </glass>
-      <ul class="ingredients">
-        {recipe.ingredients.map((ing) => {
-          return (
-            <li>
-              <IngredientDisplay ingredient={ing} unit={unit} />
-            </li>
-          );
-        })}
-      </ul>
-      {recipe.recipeOptions?.description
-        ? <p itemprop="description">{recipe.recipeOptions?.description}</p>
-        : null}
-      <p itemprop="recipeInstructions">{recipe.instructions}</p>
+      <article>
+        {swap && <title>{getTitle(recipe)}</title>}
+        <h1 itemprop="name">{recipe.name}</h1>
+        <glass>
+          <img
+            width="16"
+            height="16"
+            alt={recipe.glass.name}
+            src={getGlassSvg(recipe.glass)}
+          />
+          Served in a {recipe.glass.name}
+        </glass>
+        <ul class="ingredients">
+          {recipe.ingredients.map((ing) => {
+            return (
+              <li>
+                <IngredientDisplay ingredient={ing} unit={unit} />
+              </li>
+            );
+          })}
+        </ul>
+        {recipe.recipeOptions?.description
+          ? <p itemprop="description">{recipe.recipeOptions?.description}</p>
+          : null}
+        <p itemprop="recipeInstructions">{recipe.instructions}</p>
 
-      <h2>ABV</h2>
-      <p>
-        Alcohol by volume totals and numbers are based on typical numbers - your
-        brands may vary.
-      </p>
-      <ul class="abv-list">
-        {recipe.materialsAlcohol().map((mat) => {
-          return (
-            <li>
-              {mat.name}: {mat.formattedAbv()}
-            </li>
-          );
-        })}
-      </ul>
+        <h2>ABV</h2>
+        <p>
+          Alcohol by volume totals and numbers are based on typical numbers -
+          your brands may vary.
+        </p>
+        <ul class="abv-list">
+          {recipe.materialsAlcohol().map((mat) => {
+            return (
+              <li>
+                {mat.name}: {mat.formattedAbv()}
+              </li>
+            );
+          })}
+        </ul>
 
-      {caffeineMaterials.length
-        ? (
-          <>
-            <p>
-              Note: this recipe contains caffeine in its ingredients (
-              {caffeineMaterials.map((i) => i.name)})
-            </p>
-          </>
-        )
-        : null}
+        {caffeineMaterials.length
+          ? (
+            <>
+              <p>
+                Note: this recipe contains caffeine in its ingredients (
+                {caffeineMaterials.map((i) => i.name)})
+              </p>
+            </>
+          )
+          : null}
 
-      {dairyMaterials.length
-        ? (
-          <>
-            <p>
-              Note: this recipe contains dairy in its ingredients (
-              {dairyMaterials.map((i) => i.name)})
-            </p>
-          </>
-        )
-        : null}
+        {dairyMaterials.length
+          ? (
+            <>
+              <p>
+                Note: this recipe contains dairy in its ingredients (
+                {dairyMaterials.map((i) => i.name)})
+              </p>
+            </>
+          )
+          : null}
 
-      {recipe.recipeOptions?.wiki
-        ? (
-          <>
-            <p>
-              <a href={recipe.recipeOptions?.wiki}>View on Wikipedia</a>
-            </p>
-          </>
-        )
-        : null}
+        {recipe.recipeOptions?.wiki
+          ? (
+            <>
+              <p>
+                <a href={recipe.recipeOptions?.wiki}>View on Wikipedia</a>
+              </p>
+            </>
+          )
+          : null}
 
-      {recipe.recipeOptions?.tags?.length
-        ? (
-          <>
-            <h3>Tags</h3>
-            <p>
-              {recipe.recipeOptions?.tags.map((tag) => {
-                return <span>{tag}</span>;
-              })}
-            </p>
-          </>
-        )
-        : null}
+        {recipe.recipeOptions?.tags?.length
+          ? (
+            <>
+              <h2>Tags</h2>
+              <p>
+                {recipe.recipeOptions?.tags.map((tag) => {
+                  return <span>{tag}</span>;
+                })}
+              </p>
+            </>
+          )
+          : null}
 
-      <meta itemprop="recipeCategory" content="cocktail" />
-      <meta itemprop="recipeYield" content="1 drink" />
+        <meta itemprop="recipeCategory" content="cocktail" />
+        <meta itemprop="recipeYield" content="1 drink" />
+      </article>
     </plank>
   );
 }
@@ -389,26 +293,16 @@ function Index() {
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Old Fashioned" />
         <meta property="og:locale" content="en_US" />
-        <StyleTag />
+        <link href="/static/style.css" rel="stylesheet" type="text/css" />
       </head>
       <body>
-        <columns>
-          <RecipeDetail />
-          <RecipesList />
-          <MaterialsList />
-          <Units />
-        </columns>
-        {
-          /*
-        <div hx-get="/reload" hx-trigger="every 2s"></div>
-        */
-        }
+        <RecipeDetail />
+        <RecipesList />
+        <Units />
       </body>
     </html>
   );
 }
-
-const RequestContext = createContext<Context | null>(null);
 
 let reloaded = false;
 app.get("/", async (c) => {
