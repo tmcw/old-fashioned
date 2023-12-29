@@ -12,6 +12,7 @@ import { RecipesList } from "./components/RecipesList.tsx";
 import { getGlassSvg } from "./getGlassSvg.ts";
 import { Units } from "./components/Units.tsx";
 import { units } from "./units.ts";
+import styleUrl from "../static/style.css?url";
 
 const app = new Hono();
 
@@ -284,7 +285,7 @@ function Index() {
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Old Fashioned" />
         <meta property="og:locale" content="en_US" />
-        <link href="/static/style.css" rel="stylesheet" type="text/css" />
+        <link href={styleUrl} rel="stylesheet" type="text/css" />
       </head>
       <body>
         <RecipeDetail />
